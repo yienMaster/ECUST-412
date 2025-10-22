@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="selection" value=""/>
+		<item key="wrap" value="true"/>
+		<item key="casesensitive" value="false"/>
+		<item key="wholeword" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<list key="findhistory">
+			<item value="target_decision_flag"/>
+			<item value="27"/>
+			<item value="menu_bldc"/>
+			<item value="round_p"/>
+			<item value="round_p_offset"/>
+			<item value="menu_round_p_offset"/>
+			<item value="speed_120"/>
+			<item value="RIGHT"/>
+			<item value="right"/>
+			<item value="LEFT"/>
+			<item value="left"/>
+			<item value="Calculate_Linear_Degree"/>
+			<item value="0.1"/>
+			<item value="calculate"/>
+			<item value="start_row_set"/>
+		</list>
+		<list key="replacehistory">
+			<item value="30"/>
+			<item value="frontsight"/>
+			<item value="dynamic_frontsight"/>
+			<item value="dyna"/>
+			<item value="menu_dynamic_frontsight"/>
+			<item value="speed_para_set"/>
+			<item value="MIDDLE"/>
+			<item value="middle"/>
+			<item value="1"/>
+			<item value="round_state_update_count"/>
+			<item value=""/>
+			<item value="Calculate_Slope"/>
+			<item value="MT9V03X_H-6"/>
+			<item value="5"/>
+			<item value="ANGLE_CONSTANT_LARGE"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="1215"/>
+		<item key="DIALOG_Y_ORIGIN" value="229"/>
+		<item key="DIALOG_WIDTH" value="322"/>
+		<item key="DIALOG_HEIGHT" value="410"/>
+		<item key="DIALOG_FONT_NAME" value="1|Microsoft YaHei UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Microsoft YaHei UI"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="927"/>
+		<item key="DIALOG_Y_ORIGIN" value="575"/>
+	</section>
+</section>

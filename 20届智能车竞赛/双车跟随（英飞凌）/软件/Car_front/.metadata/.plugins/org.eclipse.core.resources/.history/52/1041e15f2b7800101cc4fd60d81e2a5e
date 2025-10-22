@@ -1,0 +1,306 @@
+#include "control.h"
+
+
+int16 encoder_data_L,encoder_data_R;    //编码器读数
+int16 encoder_data_window_L[ENCODER_FILTER_SIZE],encoder_data_window_R[ENCODER_FILTER_SIZE];    //均值滤波数组
+float LP_filter_coef=0.1;
+float speed_L,speed_R;  //速度
+float target_speed_L,target_speed_R;    //目标速度
+float target_speed,target_speed_set; //目标速度
+uint8 weight[11]={1,5,6,11,12,13,12,10,5,2,1};   //权重
+uint8 start_flag=0;     //启动标志位
+uint8 start_delay_count=0;   //启动延时计数
+uint8 start_delay_count_flag=0; //启动延时计数标志位
+uint8 start_row_set;      //动态error前瞻行下限
+float dir_error_k,dir_error_b=1;  //动态error参数
+uint8 low_weight[3]={12,15,12};
+uint8 bldc_duty;
+uint8 speed_increase;
+float round_p_offset;
+float dir_p_set;
+float dynamic_p_coef;
+uint8 target_decision_flag=0;
+uint8 speedup_flag=0,speedup_count=0;
+float dynamic_frontsight=0;
+uint8 down_round_speed;
+float start_p_decrease;
+uint8 start_p_decrease_count=0;
+uint8 start_frontsight;
+uint8 start_frontsight_count=0;
+float round_p1_decrease,round_p2_decrease;
+
+
+//void Steer_Init(void)
+//{
+//    pwm_init(SERVO_MOTOR_PWM, SERVO_MOTOR_FREQ, STEER_DUTY_MIDDLE);
+//}
+//
+//void Steer_Control(int16 duty)
+//{
+//    pwm_set_duty(SERVO_MOTOR_PWM, duty);
+//}
+
+void Motor_Init(void)
+{
+    gpio_init(DIR_R, GPO, GPIO_LOW, GPO_PUSH_PULL);                           // GPIO 初始化为输出 默认上拉输出高
+    pwm_init(PWM_R, 17000, 0);                                                 // PWM 通道初始化频率 17KHz 占空比初始为 0
+    gpio_init(DIR_L, GPO, GPIO_HIGH, GPO_PUSH_PULL);                           // GPIO 初始化为输出 默认上拉输出高
+    pwm_init(PWM_L, 17000, 0);                                                 // PWM 通道初始化频率 17KHz 占空比初始为 0
+}
+
+void Motor_Control(motor_enum num,int16 duty)
+{
+    if(num==left_motor)
+    {
+        if(duty>=0)
+        {
+            gpio_set_level(DIR_L, GPIO_HIGH);
+            pwm_set_duty(PWM_L, (uint32)duty);
+        }
+        else
+        {
+            gpio_set_level(DIR_L, GPIO_LOW);
+            pwm_set_duty(PWM_L, (uint32)(-duty));
+        }
+    }
+    else
+    {
+        if(duty>=0)
+        {
+            gpio_set_level(DIR_R, GPIO_LOW);
+            pwm_set_duty(PWM_R, (uint32)duty);
+        }
+        else
+        {
+            gpio_set_level(DIR_R, GPIO_HIGH);
+            pwm_set_duty(PWM_R, (uint32)(-duty));
+        }
+    }
+}
+
+void Encoder_Init(void)
+{
+    encoder_dir_init(ENCODER_L, ENCODER_L_PULSE, ENCODER_L_DIR);
+    encoder_dir_init(ENCODER_R, ENCODER_R_PULSE, ENCODER_R_DIR);
+}
+
+void Bldc_Init(void)
+{
+    pwm_init(BLDC_L_PIN,50,500);
+    pwm_init(BLDC_R_PIN,50,500);
+}
+
+void Speed_Loop(void)
+{
+    float error_L,error_R;
+    int16 duty_L,duty_R;
+    encoder_data_L=-encoder_get_count(ENCODER_L);
+    encoder_clear_count(ENCODER_L);
+    encoder_data_R=encoder_get_count(ENCODER_R);
+    encoder_clear_count(ENCODER_R);
+//    speed_L=Average_Filter(encoder_data_window_L,encoder_data_L,ENCODER_FILTER_SIZE);
+//    speed_R=Average_Filter(encoder_data_window_R,encoder_data_R,ENCODER_FILTER_SIZE);
+//    speed_L=LowPass(encoder_data_L,speed_L,LP_filter_coef);
+//    speed_R=LowPass(encoder_data_R,speed_R,LP_filter_coef);
+    speed_L=encoder_data_L;
+    speed_R=encoder_data_R;
+    error_L=target_speed_L-speed_L;
+    error_R=target_speed_R-speed_R;
+    duty_L=(int16)PID_Incremental_Controller(&motor_l,error_L);
+    duty_R=(int16)PID_Incremental_Controller(&motor_r,error_R);
+    Motor_Control(left_motor,duty_L);
+    Motor_Control(right_motor,duty_R);
+}
+
+uint8 Find_Start_Row(void)
+{
+    uint8 i,count_l=0,count_r=0,count_m=0;
+    uint8 max_row_l,max_row_r;
+    uint8 flag_l=0,flag_r=0;
+    if(element_state==STRAIGHT)
+    {
+        for(i=0;i<MT9V03X_H;i++)
+        {
+            if(line_middle[i]>0 && line_middle[i]<MT9V03X_W/2-20)
+            {
+                count_l++;
+                if(!flag_l)
+                {
+                    max_row_l=i;
+                    flag_l=1;
+                }
+                else
+                {
+                    if(line_middle[i]<line_middle[max_row_l])
+                        max_row_l=i;
+                }
+            }
+            else if(line_middle[i]<MT9V03X_W-1 && line_middle[i]>MT9V03X_W/2+20)
+            {
+                count_r++;
+                if(!flag_r)
+                {
+                    max_row_r=i;
+                    flag_r=1;
+                }
+                else
+                {
+                    if(line_middle[i]>line_middle[max_row_r])
+                        max_row_r=i;
+                }
+            }
+            else
+                count_m++;
+        }
+        if(count_m>=count_l && count_m>=count_r)
+            return start_row_set;
+        if(count_l>count_r && !Calculate_Linear_Degree(line_left) && !Calculate_Linear_Degree(line_right))
+            return Max(max_row_l,start_row_set);
+        else if(count_r>count_l && !Calculate_Linear_Degree(line_left) && !Calculate_Linear_Degree(line_right))
+            return Max(max_row_r,start_row_set);
+        else
+            return start_row_set;
+    }
+    else return start_row_set;
+}
+
+void Dir_Loop(void)
+{
+    float error,out,error_coef;
+    float sum_error1=0,sum_weight1=0.01;
+    float sum_error2=0,sum_weight2=0.01;
+    uint8 i;
+    uint8 start_row;
+    if((speed_L+speed_R)/2>140&&start_frontsight_count<3)
+    {
+        start_frontsight_count++;
+    }
+    if(start_frontsight_count<3&&element_state==STRAIGHT)
+    {
+        start_row=start_frontsight;
+    }
+    else if(element_state==ROUND && round_state==GET_OUT_ROUND)
+        start_row=start_row_set;
+    else
+        start_row=Max(start_row_set,Max(longest_col_left.highest_row,longest_col_right.highest_row));
+    if((speed_L+speed_R)/2-target_speed_set>=10&&element_state==STRAIGHT)
+        start_row=start_row_set-(uint8)dynamic_frontsight;
+    for(i=start_row;i<start_row+11;i++)
+    {
+        if(line_middle[i]!=LINE_INVALID_MIDDLE && i<MT9V03X_H-1)
+        {
+            sum_error1+=((MT9V03X_W>>1)-line_middle[i])*weight[i-start_row];
+            sum_weight1+=weight[i-start_row];
+        }
+    }
+    if(sum_weight1==0.01) error=dir.error0;
+    else if(element_state==ZEBRA && zebra_state==ZEBRA_STOP) error=0;
+    else
+    {
+        error=(float)(sum_error1+sum_error2)/(sum_weight1+sum_weight2);
+        error=Constrain_float(error,80,-80);
+    }
+    if(start_row>start_row_set+5 && element_state!=ROUND)
+    {
+        error_coef=dir_error_k*(start_row-start_row_set)+dir_error_b;
+        error=error_coef*error;
+    }
+
+    if(start_frontsight_count<3&&element_state==STRAIGHT)
+    {
+        dir.p=dir_p_set-start_p_decrease;
+    }
+    else if(round_size==1 && element_state==ROUND && round_state>2)
+    {
+        dir.p=dir_p_set-round_p1_decrease;
+    }
+    else if(round_size==2 && element_state==ROUND && round_state>2)
+    {
+        dir.p=dir_p_set-round_p2_decrease;
+    }
+    else if(Max(longest_col_left.highest_row,longest_col_right.highest_row)>3 && element_state!=ZEBRA&&(speed_L+speed_R)/2>=target_speed_set)
+    {
+        dir.p=dir_p_set*(1 + dynamic_p_coef * Constrain_float(((speed_L+speed_R)/2-target_speed_set)/speed_increase,1.5,0));
+    }
+    else
+        dir.p=dir_p_set;
+
+    out=Double_PD_Position_Controller(&dir, error);
+    target_speed_L=target_speed-out;
+    target_speed_R=target_speed+out;
+}
+
+void Speed_Decision(void)
+{
+    switch(target_decision_flag)
+    {
+        case 0:
+            target_speed=3;
+            target_decision_flag=1;
+            break;
+        case 1:
+            target_speed+=3;
+            if(Abs(target_speed-target_speed_set)<5)
+                target_decision_flag=2;
+            break;
+        case 2:
+            if(element_state==STRAIGHT)
+            {
+                speedup_flag=1;
+                if(white_col_mid_row<2 && speedup_count==1)
+                {
+                    if(target_speed<(target_speed_set+speed_increase))
+                       // target_speed+=(target_speed_set+speed_increase)/5;
+                        target_speed+=speed_increase/5;
+                    else
+                        target_speed=target_speed_set+speed_increase;
+                }
+                else if(white_col_mid_row<5 && speedup_count==1)
+                    if(target_speed<(target_speed_set+speed_increase/2))
+                        target_speed+=speed_increase/5;
+                    else
+                        target_speed=target_speed_set+speed_increase/2;
+                else if(white_col_mid_row>35)
+                    target_speed=target_speed_set-10;
+                else
+                {
+                    target_speed=target_speed_set;
+//                    speedup_flag=0;
+                }
+            }
+            else if(element_state==ZEBRA && zebra_state==ZEBRA_STOP)
+            {
+                speedup_flag=0;
+                target_speed=0;
+            }
+            else if(element_state==ROUND&&(round_position==ROUND_READY||round_position==GET_IN_READY))
+            {
+                speedup_flag=0;
+                target_speed=target_speed_set-down_round_speed;
+            }
+            else if(element_state==ROUND)
+            {
+                speedup_flag=0;
+                target_speed=target_speed_set+20;
+            }
+            else if(element_state==CROSSING)
+            {
+                speedup_flag=0;
+                target_speed=target_speed_set-down_round_speed;
+            }
+            else
+            {
+                speedup_flag=0;
+                target_speed=target_speed_set;
+            }
+            break;
+    }
+}
+
+
+
+
+
+
+
+

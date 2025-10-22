@@ -1,0 +1,9 @@
+AURIX Flasher Software Tool 1.0.8.0, built on 2023/7/7 22:18:22
+Connected to device... [TRICORE] DAS JDS TriBoard TC3XX V2.0
+::Loading HEX file .......... 
+ ::Warning: The given program file is trying to write on reserved memory addresses, which will be skipped.
+::Erasing Flash memory .......... (Pass)
+::Programming Flash memory .......... (Pass)
+Overall time: 7291 ms
+AURIXFlasher Exit Status: Pass
+Flashing was successfull

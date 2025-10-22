@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="installedFeatures">
+		<item value="com.infineon.aurix.ads.profiler.feature:1.9.12"/>
+		<item value="com.infineon.aurix.buildsystem.feature:1.9.12"/>
+		<item value="com.tasking.ctc.debug:1.18.23.0"/>
+		<item value="com.tasking.dbg:1.9.25.0"/>
+		<item value="com.tasking.debug.darwin:1.16.14.0"/>
+		<item value="com.tasking.debug:1.24.24.0"/>
+		<item value="org.eclipse.cdt.build.crossgcc:10.7.0.202204200013"/>
+		<item value="org.eclipse.cdt.debug.gdbjtag:10.7.0.202204241640"/>
+		<item value="org.eclipse.cdt.examples.dsf:10.7.0.202204200013"/>
+		<item value="org.eclipse.cdt.gdb:10.7.0.202204200013"/>
+		<item value="org.eclipse.cdt.gnu.build:10.7.0.202205051013"/>
+		<item value="org.eclipse.cdt.gnu.debug:10.7.0.202204200013"/>
+		<item value="org.eclipse.cdt.gnu.dsf:10.7.0.202205110149"/>
+		<item value="org.eclipse.cdt.native:10.7.0.202206081808"/>
+		<item value="org.eclipse.cdt.platform:10.7.0.202206081808"/>
+		<item value="org.eclipse.emf.common:2.26.0.v20220325-0806"/>
+		<item value="org.eclipse.emf.ecore:2.28.0.v20220426-0617"/>
+		<item value="org.eclipse.help:2.3.1000.v20220607-0700"/>
+		<item value="org.eclipse.justj.openjdk.hotspot.jre.full:17.0.4.v20221004-1257"/>
+		<item value="org.eclipse.launchbar:10.7.0.202204200013"/>
+		<item value="org.eclipse.mylyn.wikitext.editors_feature:3.0.42.202201072301"/>
+		<item value="org.eclipse.platform:4.24.0.v20220607-0700"/>
+		<item value="org.eclipse.rcp:4.24.0.v20220607-0700"/>
+	</list>
+	<section name="ExternalProjectImportWizard">
+		<item key="WizardProjectsImportPage.STORE_NESTED_PROJECTS" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID" value="true"/>
+		<item key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
+		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="E:\ADS_Workspace\Car_Front"/>
+		</list>
+		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value=""/>
+		</list>
+	</section>
+	<section name="ChooseWorkspaceDialogSettings">
+		<item key="DIALOG_X_ORIGIN" value="598"/>
+		<item key="DIALOG_Y_ORIGIN" value="312"/>
+	</section>
+	<section name="WORKBENCH_SETTINGS">
+		<list key="ENABLED_TRANSFERS">
+		</list>
+	</section>
+</section>
