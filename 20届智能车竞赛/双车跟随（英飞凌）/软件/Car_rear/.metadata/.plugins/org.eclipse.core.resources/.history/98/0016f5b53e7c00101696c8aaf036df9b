@@ -1,0 +1,927 @@
+#include "device.h"
+
+
+Key_State_enum key_state=idle;  //按键状态
+uint8 key_scan_count=2; //按键消抖时间：key_scan_count*10ms
+gpio_pin_enum key_list[4]={KEY1,KEY2,KEY3,KEY4};    //按键列表
+Key_enum key_press=nokey;   //按下的按键
+Speed_enum speed_para_set=speed_220;
+Menu_enum menu=page_main;
+Menu_Para_enum menu_para=menu_motor_l;
+Menu_PID_enum menu_pid=menu_p;
+float menu_offset=0.001;
+uint8 menu_update_flag=0;
+uint8 bldc_duty;
+
+void Led_Init(void)
+{
+    gpio_init(LED_PIN, GPO, GPIO_HIGH, GPO_PUSH_PULL);
+}
+
+void Buzzer_Init(void)
+{
+    gpio_init(BUZZER_PIN, GPO, GPIO_LOW, GPO_PUSH_PULL);
+}
+
+void Key_Init(void)
+{
+    gpio_init(KEY1, GPI, GPIO_HIGH, GPI_PULL_UP);
+    gpio_init(KEY2, GPI, GPIO_HIGH, GPI_PULL_UP);
+    gpio_init(KEY3, GPI, GPIO_HIGH, GPI_PULL_UP);
+    gpio_init(KEY4, GPI, GPIO_HIGH, GPI_PULL_UP);
+}
+
+void Key_Scan(void)
+{
+    static Key_enum key;
+    uint8 i;
+    switch(key_state)
+    {
+        case idle:
+            key=nokey;
+            for(i=0;i<4;i++)
+            {
+                if(!gpio_get_level(key_list[i]))
+                {
+                    key=i;
+                    key_state=maypress;
+                    break;
+                }
+            }
+            break;
+        case maypress:
+            if(--key_scan_count==0)
+            {
+                if(!gpio_get_level(key_list[key]))
+                {
+                    key_state=press;
+                }
+                else
+                {
+                    key_state=idle;
+                }
+                key_scan_count=2;
+            }
+            break;
+        case press:
+            if(gpio_get_level(key_list[key]))
+            {
+                key_state=release;
+            }
+            break;
+        case release:
+            if(--key_scan_count==0)
+            {
+                if(gpio_get_level(key_list[key]))
+                {
+                    key_state=idle;
+                    key_press=key;
+                }
+                key_scan_count=2;
+            }
+            break;
+    }
+}
+
+void Speed_Para_Update(void)
+{
+    if(speed_para_set==speed_idle)
+        speed_para_set=speed_120;
+    switch(speed_para_set)
+    {
+        case speed_120:
+            target_speed_set=120;
+            bldc_duty=0;
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_p,59.469);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_i,2.804);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_p,59.710);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_i,2.808);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_p,9);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_i,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_d,5);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_p,5);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_i,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_target_distance_coef,0.8);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_dynamic_p_coef,0.5);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_target_speed_offset_coef,15);
+//            EEPROM_Write_Data_uint16(speed_para_set*para_num+para_point_distance,27);
+            para_update_flag=1;
+            para_update_display_flag=1;
+            break;
+        case speed_135:
+            target_speed_set=135;
+            bldc_duty=0;
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_p,59.469);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_i,2.804);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_p,59.710);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_i,2.808);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_p,7.7);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_i,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_d,3);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_p,5);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_i,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_target_distance_coef,0.3);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_dynamic_p_coef,0.5);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_target_speed_offset_coef,12);
+//            EEPROM_Write_Data_uint16(speed_para_set*para_num+para_point_distance,27);
+            para_update_flag=1;
+            para_update_display_flag=1;
+            break;
+        case speed_150:
+            target_speed_set=150;
+            bldc_duty=50;
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_p,59.469);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_i,2.804);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_p,59.710);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_i,2.808);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_p,6.8);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_i,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_d,14.8);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_p,4.3);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_i,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_d,1);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_target_distance_coef,0.1);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_dynamic_p_coef,0.5);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_target_speed_offset_coef,8.23);
+//            EEPROM_Write_Data_uint16(speed_para_set*para_num+para_point_distance,26);
+            para_update_flag=1;
+            para_update_display_flag=1;
+            break;
+        case speed_160:
+            target_speed_set=160;
+            bldc_duty=60;
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_p,59.469);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_i,2.804);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_p,59.710);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_i,2.808);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_p,6.5);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_i,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_d,14.68);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_p,5.3);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_i,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_d,1);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_target_distance_coef,0.52);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_dynamic_p_coef,1.9);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_target_speed_offset_coef,8.08);
+//            EEPROM_Write_Data_uint16(speed_para_set*para_num+para_point_distance,23);
+            para_update_flag=1;
+            para_update_display_flag=1;
+            break;
+        case speed_170:
+            target_speed_set=170;
+            bldc_duty=70;
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_p,59.469);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_i,2.804);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_p,59.710);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_i,2.808);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_p,6.95);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_i,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_d,13.35);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_p,5.6);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_i,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_d,1);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_target_distance_coef,0.552);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_dynamic_p_coef,0.7);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_target_speed_offset_coef,8.35);
+//            EEPROM_Write_Data_uint16(speed_para_set*para_num+para_point_distance,23);
+            para_update_flag=1;
+            para_update_display_flag=1;
+            break;
+        case speed_180:
+            target_speed_set=180;
+            bldc_duty=75;
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_p,59.469);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_i,2.804);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_p,59.710);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_i,2.808);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_p,7.35);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_i,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_d,12.45);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_p,5.3);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_i,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_d,1);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_target_distance_coef,0.6);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_dynamic_p_coef,1.73);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_target_speed_offset_coef,6.05);
+//            EEPROM_Write_Data_uint16(speed_para_set*para_num+para_point_distance,22);
+            para_update_flag=1;
+            para_update_display_flag=1;
+            break;
+        case speed_190:
+            target_speed_set=190;
+            bldc_duty=80;
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_p,59.469);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_i,2.804);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_p,59.710);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_i,2.808);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_p,8.3);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_i,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_d,10.85);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_p,5.3);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_i,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_d,1);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_target_distance_coef,0.65);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_dynamic_p_coef,1.25);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_target_speed_offset_coef,6.75);
+//            EEPROM_Write_Data_uint16(speed_para_set*para_num+para_point_distance,21);
+            para_update_flag=1;
+            para_update_display_flag=1;
+            break;
+        case speed_200:
+            target_speed_set=200;
+            bldc_duty=80;
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_p,59.469);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_i,2.804);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_p,59.710);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_i,2.808);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_p,8.75);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_i,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_d,12.95);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_p,5.5);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_i,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_d,1);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_target_distance_coef,0.7);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_dynamic_p_coef,1.2);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_target_speed_offset_coef,6.75);
+//            EEPROM_Write_Data_uint16(speed_para_set*para_num+para_point_distance,20);
+            para_update_flag=1;
+            para_update_display_flag=1;
+            break;
+        case speed_210:
+            target_speed_set=210;
+            bldc_duty=85;
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_p,59.469);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_i,2.804);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_p,59.710);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_i,2.808);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_p,8.45);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_i,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_d,14.25);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_p,5.5);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_i,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_d,1);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_target_distance_coef,0.77);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_dynamic_p_coef,1.1);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_target_speed_offset_coef,6.65);
+//            EEPROM_Write_Data_uint16(speed_para_set*para_num+para_point_distance,19);
+            para_update_flag=1;
+            para_update_display_flag=1;
+            break;
+        case speed_220:
+            target_speed_set=220;
+            bldc_duty=90;
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_p,59.469);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_i,2.804);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_l_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_p,59.710);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_i,2.808);
+//            EEPROM_Write_Data(speed_para_set*para_num+motor_r_d,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_p,9.15);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_i,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+dir_d,14.35);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_p,5.5);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_i,0);
+//            EEPROM_Write_Data(speed_para_set*para_num+target_speed_d,1);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_target_distance_coef,0.9);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_dynamic_p_coef,1.2);
+//            EEPROM_Write_Data(speed_para_set*para_num+para_target_speed_offset_coef,6.75);
+//            EEPROM_Write_Data_uint16(speed_para_set*para_num+para_point_distance,19);
+            para_update_flag=1;
+            para_update_display_flag=1;
+            break;
+        case speed_230:
+            target_speed_set=230;
+            bldc_duty=100;
+            EEPROM_Write_Data(speed_para_set*para_num+motor_l_p,59.469);
+            EEPROM_Write_Data(speed_para_set*para_num+motor_l_i,2.804);
+            EEPROM_Write_Data(speed_para_set*para_num+motor_l_d,0);
+            EEPROM_Write_Data(speed_para_set*para_num+motor_r_p,59.710);
+            EEPROM_Write_Data(speed_para_set*para_num+motor_r_i,2.808);
+            EEPROM_Write_Data(speed_para_set*para_num+motor_r_d,0);
+            EEPROM_Write_Data(speed_para_set*para_num+dir_p,9.15);
+            EEPROM_Write_Data(speed_para_set*para_num+dir_i,0);
+            EEPROM_Write_Data(speed_para_set*para_num+dir_d,14.35);
+            EEPROM_Write_Data(speed_para_set*para_num+target_speed_p,5.5);
+            EEPROM_Write_Data(speed_para_set*para_num+target_speed_i,0);
+            EEPROM_Write_Data(speed_para_set*para_num+target_speed_d,1);
+            EEPROM_Write_Data(speed_para_set*para_num+para_target_distance_coef,0.9);
+            EEPROM_Write_Data(speed_para_set*para_num+para_dynamic_p_coef,1.2);
+            EEPROM_Write_Data(speed_para_set*para_num+para_target_speed_offset_coef,6.75);
+            EEPROM_Write_Data_uint16(speed_para_set*para_num+para_point_distance,19);
+            para_update_flag=1;
+            para_update_display_flag=1;
+            break;
+        case speed_240:
+            target_speed_set=240;
+            bldc_duty=100;
+            EEPROM_Write_Data(speed_para_set*para_num+motor_l_p,59.469);
+            EEPROM_Write_Data(speed_para_set*para_num+motor_l_i,2.804);
+            EEPROM_Write_Data(speed_para_set*para_num+motor_l_d,0);
+            EEPROM_Write_Data(speed_para_set*para_num+motor_r_p,59.710);
+            EEPROM_Write_Data(speed_para_set*para_num+motor_r_i,2.808);
+            EEPROM_Write_Data(speed_para_set*para_num+motor_r_d,0);
+            EEPROM_Write_Data(speed_para_set*para_num+dir_p,9.15);
+            EEPROM_Write_Data(speed_para_set*para_num+dir_i,0);
+            EEPROM_Write_Data(speed_para_set*para_num+dir_d,14.35);
+            EEPROM_Write_Data(speed_para_set*para_num+target_speed_p,5.5);
+            EEPROM_Write_Data(speed_para_set*para_num+target_speed_i,0);
+            EEPROM_Write_Data(speed_para_set*para_num+target_speed_d,1);
+            EEPROM_Write_Data(speed_para_set*para_num+para_target_distance_coef,0.9);
+            EEPROM_Write_Data(speed_para_set*para_num+para_dynamic_p_coef,1.2);
+            EEPROM_Write_Data(speed_para_set*para_num+para_target_speed_offset_coef,6.75);
+            EEPROM_Write_Data_uint16(speed_para_set*para_num+para_point_distance,19);
+            para_update_flag=1;
+            para_update_display_flag=1;
+            break;
+        case speed_idle:
+            break;
+    }
+}
+
+void Menu_Update(void)
+{
+    switch(key_press)
+    {
+        case key1:
+            switch(menu)
+            {
+                case page_main:
+                    Para_Init();                    //恢复eeprom参数
+                    break;
+                case page_setting:
+                    menu=page_main;                 //返回主界面
+                    break;
+                case page_pid_choose:
+                    menu=page_setting;              //返回参数选择界面
+                    break;
+                case page_value_set:
+                    switch(menu_para)
+                    {
+                        case menu_motor_l:
+                        case menu_motor_r:
+                        case menu_dir:
+                        case menu_target_speed:
+                            menu=page_pid_choose;   //返回pid选择界面
+                            break;
+                        case menu_target_offset_coef:
+                        case menu_target_distance_coef:
+                        case menu_dynamic_p_coef:
+                        case menu_bldc:
+                        case menu_target_distance:
+                            menu=page_setting;
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+            }
+            menu_update_flag=1;
+            key_press=nokey;
+            break;
+        case key2:
+            switch(menu)
+            {
+                case page_main:
+                    speed_para_set++;
+                    Speed_Para_Update();
+                    break;
+                case page_setting:
+                    switch(menu_para)
+                    {
+                        case menu_motor_l:
+                        case menu_motor_r:
+                        case menu_dir:
+                        case menu_target_speed:
+                            menu=page_pid_choose;
+                            break;
+                        case menu_target_offset_coef:
+                        case menu_target_distance_coef:
+                        case menu_dynamic_p_coef:
+                        case menu_bldc:
+                        case menu_target_distance:
+                            menu=page_value_set;
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case page_pid_choose:
+                    menu=page_value_set;
+                    break;
+                case page_value_set:
+                    menu_offset*=10;
+                    if(menu_offset>11) menu_offset=0.001;
+                    break;
+            }
+            key_press=nokey;
+            menu_update_flag=1;
+            break;
+        case key3:
+            switch(menu)
+            {
+                case page_main:
+                    menu=page_setting;
+                    break;
+                case page_setting:
+                    menu_para=(menu_para+1)%menu_para_count;
+                    break;
+                case page_pid_choose:
+                    menu_pid=(menu_pid+1)%menu_pid_count;
+                    break;
+                case page_value_set:
+                    switch(menu_para)
+                    {
+                        case menu_motor_l:
+                            switch(menu_pid)
+                            {
+                                case menu_p:
+                                    motor_l.p-=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+motor_l_p,motor_l.p);
+                                    break;
+                                case menu_i:
+                                    motor_l.i-=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+motor_l_i,motor_l.i);
+                                    break;
+                                case menu_d:
+                                    motor_l.d-=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+motor_l_d,motor_l.d);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case menu_motor_r:
+                            switch(menu_pid)
+                            {
+                                case menu_p:
+                                    motor_r.p-=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+motor_r_p,motor_r.p);
+                                    break;
+                                case menu_i:
+                                    motor_r.i-=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+motor_r_i,motor_r.i);
+                                    break;
+                                case menu_d:
+                                    motor_r.d-=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+motor_r_d,motor_r.d);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case menu_dir:
+                            switch(menu_pid)
+                            {
+                                case menu_p:
+                                    dir_p_set-=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+dir_p,dir_p_set);
+                                    break;
+                                case menu_i:
+                                    dir.i-=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+dir_i,dir.i);
+                                    break;
+                                case menu_d:
+                                    dir.d-=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+dir_d,dir.d);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case menu_target_speed:
+                            switch(menu_pid)
+                            {
+                                case menu_p:
+                                    target_speed_pid.p-=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+target_speed_p,target_speed_pid.p);
+                                    break;
+                                case menu_i:
+                                    target_speed_pid.i-=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+target_speed_i,target_speed_pid.i);
+                                    break;
+                                case menu_d:
+                                    target_speed_pid.d-=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+target_speed_d,target_speed_pid.d);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case menu_target_offset_coef:
+                            target_speed_offset_coef-=menu_offset;
+                            EEPROM_Write_Data(speed_para_set*para_num+para_target_speed_offset_coef,target_speed_offset_coef);
+                            break;
+                        case menu_target_distance_coef:
+                            target_distance_coef-=menu_offset;
+                            EEPROM_Write_Data(speed_para_set*para_num+para_target_distance_coef,target_distance_coef);
+                            break;
+                        case menu_dynamic_p_coef:
+                            dynamic_p_coef-=menu_offset;
+                            EEPROM_Write_Data(speed_para_set*para_num+para_dynamic_p_coef,dynamic_p_coef);
+                            break;
+                        case menu_bldc:
+                            bldc_duty-=menu_offset;
+                            break;
+                        case menu_target_distance:
+                            target_point_distance-=(uint8)menu_offset;
+                            EEPROM_Write_Data_uint16(speed_para_set*para_num+para_point_distance,target_point_distance);
+                            break;
+                        default:
+                            break;
+
+                    }
+            }
+            key_press=nokey;
+            menu_update_flag=1;
+            break;
+        case key4:
+            switch(menu)
+            {
+                case page_main:
+                    if(start_flag==0)
+                        start_delay_count_flag=1;
+                    else
+                    {
+                        start_flag=0;
+                    }
+                    break;
+                case page_setting:
+                    menu_para=(menu_para+menu_para_count-1)%menu_para_count;
+                    break;
+                case page_pid_choose:
+                    menu_pid=(menu_pid+menu_pid_count-1)%menu_pid_count;
+                    break;
+                case page_value_set:
+                    switch(menu_para)
+                    {
+                        case menu_motor_l:
+                            switch(menu_pid)
+                            {
+                                case menu_p:
+                                    motor_l.p+=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+motor_l_p,motor_l.p);
+                                    break;
+                                case menu_i:
+                                    motor_l.i+=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+motor_l_i,motor_l.i);
+                                    break;
+                                case menu_d:
+                                    motor_l.d+=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+motor_l_d,motor_l.d);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case menu_motor_r:
+                            switch(menu_pid)
+                            {
+                                case menu_p:
+                                    motor_r.p+=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+motor_r_p,motor_r.p);
+                                    break;
+                                case menu_i:
+                                    motor_r.i+=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+motor_r_i,motor_r.i);
+                                    break;
+                                case menu_d:
+                                    motor_r.d+=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+motor_r_d,motor_r.d);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case menu_dir:
+                            switch(menu_pid)
+                            {
+                                case menu_p:
+                                    dir_p_set+=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+dir_p,dir_p_set);
+                                    break;
+                                case menu_i:
+                                    dir.i+=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+dir_i,dir.i);
+                                    break;
+                                case menu_d:
+                                    dir.d+=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+dir_d,dir.d);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case menu_target_speed:
+                            switch(menu_pid)
+                            {
+                                case menu_p:
+                                    target_speed_pid.p+=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+target_speed_p,target_speed_pid.p);
+                                    break;
+                                case menu_i:
+                                    target_speed_pid.i+=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+target_speed_i,target_speed_pid.i);
+                                    break;
+                                case menu_d:
+                                    target_speed_pid.d+=menu_offset;
+                                    EEPROM_Write_Data(speed_para_set*para_num+target_speed_d,target_speed_pid.d);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case menu_target_offset_coef:
+                            target_speed_offset_coef+=menu_offset;
+                            EEPROM_Write_Data(speed_para_set*para_num+para_target_speed_offset_coef,target_speed_offset_coef);
+                            break;
+                        case menu_target_distance_coef:
+                            target_distance_coef+=menu_offset;
+                            EEPROM_Write_Data(speed_para_set*para_num+para_target_distance_coef,target_distance_coef);
+                            break;
+                        case menu_dynamic_p_coef:
+                            dynamic_p_coef+=menu_offset;
+                            EEPROM_Write_Data(speed_para_set*para_num+para_dynamic_p_coef,dynamic_p_coef);
+                            break;
+                        case menu_bldc:
+                            bldc_duty+=menu_offset;
+                            break;
+                        case menu_target_distance:
+                            target_point_distance+=(uint8)menu_offset;
+                            EEPROM_Write_Data_uint16(speed_para_set*para_num+para_point_distance,target_point_distance);
+                            break;
+                        default:
+                            break;
+                    }
+            }
+            key_press=nokey;
+            menu_update_flag=1;
+            break;
+        default:
+            key_press=nokey;
+    }
+}
+
+void Menu_Display(void)
+{
+    uint8 i;
+    if(menu_update_flag)
+    {
+        menu_update_flag=0;
+        tft180_clear();
+    }
+    switch(menu)
+    {
+        case page_main:
+            //按键功能
+            tft180_show_string(80,40,"start");
+            tft180_show_string(80,50,"setting");
+            tft180_show_string(80,60,"speed");
+            tft180_show_string(80,70,"recover");
+            //左电机pid参数
+            motor_l_display.p=motor_l.p;
+            motor_l_display.i=motor_l.i;
+            motor_l_display.d=motor_l.d;
+            tft180_show_string(LCD_PARA_START_X,LCD_PARA_START_Y,(const char*)motor_l_display.name);
+            tft180_show_string(LCD_PARA_START_X,LCD_PARA_START_Y+LCD_OFFSET_Y,"p:");
+            tft180_show_float(LCD_PARA_START_X+12,LCD_PARA_START_Y+LCD_OFFSET_Y,motor_l_display.p,2,3);
+            tft180_show_string(LCD_PARA_START_X,LCD_PARA_START_Y+LCD_OFFSET_Y*2,"i:");
+            tft180_show_float(LCD_PARA_START_X+12,LCD_PARA_START_Y+LCD_OFFSET_Y*2,motor_l_display.i,2,3);
+            //右电机pid参数
+            motor_r_display.p=motor_r.p;
+            motor_r_display.i=motor_r.i;
+            motor_r_display.d=motor_r.d;
+            tft180_show_string(LCD_PARA_START_X,LCD_PARA_START_Y+LCD_OFFSET_Y*3,(const char*)motor_r_display.name);
+            tft180_show_string(LCD_PARA_START_X,LCD_PARA_START_Y+LCD_OFFSET_Y*4,"p:");
+            tft180_show_float(LCD_PARA_START_X+12,LCD_PARA_START_Y+LCD_OFFSET_Y*4,motor_r_display.p,2,3);
+            tft180_show_string(LCD_PARA_START_X,LCD_PARA_START_Y+LCD_OFFSET_Y*5,"i:");
+            tft180_show_float(LCD_PARA_START_X+12,LCD_PARA_START_Y+LCD_OFFSET_Y*5,motor_r_display.i,2,3);
+            //方向环pid参数
+            dir_display.p=dir_p_set;
+            dir_display.i=dir.i;
+            dir_display.d=dir.d;
+            tft180_show_string(LCD_PARA_START_X,LCD_PARA_START_Y+LCD_OFFSET_Y*6,(const char*)dir_display.name);
+            tft180_show_string(LCD_PARA_START_X,LCD_PARA_START_Y+LCD_OFFSET_Y*7,"p:");
+            tft180_show_float(LCD_PARA_START_X+12,LCD_PARA_START_Y+LCD_OFFSET_Y*7,dir_display.p,2,3);
+            tft180_show_string(LCD_PARA_START_X,LCD_PARA_START_Y+LCD_OFFSET_Y*8,"d:");
+            tft180_show_float(LCD_PARA_START_X+12,LCD_PARA_START_Y+LCD_OFFSET_Y*8,dir_display.d,2,3);
+            //目标速度环pid参数
+            target_speed_display.p=target_speed_pid.p;
+            target_speed_display.i=target_speed_pid.i;
+            target_speed_display.d=target_speed_pid.d;
+            tft180_show_string(LCD_PARA_START_X,LCD_PARA_START_Y+LCD_OFFSET_Y*9,(const char*)target_speed_display.name);
+            tft180_show_string(LCD_PARA_START_X,LCD_PARA_START_Y+LCD_OFFSET_Y*10,"p:");
+            tft180_show_float(LCD_PARA_START_X+12,LCD_PARA_START_Y+LCD_OFFSET_Y*10,target_speed_display.p,2,3);
+            tft180_show_string(LCD_PARA_START_X,LCD_PARA_START_Y+LCD_OFFSET_Y*11,"i:");
+            tft180_show_float(LCD_PARA_START_X+12,LCD_PARA_START_Y+LCD_OFFSET_Y*11,target_speed_display.i,2,3);
+            tft180_show_string(LCD_PARA_START_X,LCD_PARA_START_Y+LCD_OFFSET_Y*12,"d:");
+            tft180_show_float(LCD_PARA_START_X+12,LCD_PARA_START_Y+LCD_OFFSET_Y*12,target_speed_display.d,1,3);
+            tft180_show_string(LCD_PARA_START_X,LCD_PARA_START_Y+LCD_OFFSET_Y*13,"offset:");
+            tft180_show_float(LCD_PARA_START_X+42,LCD_PARA_START_Y+LCD_OFFSET_Y*13,target_speed_offset_coef,2,3);
+            tft180_show_string(70,80,"target");
+            tft180_show_uint (70,90, target_speed_set, 3);
+            tft180_show_string(70,100,"distance");
+            tft180_show_float(70,110,target_distance_coef,1,3);
+            tft180_show_string(70,120,"p_coef");
+            tft180_show_float(70,130,dynamic_p_coef,1,3);
+            tft180_show_string(70,140,"bldc:");
+            tft180_show_uint(100,140,bldc_duty,3);
+            tft180_show_string(80,150,"dis:");
+            tft180_show_uint(104,150,target_point_distance,2);
+            break;
+        case page_setting:
+            //按键功能
+            tft180_show_string(80,0,"up");
+            tft180_show_string(80,10,"down");
+            tft180_show_string(80,20,"ok");
+            tft180_show_string(80,30,"back");
+            //参数
+            tft180_show_string(0,0,"motor_l");
+            tft180_show_string(0,10,"motor_r");
+            tft180_show_string(0,20,"dir");
+            tft180_show_string(0,30,"target");
+            tft180_show_string(0,40,"offset");
+            tft180_show_string(0,50,"distance");
+            tft180_show_string(0,60,"p_coef");
+            tft180_show_string(0,70,"bldc");
+            tft180_show_string(0,80,"point_dis");
+            //位置
+            tft180_show_string(60,10*menu_para,"<<");
+            break;
+        case page_pid_choose:
+            //按键功能
+            tft180_show_string(80,0,"up");
+            tft180_show_string(80,10,"down");
+            tft180_show_string(80,20,"ok");
+            tft180_show_string(80,30,"back");
+            //参数
+            switch(menu_para)
+            {
+                case menu_motor_l:
+                    tft180_show_string(0,0,"motor_l");
+                    break;
+                case menu_motor_r:
+                    tft180_show_string(0,0,"motor_r");
+                    break;
+                case menu_dir:
+                    tft180_show_string(0,0,"dir");
+                    break;
+                case menu_target_speed:
+                    tft180_show_string(0,0,"target_speed");
+                    break;
+                default:
+                    break;
+            }
+            tft180_show_string(0,20,"p");
+            tft180_show_string(0,30,"i");
+            tft180_show_string(0,40,"d");
+            //位置
+            tft180_show_string(30,10*menu_pid+20,"<<");
+            break;
+        case page_value_set:
+            //按键功能
+            tft180_show_string(80,0,"up");
+            tft180_show_string(80,10,"down");
+            tft180_show_string(80,20,"offset");
+            tft180_show_string(80,30,"back");
+            //参数
+            switch(menu_para)
+            {
+                case menu_motor_l:
+                    switch(menu_pid)
+                    {
+                        case menu_p:
+                            tft180_show_string(0,0,"motor_l_p");
+                            tft180_show_float(0,10,motor_l.p,2,3);
+                            break;
+                        case menu_i:
+                            tft180_show_string(0,0,"motor_l_i");
+                            tft180_show_float(0,10,motor_l.i,2,3);
+                            break;
+                        case menu_d:
+                            tft180_show_string(0,0,"motor_l_d");
+                            tft180_show_float(0,10,motor_l.d,2,3);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case menu_motor_r:
+                    switch(menu_pid)
+                    {
+                        case menu_p:
+                            tft180_show_string(0,0,"motor_r_p");
+                            tft180_show_float(0,10,motor_r.p,2,3);
+                            break;
+                        case menu_i:
+                            tft180_show_string(0,0,"motor_r_i");
+                            tft180_show_float(0,10,motor_r.i,2,3);
+                            break;
+                        case menu_d:
+                            tft180_show_string(0,0,"motor_r_d");
+                            tft180_show_float(0,10,motor_r.d,2,3);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case menu_dir:
+                    switch(menu_pid)
+                    {
+                        case menu_p:
+                            tft180_show_string(0,0,"dir_p");
+                            tft180_show_float(0,10,dir_p_set,2,3);
+                            break;
+                        case menu_i:
+                            tft180_show_string(0,0,"dir_i");
+                            tft180_show_float(0,10,dir.i,2,3);
+                            break;
+                        case menu_d:
+                            tft180_show_string(0,0,"dir_d");
+                            tft180_show_float(0,10,dir.d,2,3);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case menu_target_speed:
+                    switch(menu_pid)
+                    {
+                        case menu_p:
+                            tft180_show_string(0,0,"target_p");
+                            tft180_show_float(0,10,target_speed_pid.p,2,3);
+                            break;
+                        case menu_i:
+                            tft180_show_string(0,0,"target_i");
+                            tft180_show_float(0,10,target_speed_pid.i,2,3);
+                            break;
+                        case menu_d:
+                            tft180_show_string(0,0,"target_d");
+                            tft180_show_float(0,10,target_speed_pid.d,2,3);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case menu_target_offset_coef:
+                    tft180_show_string(0,0,"offset");
+                    tft180_show_float(0,10,target_speed_offset_coef,2,3);
+                    break;
+                case menu_target_distance_coef:
+                    tft180_show_string(0,0,"distance");
+                    tft180_show_float(0,10,target_distance_coef,1,3);
+                    break;
+                case menu_dynamic_p_coef:
+                    tft180_show_string(0,0,"p_coef");
+                    tft180_show_float(0,10,dynamic_p_coef,1,3);
+                    break;
+                case menu_bldc:
+                    tft180_show_string(0,0,"bldc");
+                    tft180_show_uint(0,10,bldc_duty,3);
+                    break;
+                case menu_target_distance:
+                    tft180_show_string(0,0,"point_dis");
+                    tft180_show_uint(0,10,target_point_distance,2);
+                    break;
+                default:
+                    break;
+            }
+            //步长
+            tft180_show_string(0,40,"offset");
+            tft180_show_float(0,50,menu_offset,2,3);
+            break;
+    }
+#if LCD_IMAGE
+    if(menu==page_main)
+    {
+        tft180_show_gray_image(0,0,(const uint8 *)image_display[0], MT9V03X_W, MT9V03X_H, MT9V03X_W >>1, MT9V03X_H >>1, 0);
+        for(i=0;i<16;i++)
+        {
+            tft180_draw_point(point_u_display.col[i]>>1,point_u_display.row[i]>>1,RGB565_BLUE);
+            tft180_draw_point(point_d_display.col[i]>>1,point_d_display.row[i]>>1,RGB565_GREEN);
+            tft180_draw_point(point_m_display.col[i]>>1,point_m_display.row[i]>>1,RGB565_RED);
+        }
+    }
+#endif
+}
+
+

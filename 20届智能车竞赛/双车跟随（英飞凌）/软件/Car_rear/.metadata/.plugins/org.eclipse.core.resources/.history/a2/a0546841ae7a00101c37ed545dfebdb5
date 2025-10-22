@@ -1,0 +1,189 @@
+#include "control.h"
+
+
+int16 encoder_data_L,encoder_data_R;    //编码器读数
+int16 encoder_data_window_L[ENCODER_FILTER_SIZE],encoder_data_window_R[ENCODER_FILTER_SIZE];    //均值滤波数组
+float LP_filter_coef=0.1; //低通滤波系数
+float speed_L,speed_R;  //速度
+float target_speed_L,target_speed_R;    //目标速度
+float target_speed_offset;  //差速
+float target_speed,target_speed_set; //目标速度
+float target_speed_offset_coef=0.006; //差速系数
+uint8 start_flag=0;     //启动标志位
+uint8 start_delay_count=0;   //启动延时计数
+uint8 start_delay_count_flag=0; //启动延时计数标志位
+uint8 run_state;
+float target_distance_coef;
+float dir_error_queue[3]={0,0,0};
+float dir_p_set;
+float dynamic_p_coef;
+
+
+void Steer_Init(void)
+{
+    pwm_init(SERVO_MOTOR_PWM, SERVO_MOTOR_FREQ, STEER_DUTY_MIDDLE);
+}
+
+void Steer_Control(int16 duty)
+{
+    pwm_set_duty(SERVO_MOTOR_PWM, STEER_DUTY_MIDDLE+duty);
+}
+
+void Motor_Init(void)
+{
+    gpio_init(DIR_R, GPO, GPIO_LOW, GPO_PUSH_PULL);                           // GPIO 初始化为输出 默认上拉输出高
+    pwm_init(PWM_R, 17000, 0);                                                 // PWM 通道初始化频率 17KHz 占空比初始为 0
+    gpio_init(DIR_L, GPO, GPIO_HIGH, GPO_PUSH_PULL);                           // GPIO 初始化为输出 默认上拉输出高
+    pwm_init(PWM_L, 17000, 0);                                                 // PWM 通道初始化频率 17KHz 占空比初始为 0
+}
+
+void Motor_Control(motor_enum num,int16 duty)
+{
+    if(num==left_motor)
+    {
+        if(duty>=0)
+        {
+            gpio_set_level(DIR_L, GPIO_HIGH);
+            pwm_set_duty(PWM_L, (uint32)duty);
+        }
+        else
+        {
+            gpio_set_level(DIR_L, GPIO_LOW);
+            pwm_set_duty(PWM_L, (uint32)(-duty));
+        }
+    }
+    else
+    {
+        if(duty>=0)
+        {
+            gpio_set_level(DIR_R, GPIO_LOW);
+            pwm_set_duty(PWM_R, (uint32)duty);
+        }
+        else
+        {
+            gpio_set_level(DIR_R, GPIO_HIGH);
+            pwm_set_duty(PWM_R, (uint32)(-duty));
+        }
+    }
+}
+
+void Encoder_Init(void)
+{
+    encoder_dir_init(ENCODER_L, ENCODER_L_PULSE, ENCODER_L_DIR);
+    encoder_dir_init(ENCODER_R, ENCODER_R_PULSE, ENCODER_R_DIR);
+}
+
+void Bldc_Init(void)
+{
+    pwm_init(BLDC_L_PIN,50,500);
+    pwm_init(BLDC_R_PIN,50,500);
+}
+
+void Speed_Loop(void)
+{
+    float error_L,error_R;
+    int16 duty_L,duty_R;
+    encoder_data_L=-encoder_get_count(ENCODER_L);
+    encoder_clear_count(ENCODER_L);
+    encoder_data_R=encoder_get_count(ENCODER_R);
+    encoder_clear_count(ENCODER_R);
+//    speed_L=Average_Filter(encoder_data_window_L,encoder_data_L,ENCODER_FILTER_SIZE);
+//    speed_R=Average_Filter(encoder_data_window_R,encoder_data_R,ENCODER_FILTER_SIZE);
+//    speed_L=LowPass(encoder_data_L,speed_L,LP_filter_coef);
+//    speed_R=LowPass(encoder_data_R,speed_R,LP_filter_coef);
+    speed_L=encoder_data_L;
+    speed_R=encoder_data_R;
+    error_L=target_speed_L-speed_L;
+    error_R=target_speed_R-speed_R;
+    duty_L=(int16)PID_Incremental_Controller(&motor_l,error_L);
+    duty_R=(int16)PID_Incremental_Controller(&motor_r,error_R);
+
+    Motor_Control(left_motor,duty_L);
+    Motor_Control(right_motor,duty_R);
+}
+
+void Dir_Loop(void)
+{
+    float error;
+    int16 duty;
+    if(find_point_flag)
+        error=MT9V03X_W/2.0-point_middle.col;
+    else
+        error=dir.error0/Abs(dir.error0)*MT9V03X_W/2;
+
+//    dir.p=dir_p_set*(1+dynamic_p_coef*Abs(error)/100);
+//    error=-40;/////////////////////////////////////////
+    if(Abs(error)>35)
+        dir.p=dir_p_set*(1+dynamic_p_coef*Max((speed_L+speed_R)/2-target_speed_set,0)/100);
+    else
+        dir.p=dir_p_set;
+    duty=(int16)PID_Position_Controller(&dir,error);
+    Steer_Control(duty);
+//    seekfree_assistant_oscilloscope_data.data[7]=error;
+}
+
+void Target_Speed_Loop(void)
+{
+    float error;
+    float target;
+    if(find_point_flag)
+    {
+        error=(float)(target_point_distance-target_distance_coef*Abs(dir.error0)/5-point_distance);
+        target=PID_Position_Controller(&target_speed_pid,error);
+    }
+    else
+    {
+        target=target_speed_pid.out;
+    }
+//    target=0;///////////////////////////////////
+    target_speed_offset=target_speed_offset_coef*dir.error0*(target_speed+target)/1000;
+    target_speed_L=target_speed+target-target_speed_offset;
+    target_speed_R=target_speed+target+target_speed_offset;
+}
+
+void Run_State_Update(void)
+{
+    switch(run_state)
+    {
+        case 0:
+            if(find_point_flag && point_distance<target_point_distance-2)///////////////////////
+            {
+                run_state=1;
+                motor_l.out=motor_r.out=0;
+                target_speed=2;
+                BLDC_L(bldc_duty);
+                BLDC_R(bldc_duty);
+            }
+            break;
+        case 1:
+            Dir_Loop();
+            target_speed+=2;
+            Target_Speed_Loop();
+//            target_speed_L=target_speed_R=target_speed;
+            if(Abs(target_speed-target_speed_set)<2)
+            {
+                run_state=2;
+                target_speed=target_speed_set;
+            }
+            break;
+        case 2:
+            if(!find_point_flag)
+            {
+                Motor_Control(left_motor,0);
+                Motor_Control(right_motor,0);
+                motor_l.out=0;
+                motor_r.out=0;
+                start_flag=0;
+                run_state=0;
+            }
+            else
+            {
+                Dir_Loop();
+                Target_Speed_Loop();
+            }
+            break;
+    }
+}
+
+
+
