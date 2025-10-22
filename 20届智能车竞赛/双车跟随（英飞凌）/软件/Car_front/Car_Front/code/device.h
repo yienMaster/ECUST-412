@@ -1,0 +1,111 @@
+#ifndef __DEVICE_H__
+#define __DEVICE_H__
+
+#include "zf_common_headfile.h"
+
+//红外灯版，蜂鸣器，LED，按键，陀螺仪
+
+//按键枚举
+typedef enum
+{
+    key1,key2,key3,key4,nokey
+}Key_enum;
+
+//按键状态枚举
+typedef enum
+{
+    idle,           //未按下
+    maypress,       //可能按下
+    press,          //确定按下
+    release         //释放
+}Key_State_enum;
+
+typedef enum
+{
+    speed_120,
+    speed_135,
+    speed_150,
+    speed_160,
+    speed_170,
+    speed_180,
+    speed_190,
+    speed_200,
+    speed_210,
+    speed_220,
+    speed_230,
+    speed_240,
+    speed_idle
+}Speed_enum;
+
+typedef enum
+{
+    page_main,page_setting,page_pid_choose,page_value_set
+}Menu_enum;
+
+typedef enum
+{
+    menu_motor_l,menu_motor_r,menu_dir,
+    menu_gkd,menu_error_k,menu_error_b,
+    menu_bldc,menu_speedup,
+    menu_dynamic_frontsight,menu_dynamic_p_coef,menu_round_p1_decrease,menu_round_p2_decrease,
+    menu_round_size,menu_startrow,menu_down_round_speed,
+    menu_para_count
+}Menu_Para_enum;
+
+typedef enum
+{
+    menu_p,menu_i,menu_d,
+    menu_pid_count
+}Menu_PID_enum;
+
+
+//引脚定义
+#define LED_PIN             (P00_12)        //板载LED
+#define BUZZER_PIN          (P33_3)         //蜂鸣器
+#define LIGHT_PIN           (P13_1)         //红外灯版
+#define KEY1                (P11_11)        //按键
+#define KEY2                (P11_9)
+#define KEY3                (P13_2)
+#define KEY4                (P13_0)
+
+//设备开关函数（0关1开）
+#define LED(x)              (gpio_set_level(LED_PIN, (!x)))
+#define BUZZER(x)           (gpio_set_level(BUZZER_PIN, (x)))
+#define LIGHT(x)            (gpio_set_level(LIGHT_PIN, (x)))
+#define DEVICE_TOGGLE(x)    (gpio_toggle_level(x))
+
+
+
+extern Key_enum key_press;
+extern float gyro_z;
+extern Speed_enum speed_para_set;
+extern Menu_enum menu;
+extern Menu_Para_enum menu_para;
+extern Menu_PID_enum menu_pid;
+extern float menu_offset;
+extern uint8 menu_update_flag;
+extern uint16 round_size_set;
+extern uint8 round_size;
+extern uint16 round_size_full;
+
+//初始化函数
+void Led_Init(void);
+void Buzzer_Init(void);
+void Light_Init(void);
+void Key_Init(void);
+void Menu_Update(void);
+void Menu_Display(void);
+
+
+//按键检测
+void Key_Scan(void);
+
+
+//获取z轴角速度
+void Get_Gyro_Z(void);
+
+//速度对应参数更新
+void Speed_Para_Update(void);
+
+
+#endif

@@ -1,0 +1,87 @@
+
+#ifndef __CONTROL_H__
+#define __CONTROL_H__
+
+#include "zf_common_headfile.h"
+
+typedef enum
+{
+    left_motor,right_motor
+}motor_enum;
+
+
+//#define SERVO_MOTOR_PWM             (ATOM1_CH1_P33_9)                           // 定义主板上舵机对应引脚
+//#define SERVO_MOTOR_FREQ            (300)                                       // 定义主板上舵机频率  请务必注意范围 50-300
+//#define STEER_DUTY_MIDDLE           (4992)
+//#define STEER_DUTY_LEFT             (5454)
+//#define STEER_DUTY_RIGHT            (4530)
+
+#define DIR_R                       (P33_1)
+#define PWM_R                       (ATOM2_CH1_P33_5)
+#define DIR_L                       (P33_0)
+#define PWM_L                       (ATOM2_CH0_P33_4)
+
+#define ENCODER_L                   (TIM4_ENCODER)                         // 带方向编码器对应使用的编码器接口
+#define ENCODER_L_PULSE             (TIM4_ENCODER_CH1_P02_8)               // PULSE 对应的引脚
+#define ENCODER_L_DIR               (TIM4_ENCODER_CH2_P00_9)               // DIR 对应的引脚
+#define ENCODER_R                   (TIM2_ENCODER)                         // 带方向编码器对应使用的编码器接口
+#define ENCODER_R_PULSE             (TIM2_ENCODER_CH1_P33_7)               // PULSE 对应的引脚
+#define ENCODER_R_DIR               (TIM2_ENCODER_CH2_P33_6)               // DIR 对应的引脚
+#define ENCODER_FILTER_SIZE         (20)                                   // 均值滤波长度
+
+#define BLDC_L_PIN                  (ATOM3_CH5_P11_10)
+#define BLDC_R_PIN                  (ATOM3_CH7_P11_12)
+
+#define START_DELAY_TIME            (200)                                   // 启动延时时间（START_DELAY_TIME*10ms）
+
+#define MOTOR_L_P                   (32.770)
+#define MOTOR_L_I                   (0.570)
+#define MOTOR_R_P                   (37.319)
+#define MOTOR_R_I                   (0.652)
+#define DIR_P                       (0)
+#define DIR_D                       (0)
+
+
+//无刷电机开关函数（0关100满）
+#define BLDC_L(x)                   (pwm_set_duty(BLDC_L_PIN,5*(x)+500))
+#define BLDC_R(x)                   (pwm_set_duty(BLDC_R_PIN,5*(x)+500))
+
+
+//void Steer_Init(void);
+//void Steer_Control(int16 duty);
+void Motor_Init(void);
+void Motor_Control(motor_enum num,int16 duty);
+void Encoder_Init(void);
+void Bldc_Init(void);
+void Speed_Loop(void);
+void Dir_Loop(void);
+void Speed_Decision(void);
+uint8 Find_Start_Row(void);
+
+
+extern int16 encoder_data_L,encoder_data_R;    //编码器读数
+extern float LP_filter_coef;
+extern float speed_L,speed_R;  //速度
+extern float target_speed_L,target_speed_R;
+extern float target_speed,target_speed_set; //目标速度
+extern uint8 start_flag;     //启动标志位
+extern uint8 start_delay_count;   //启动延时计数
+extern uint8 start_delay_count_flag;
+extern float dir_error_k,dir_error_b;
+extern uint8 start_row_set;
+extern uint8 bldc_duty;
+extern uint8 speed_increase;
+extern float round_p_offset;
+extern float dir_p_set;
+extern float dynamic_p_coef;
+extern uint8 target_decision_flag;
+extern uint8 speedup_flag,speedup_count;
+extern float dynamic_frontsight;
+extern uint8 down_round_speed;
+extern float start_p_decrease;
+extern uint8 start_frontsight;
+extern float round_p1_decrease,round_p2_decrease;
+extern uint8 start_frontsight_count;
+
+
+#endif
