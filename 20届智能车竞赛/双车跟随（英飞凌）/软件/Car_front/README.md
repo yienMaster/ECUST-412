@@ -6,9 +6,9 @@
 
 前车代码(记录更新内容和时间)
 
-![pid](/Readme_Image/前车pid.jpg)
+![pid](\\Readme_Image\\前车pid.jpg)
 
-![cpu分配](/Readme_Image/前车cpu分配.jpg)
+![cpu分配](\\Readme_Image\\前车cpu分配.jpg)
 
 ---
 
