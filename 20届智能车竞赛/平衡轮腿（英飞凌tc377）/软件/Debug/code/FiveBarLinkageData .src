@@ -1,0 +1,1317 @@
+	; Module start
+	.compiler_version	"TASKING VX-toolset for AURIX Development Studio (non-commercial): C compiler v1.1r8 Build 22011964"
+	.compiler_invocation	"ctc -f cc88024a --dep-file=code/FiveBarLinkageData .d -c99 --fp-model=3cflnrSTz -D__CPU__=tc37x -D__CPU_TC37X__ --core=tc1.6.2 --fp-model=+float -D__CPU__=tc37x -g2 -w544 -w557 -t4 --language=+volatile -N0 -O0 -Y0 -Z0 --compact-max-size=200 --misrac-version=2004 -o code/FiveBarLinkageData .src ../code/FiveBarLinkageData .c"
+	.compiler_name		"ctc"
+	;source	'../code/FiveBarLinkageData .c'
+
+	
+$TC162
+	
+	.sdecl	'.text.FiveBarLinkageData .getJointAngles',code,cluster('getJointAngles')
+	.sect	'.text.FiveBarLinkageData .getJointAngles'
+	.align	2
+	
+	.global	getJointAngles
+; Function getJointAngles
+.L24:
+getJointAngles:	.type	func
+	mov	e8,d5,d4
+	mov.aa	a15,a4
+.L70:
+	mov.aa	a12,a5
+.L71:
+	mov.u	d15,#42467
+	addih	d15,d15,#15515
+.L72:
+	add.f	d15,d8,d15
+.L73:
+	movh	d0,#16384
+.L190:
+	mul.f	d15,d15,d0
+.L191:
+	mov.u	d0,#49807
+	addih	d0,d0,#15733
+.L192:
+	mul.f	d10,d15,d0
+.L74:
+	movh	d15,#16384
+.L76:
+	mul.f	d15,d9,d15
+.L77:
+	mov.u	d0,#49807
+	addih	d0,d0,#15733
+.L193:
+	mul.f	d11,d15,d0
+.L78:
+	mov.u	d15,#42467
+	addih	d15,d15,#15515
+.L80:
+	add.f	d4,d8,d15
+.L68:
+	movh	d5,#16384
+.L69:
+	call	pow
+.L67:
+	mov	d15,d2
+.L194:
+	movh	d5,#16384
+.L81:
+	mov	d4,d9
+.L82:
+	call	pow
+.L83:
+	add.f	d15,d15,d2
+.L195:
+	mov.u	d4,#49807
+	addih	d4,d4,#15733
+.L196:
+	movh	d5,#16384
+	call	pow
+.L197:
+	add.f	d15,d15,d2
+.L198:
+	mov	d4,#20972
+	addih	d4,d4,#15800
+.L199:
+	movh	d5,#16384
+	call	pow
+.L200:
+	sub.f	d12,d15,d2
+.L84:
+	movh	d5,#16384
+	mov	d4,d10
+.L85:
+	call	pow
+.L86:
+	mov	d15,d2
+.L201:
+	movh	d5,#16384
+	mov	d4,d11
+.L87:
+	call	pow
+.L88:
+	add.f	d15,d15,d2
+.L202:
+	movh	d5,#16384
+	mov	d4,d12
+.L89:
+	call	pow
+.L90:
+	sub.f	d4,d15,d2
+.L91:
+	mov	d15,#0
+.L203:
+	cmp.f	d15,d4,d15
+	and	d15,#6
+	ne	d15,d15,#0
+.L204:
+	jeq	d15,#0,.L2
+.L60:
+	call	sqrt
+.L92:
+	add.f	d15,d11,d2
+.L205:
+	add.f	d0,d10,d12
+.L206:
+	div.f	d4,d15,d0
+	call	atan
+.L207:
+	movh	d15,#16384
+.L208:
+	mul.f	d15,d2,d15
+.L93:
+	mov	d0,#12000
+	addih	d0,d0,#16997
+.L209:
+	mul.f	d15,d15,d0
+.L94:
+	st.w	[a15],d15
+.L210:
+	ld.w	d15,[a15]
+.L211:
+	movh	d0,#17332
+.L212:
+	cmp.f	d15,d15,d0
+	extr.u	d15,d15,#2,#1
+.L213:
+	jeq	d15,#0,.L3
+.L214:
+	ld.w	d15,[a15]
+.L215:
+	movh	d0,#17332
+.L216:
+	sub.f	d15,d15,d0
+	st.w	[a15],d15
+.L217:
+	j	.L4
+.L3:
+	ld.w	d15,[a15]
+.L218:
+	mov	d0,#0
+.L219:
+	cmp.f	d15,d15,d0
+	extr.u	d15,d15,#0,#1
+.L220:
+	jeq	d15,#0,.L5
+.L221:
+	ld.w	d15,[a15]
+.L222:
+	movh	d0,#17332
+.L223:
+	add.f	d15,d15,d0
+	st.w	[a15],d15
+.L5:
+.L4:
+	j	.L6
+.L2:
+	movh	d15,#17352
+.L224:
+	st.w	[a15],d15
+.L6:
+	mov.u	d15,#42467
+	addih	d15,d15,#15515
+.L95:
+	sub.f	d15,d8,d15
+.L96:
+	movh	d0,#16384
+.L225:
+	mul.f	d15,d15,d0
+.L226:
+	mov.u	d0,#49807
+	addih	d0,d0,#15733
+.L227:
+	mul.f	d10,d15,d0
+.L75:
+	movh	d15,#16384
+.L97:
+	mul.f	d15,d9,d15
+.L98:
+	mov.u	d0,#49807
+	addih	d0,d0,#15733
+.L228:
+	mul.f	d11,d15,d0
+.L79:
+	mov.u	d15,#42467
+	addih	d15,d15,#15515
+.L99:
+	sub.f	d4,d8,d15
+.L100:
+	movh	d5,#16384
+	call	pow
+.L229:
+	mov	d15,d2
+.L230:
+	movh	d5,#16384
+.L101:
+	mov	d4,d9
+.L102:
+	call	pow
+.L103:
+	add.f	d15,d15,d2
+.L231:
+	mov.u	d4,#49807
+	addih	d4,d4,#15733
+.L232:
+	movh	d5,#16384
+	call	pow
+.L233:
+	add.f	d15,d15,d2
+.L234:
+	mov	d4,#20972
+	addih	d4,d4,#15800
+.L235:
+	movh	d5,#16384
+	call	pow
+.L236:
+	sub.f	d8,d15,d2
+.L104:
+	movh	d5,#16384
+	mov	d4,d10
+.L105:
+	call	pow
+.L106:
+	mov	d15,d2
+.L237:
+	movh	d5,#16384
+	mov	d4,d11
+.L107:
+	call	pow
+.L108:
+	add.f	d15,d15,d2
+.L238:
+	movh	d5,#16384
+	mov	d4,d8
+.L109:
+	call	pow
+.L110:
+	sub.f	d4,d15,d2
+.L111:
+	mov	d15,#0
+.L239:
+	cmp.f	d15,d4,d15
+	and	d15,#6
+	ne	d15,d15,#0
+.L240:
+	jeq	d15,#0,.L7
+.L65:
+	call	sqrt
+.L112:
+	sub.f	d15,d11,d2
+.L241:
+	add.f	d0,d10,d8
+.L242:
+	div.f	d4,d15,d0
+	call	atan
+.L243:
+	movh	d15,#16384
+.L244:
+	mul.f	d15,d2,d15
+.L113:
+	mov	d0,#12000
+	addih	d0,d0,#16997
+.L245:
+	mul.f	d15,d15,d0
+.L114:
+	st.w	[a12],d15
+.L246:
+	ld.w	d15,[a12]
+.L247:
+	movh	d0,#17332
+.L248:
+	cmp.f	d15,d15,d0
+	extr.u	d15,d15,#2,#1
+.L249:
+	jeq	d15,#0,.L8
+.L250:
+	ld.w	d15,[a12]
+.L251:
+	movh	d0,#17332
+.L252:
+	sub.f	d15,d15,d0
+	st.w	[a12],d15
+.L253:
+	j	.L9
+.L8:
+	ld.w	d15,[a12]
+.L254:
+	mov	d0,#0
+.L255:
+	cmp.f	d15,d15,d0
+	extr.u	d15,d15,#0,#1
+.L256:
+	jeq	d15,#0,.L10
+.L257:
+	ld.w	d15,[a12]
+.L258:
+	movh	d0,#17332
+.L259:
+	add.f	d15,d15,d0
+	st.w	[a12],d15
+.L10:
+.L9:
+	j	.L11
+.L7:
+	movh	d15,#17352
+.L260:
+	st.w	[a12],d15
+.L11:
+	ret
+.L50:
+	
+__getJointAngles_function_end:
+	.size	getJointAngles,__getJointAngles_function_end-getJointAngles
+.L40:
+	; End of function
+	
+	.sdecl	'.text.FiveBarLinkageData .servo_control',code,cluster('servo_control')
+	.sect	'.text.FiveBarLinkageData .servo_control'
+	.align	2
+	
+	.global	servo_control
+; Function servo_control
+.L26:
+servo_control:	.type	func
+	sub.a	a10,#8
+.L115:
+	mov.aa	a15,a4
+.L119:
+	mov.aa	a12,a5
+.L120:
+	lea	a4,[a10]0
+.L116:
+	lea	a5,[a10]4
+.L117:
+	call	getJointAngles
+.L118:
+	ld.w	d15,[a10]
+.L129:
+	movh	d0,#17352
+.L130:
+	cmp.f	d15,d15,d0
+	jnz.t	d15:1,.L12
+.L131:
+	ld.w	d15,[a10]4
+.L132:
+	movh	d0,#17352
+.L133:
+	cmp.f	d15,d15,d0
+	extr.u	d15,d15,#1,#1
+	jeq	d15,#0,.L13
+.L12:
+	j	.L14
+.L13:
+	ld.w	d15,[a10]
+.L134:
+	movh	d0,#17094
+.L135:
+	cmp.f	d15,d15,d0
+	and	d15,#6
+	ne	d15,d15,#0
+.L136:
+	jeq	d15,#0,.L15
+.L137:
+	ld.w	d15,[a10]
+.L138:
+	mov.u	d0,#32768
+	addih	d0,d0,#17282
+.L139:
+	cmp.f	d15,d15,d0
+	and	d15,#3
+	ne	d15,d15,#0
+	jeq	d15,#0,.L16
+.L140:
+	ld.w	d15,[a10]4
+.L141:
+	mov.u	d0,#32768
+	addih	d0,d0,#17291
+.L142:
+	cmp.f	d15,d15,d0
+	and	d15,#6
+	ne	d15,d15,#0
+.L143:
+	jne	d15,#0,.L17
+.L144:
+	ld.w	d15,[a10]4
+.L145:
+	movh	d0,#17058
+.L146:
+	cmp.f	d15,d15,d0
+	and	d15,#3
+	ne	d15,d15,#0
+	jeq	d15,#0,.L18
+.L17:
+	movh	d15,#17287
+.L147:
+	ld.w	d0,[a10]
+.L148:
+	sub.f	d15,d15,d0
+.L149:
+	movh	d0,#17204
+.L150:
+	div.f	d15,d15,d0
+.L151:
+	movh	d0,#17530
+.L152:
+	movh	d1,#17274
+.L153:
+	madd.f	d15,d1,d15,d0
+	ftoiz	d15,d15
+.L154:
+	st.w	[a15],d15
+.L155:
+	ld.w	d15,[a10]4
+.L156:
+	movh	d0,#17287
+.L157:
+	cmp.f	d15,d15,d0
+	and	d15,#6
+	ne	d15,d15,#0
+.L158:
+	jeq	d15,#0,.L19
+.L159:
+	ld.w	d15,[a10]4
+.L160:
+	movh	d0,#17287
+.L161:
+	sub.f	d15,d15,d0
+.L162:
+	movh	d0,#17204
+.L163:
+	div.f	d15,d15,d0
+.L164:
+	movh	d0,#17530
+.L165:
+	movh	d1,#17274
+.L166:
+	madd.f	d15,d1,d15,d0
+.L167:
+	ftoiz	d15,d15
+.L168:
+	st.w	[a12],d15
+.L169:
+	j	.L20
+.L19:
+	ld.w	d15,[a10]4
+.L170:
+	movh	d0,#17076
+.L171:
+	cmp.f	d15,d15,d0
+	and	d15,#3
+	ne	d15,d15,#0
+.L172:
+	jeq	d15,#0,.L21
+.L173:
+	ld.w	d15,[a10]4
+.L174:
+	movh	d0,#17076
+.L175:
+	add.f	d15,d15,d0
+.L176:
+	movh	d0,#17204
+.L177:
+	div.f	d15,d15,d0
+.L178:
+	movh	d0,#17530
+.L179:
+	movh	d1,#17274
+.L180:
+	madd.f	d15,d1,d15,d0
+.L181:
+	ftoiz	d15,d15
+.L182:
+	st.w	[a12],d15
+.L21:
+.L20:
+	j	.L22
+.L18:
+.L16:
+.L15:
+	ld.w	d15,[a12]
+.L183:
+	st.w	[a15],d15
+.L184:
+	ld.w	d15,[a12]
+.L185:
+	st.w	[a12],d15
+.L22:
+.L14:
+	ret
+.L41:
+	
+__servo_control_function_end:
+	.size	servo_control,__servo_control_function_end-servo_control
+.L35:
+	; End of function
+	
+	.calls	'getJointAngles','pow'
+	.calls	'getJointAngles','sqrt'
+	.calls	'getJointAngles','atan'
+	.calls	'servo_control','getJointAngles'
+	.calls	'getJointAngles','',0
+	.extern	atan
+	.extern	pow
+	.extern	sqrt
+	.calls	'servo_control','',8
+	.sdecl	'.debug_info',debug
+	.sect	'.debug_info'
+.L28:
+	.word	380
+	.half	3
+	.word	.L29
+	.byte	4
+.L27:
+	.byte	1
+	.byte	'../code/FiveBarLinkageData .c',0
+	.byte	'TASKING VX-toolset for AURIX Development Studio (non-commercial): C compiler',0
+	.byte	'E:\\yingfenlin\\project\\20th_bluecar\\Debug\\',0,12,1
+	.word	.L30
+.L42:
+	.byte	2
+	.byte	'float',0,4,4,3
+	.byte	'atan',0,1,103,25
+	.word	167
+	.byte	1,1,1,1,4,1,103,43
+	.word	167
+	.byte	0,3
+	.byte	'pow',0,1,180,1,25
+	.word	167
+	.byte	1,1,1,1,4,1,180,1,43
+	.word	167
+	.byte	4,1,180,1,51
+	.word	167
+	.byte	0,3
+	.byte	'sqrt',0,1,186,1,25
+	.word	167
+	.byte	1,1,1,1,4,1,186,1,43
+	.word	167
+	.byte	0,2
+	.byte	'int',0,4,5
+.L45:
+	.byte	5
+	.word	266
+.L53:
+	.byte	5
+	.word	167
+	.byte	2
+	.byte	'unsigned int',0,4,7,6
+	.byte	'__size_t',0,2,1,1
+	.word	283
+	.byte	7,1,5
+	.word	316
+	.byte	6
+	.byte	'__codeptr',0,2,1,1
+	.word	318
+	.byte	2
+	.byte	'unsigned short int',0,2,7,6
+	.byte	'_iob_flag_t',0,3,82,25
+	.word	341
+	.byte	0
+	.sdecl	'.debug_abbrev',debug
+	.sect	'.debug_abbrev'
+.L29:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,16,6,0,0,2,36,0,3,8,11,15,62,15,0,0,3,46,1,3,8,58,15,59,15,57,15
+	.byte	73,19,54,15,39,12,63,12,60,12,0,0,4,5,0,58,15,59,15,57,15,73,19,0,0,5,15,0,73,19,0,0,6,22,0,3,8,58,15
+	.byte	59,15,57,15,73,19,0,0,7,21,0,54,15,0,0,0
+	.sdecl	'.debug_line',debug
+	.sect	'.debug_line'
+.L30:
+	.word	.L122-.L121
+.L121:
+	.half	3
+	.word	.L124-.L123
+.L123:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1
+	.byte	'C:\\Infineon\\AURIX-Studio-1.9.20\\tools\\Compilers\\Tasking_1.1r8\\ctc\\include\\',0,0
+	.byte	'math.h',0,1,0,0
+	.byte	'../code/FiveBarLinkageData .c',0,0,0,0
+	.byte	'stdio.h',0,1,0,0,0
+.L124:
+.L122:
+	.sdecl	'.debug_info',debug,cluster('servo_control')
+	.sect	'.debug_info'
+.L31:
+	.word	313
+	.half	3
+	.word	.L32
+	.byte	4,1
+	.byte	'../code/FiveBarLinkageData .c',0
+	.byte	'TASKING VX-toolset for AURIX Development Studio (non-commercial): C compiler',0
+	.byte	'E:\\yingfenlin\\project\\20th_bluecar\\Debug\\',0,12,1
+	.word	.L34,.L33
+	.byte	2
+	.word	.L27
+	.byte	3
+	.byte	'servo_control',0,1,63,6,1,1,1
+	.word	.L26,.L41,.L25
+	.byte	4
+	.byte	'x',0,1,63,26
+	.word	.L42,.L43
+	.byte	4
+	.byte	'y',0,1,63,35
+	.word	.L42,.L44
+	.byte	4
+	.byte	'leg1',0,1,63,43
+	.word	.L45,.L46
+	.byte	4
+	.byte	'leg2',0,1,63,54
+	.word	.L45,.L47
+	.byte	5
+	.word	.L26,.L41
+	.byte	6
+	.byte	'phi1',0,1,64,11
+	.word	.L42,.L48
+	.byte	6
+	.byte	'phi4',0,1,64,17
+	.word	.L42,.L49
+	.byte	0,0,0
+	.sdecl	'.debug_abbrev',debug,cluster('servo_control')
+	.sect	'.debug_abbrev'
+.L32:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,5,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,5,11,1,17,1,18,1,0,0,6,52,0,3
+	.byte	8,58,15,59,15,57,15,73,16,2,6,0,0,0
+	.sdecl	'.debug_line',debug,cluster('servo_control')
+	.sect	'.debug_line'
+.L33:
+	.word	.L126-.L125
+.L125:
+	.half	3
+	.word	.L128-.L127
+.L127:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'../code/FiveBarLinkageData .c',0,0,0,0,0
+.L128:
+	.byte	5,6,7,0,5,2
+	.word	.L26
+	.byte	3,62,1,5,27,9
+	.half	.L120-.L26
+	.byte	3,4,1,5,34,9
+	.half	.L116-.L120
+	.byte	1,5,12,9
+	.half	.L118-.L116
+	.byte	3,1,1,5,18,9
+	.half	.L129-.L118
+	.byte	1,5,12,9
+	.half	.L130-.L129
+	.byte	1,5,23,9
+	.half	.L131-.L130
+	.byte	1,5,29,9
+	.half	.L132-.L131
+	.byte	1,5,27,9
+	.half	.L133-.L132
+	.byte	1,5,21,9
+	.half	.L12-.L133
+	.byte	1,5,18,9
+	.half	.L13-.L12
+	.byte	3,6,1,5,24,9
+	.half	.L134-.L13
+	.byte	1,5,22,9
+	.half	.L135-.L134
+	.byte	1,5,18,9
+	.half	.L136-.L135
+	.byte	1,5,28,7,9
+	.half	.L137-.L136
+	.byte	1,5,34,9
+	.half	.L138-.L137
+	.byte	1,5,32,9
+	.half	.L139-.L138
+	.byte	1,5,42,9
+	.half	.L140-.L139
+	.byte	1,5,50,9
+	.half	.L141-.L140
+	.byte	1,5,47,9
+	.half	.L142-.L141
+	.byte	1,5,41,9
+	.half	.L143-.L142
+	.byte	1,5,57,7,9
+	.half	.L144-.L143
+	.byte	1,5,65,9
+	.half	.L145-.L144
+	.byte	1,5,62,9
+	.half	.L146-.L145
+	.byte	1,5,26,9
+	.half	.L17-.L146
+	.byte	3,2,1,5,32,9
+	.half	.L147-.L17
+	.byte	1,5,30,9
+	.half	.L148-.L147
+	.byte	1,5,40,9
+	.half	.L149-.L148
+	.byte	1,5,38,9
+	.half	.L150-.L149
+	.byte	1,5,46,9
+	.half	.L151-.L150
+	.byte	1,5,53,9
+	.half	.L152-.L151
+	.byte	1,5,51,9
+	.half	.L153-.L152
+	.byte	1,5,23,9
+	.half	.L154-.L153
+	.byte	1,5,21,9
+	.half	.L155-.L154
+	.byte	3,1,1,5,29,9
+	.half	.L156-.L155
+	.byte	1,5,26,9
+	.half	.L157-.L156
+	.byte	1,5,17,9
+	.half	.L158-.L157
+	.byte	1,5,36,7,9
+	.half	.L159-.L158
+	.byte	3,2,1,5,43,9
+	.half	.L160-.L159
+	.byte	1,5,41,9
+	.half	.L161-.L160
+	.byte	1,5,50,9
+	.half	.L162-.L161
+	.byte	1,5,48,9
+	.half	.L163-.L162
+	.byte	1,5,56,9
+	.half	.L164-.L163
+	.byte	1,5,63,9
+	.half	.L165-.L164
+	.byte	1,5,61,9
+	.half	.L166-.L165
+	.byte	1,5,29,9
+	.half	.L167-.L166
+	.byte	1,5,27,9
+	.half	.L168-.L167
+	.byte	1,5,67,9
+	.half	.L169-.L168
+	.byte	1,5,25,9
+	.half	.L19-.L169
+	.byte	3,2,1,5,33,9
+	.half	.L170-.L19
+	.byte	1,5,30,9
+	.half	.L171-.L170
+	.byte	1,5,22,9
+	.half	.L172-.L171
+	.byte	1,5,41,7,9
+	.half	.L173-.L172
+	.byte	3,2,1,5,36,9
+	.half	.L174-.L173
+	.byte	1,5,39,9
+	.half	.L175-.L174
+	.byte	1,5,49,9
+	.half	.L176-.L175
+	.byte	1,5,47,9
+	.half	.L177-.L176
+	.byte	1,5,55,9
+	.half	.L178-.L177
+	.byte	1,5,62,9
+	.half	.L179-.L178
+	.byte	1,5,60,9
+	.half	.L180-.L179
+	.byte	1,5,29,9
+	.half	.L181-.L180
+	.byte	1,5,27,9
+	.half	.L182-.L181
+	.byte	1,5,17,9
+	.half	.L20-.L182
+	.byte	3,126,1,5,23,9
+	.half	.L15-.L20
+	.byte	3,7,1,5,22,9
+	.half	.L183-.L15
+	.byte	1,5,23,9
+	.half	.L184-.L183
+	.byte	3,1,1,5,22,9
+	.half	.L185-.L184
+	.byte	1,5,2,9
+	.half	.L14-.L185
+	.byte	3,3,1,7,9
+	.half	.L35-.L14
+	.byte	0,1,1
+.L126:
+	.sdecl	'.debug_ranges',debug,cluster('servo_control')
+	.sect	'.debug_ranges'
+.L34:
+	.word	-1,.L26,0,.L35-.L26,0,0
+	.sdecl	'.debug_info',debug,cluster('getJointAngles')
+	.sect	'.debug_info'
+.L36:
+	.word	473
+	.half	3
+	.word	.L37
+	.byte	4,1
+	.byte	'../code/FiveBarLinkageData .c',0
+	.byte	'TASKING VX-toolset for AURIX Development Studio (non-commercial): C compiler',0
+	.byte	'E:\\yingfenlin\\project\\20th_bluecar\\Debug\\',0,12,1
+	.word	.L39,.L38
+	.byte	2
+	.word	.L27
+	.byte	3
+	.byte	'getJointAngles',0,1,21,6,1,1,1
+	.word	.L24,.L50,.L23
+	.byte	4
+	.byte	'x_target',0,1,21,27
+	.word	.L42,.L51
+	.byte	4
+	.byte	'y_target',0,1,21,43
+	.word	.L42,.L52
+	.byte	4
+	.byte	'phi1',0,1,21,60
+	.word	.L53,.L54
+	.byte	4
+	.byte	'phi4',0,1,21,73
+	.word	.L53,.L55
+	.byte	5
+	.word	.L24,.L50
+	.byte	6
+	.byte	'a',0,1,22,11
+	.word	.L42,.L56
+	.byte	6
+	.byte	'b',0,1,23,15
+	.word	.L42,.L57
+	.byte	6
+	.byte	'c',0,1,24,15
+	.word	.L42,.L58
+	.byte	6
+	.byte	'sum_val',0,1,26,15
+	.word	.L42,.L59
+	.byte	5
+	.word	.L60,.L4
+	.byte	6
+	.byte	'phi1_rad',0,1,29,19
+	.word	.L42,.L61
+	.byte	0,5
+	.word	.L6,.L50
+	.byte	6
+	.byte	'a1',0,1,42,15
+	.word	.L42,.L62
+	.byte	6
+	.byte	'b1',0,1,43,15
+	.word	.L42,.L63
+	.byte	6
+	.byte	'c1',0,1,44,15
+	.word	.L42,.L64
+	.byte	5
+	.word	.L65,.L9
+	.byte	6
+	.byte	'phi4_rad',0,1,49,19
+	.word	.L42,.L66
+	.byte	0,0,0,0,0
+	.sdecl	'.debug_abbrev',debug,cluster('getJointAngles')
+	.sect	'.debug_abbrev'
+.L37:
+	.byte	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,54,15
+	.byte	39,12,63,12,17,1,18,1,64,6,0,0,4,5,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,5,11,1,17,1,18,1,0,0,6,52,0,3
+	.byte	8,58,15,59,15,57,15,73,16,2,6,0,0,0
+	.sdecl	'.debug_line',debug,cluster('getJointAngles')
+	.sect	'.debug_line'
+.L38:
+	.word	.L187-.L186
+.L186:
+	.half	3
+	.word	.L189-.L188
+.L188:
+	.byte	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.byte	'../code/FiveBarLinkageData .c',0,0,0,0,0
+.L189:
+	.byte	5,6,7,0,5,2
+	.word	.L24
+	.byte	3,20,1,5,34,9
+	.half	.L71-.L24
+	.byte	3,1,1,5,29,9
+	.half	.L72-.L71
+	.byte	1,5,15,9
+	.half	.L73-.L72
+	.byte	1,5,17,9
+	.half	.L190-.L73
+	.byte	1,5,41,9
+	.half	.L191-.L190
+	.byte	1,5,39,9
+	.half	.L192-.L191
+	.byte	1,5,19,9
+	.half	.L74-.L192
+	.byte	3,1,1,5,21,9
+	.half	.L76-.L74
+	.byte	1,5,34,9
+	.half	.L77-.L76
+	.byte	1,5,32,9
+	.half	.L193-.L77
+	.byte	1,5,38,9
+	.half	.L78-.L193
+	.byte	3,1,1,5,33,9
+	.half	.L80-.L78
+	.byte	1,5,44,9
+	.half	.L68-.L80
+	.byte	1,5,47,9
+	.half	.L67-.L68
+	.byte	1,5,63,9
+	.half	.L194-.L67
+	.byte	1,5,47,9
+	.half	.L83-.L194
+	.byte	1,5,72,9
+	.half	.L195-.L83
+	.byte	1,5,76,9
+	.half	.L196-.L195
+	.byte	1,5,66,9
+	.half	.L197-.L196
+	.byte	1,5,85,9
+	.half	.L198-.L197
+	.byte	1,5,89,9
+	.half	.L199-.L198
+	.byte	1,5,79,9
+	.half	.L200-.L199
+	.byte	1,5,32,9
+	.half	.L84-.L200
+	.byte	3,2,1,5,35,9
+	.half	.L86-.L84
+	.byte	1,5,44,9
+	.half	.L201-.L86
+	.byte	1,5,35,9
+	.half	.L88-.L201
+	.byte	1,5,56,9
+	.half	.L202-.L88
+	.byte	1,5,47,9
+	.half	.L90-.L202
+	.byte	1,5,24,9
+	.half	.L91-.L90
+	.byte	3,2,1,5,21,9
+	.half	.L203-.L91
+	.byte	1,5,9,9
+	.half	.L204-.L203
+	.byte	1,5,49,7,9
+	.half	.L60-.L204
+	.byte	3,1,1,5,42,9
+	.half	.L92-.L60
+	.byte	1,5,64,9
+	.half	.L205-.L92
+	.byte	1,5,59,9
+	.half	.L206-.L205
+	.byte	1,5,30,9
+	.half	.L207-.L206
+	.byte	1,5,32,9
+	.half	.L208-.L207
+	.byte	1,5,39,9
+	.half	.L93-.L208
+	.byte	3,1,1,5,30,9
+	.half	.L209-.L93
+	.byte	1,5,19,9
+	.half	.L94-.L209
+	.byte	1,5,17,9
+	.half	.L210-.L94
+	.byte	3,2,1,5,25,9
+	.half	.L211-.L210
+	.byte	1,5,23,9
+	.half	.L212-.L211
+	.byte	1,5,13,9
+	.half	.L213-.L212
+	.byte	1,5,18,7,9
+	.half	.L214-.L213
+	.byte	3,1,1,5,26,9
+	.half	.L215-.L214
+	.byte	1,5,23,9
+	.half	.L216-.L215
+	.byte	1,5,29,9
+	.half	.L217-.L216
+	.byte	1,5,24,9
+	.half	.L3-.L217
+	.byte	3,1,1,5,32,9
+	.half	.L218-.L3
+	.byte	1,5,30,9
+	.half	.L219-.L218
+	.byte	1,5,20,9
+	.half	.L220-.L219
+	.byte	1,5,18,7,9
+	.half	.L221-.L220
+	.byte	3,1,1,5,26,9
+	.half	.L222-.L221
+	.byte	1,5,23,9
+	.half	.L223-.L222
+	.byte	1,5,15,9
+	.half	.L4-.L223
+	.byte	3,127,1,5,21,9
+	.half	.L2-.L4
+	.byte	3,4,1,5,19,9
+	.half	.L224-.L2
+	.byte	1,5,39,9
+	.half	.L6-.L224
+	.byte	3,4,1,5,34,9
+	.half	.L95-.L6
+	.byte	1,5,20,9
+	.half	.L96-.L95
+	.byte	1,5,22,9
+	.half	.L225-.L96
+	.byte	1,5,46,9
+	.half	.L226-.L225
+	.byte	1,5,44,9
+	.half	.L227-.L226
+	.byte	1,5,20,9
+	.half	.L75-.L227
+	.byte	3,1,1,5,22,9
+	.half	.L97-.L75
+	.byte	1,5,35,9
+	.half	.L98-.L97
+	.byte	1,5,33,9
+	.half	.L228-.L98
+	.byte	1,5,39,9
+	.half	.L79-.L228
+	.byte	3,1,1,5,34,9
+	.half	.L99-.L79
+	.byte	1,5,45,9
+	.half	.L100-.L99
+	.byte	1,5,48,9
+	.half	.L229-.L100
+	.byte	1,5,64,9
+	.half	.L230-.L229
+	.byte	1,5,48,9
+	.half	.L103-.L230
+	.byte	1,5,73,9
+	.half	.L231-.L103
+	.byte	1,5,77,9
+	.half	.L232-.L231
+	.byte	1,5,67,9
+	.half	.L233-.L232
+	.byte	1,5,86,9
+	.half	.L234-.L233
+	.byte	1,5,90,9
+	.half	.L235-.L234
+	.byte	1,5,80,9
+	.half	.L236-.L235
+	.byte	1,5,27,9
+	.half	.L104-.L236
+	.byte	3,2,1,5,30,9
+	.half	.L106-.L104
+	.byte	1,5,40,9
+	.half	.L237-.L106
+	.byte	1,5,30,9
+	.half	.L108-.L237
+	.byte	1,5,53,9
+	.half	.L238-.L108
+	.byte	1,5,43,9
+	.half	.L110-.L238
+	.byte	1,5,24,9
+	.half	.L111-.L110
+	.byte	3,2,1,5,21,9
+	.half	.L239-.L111
+	.byte	1,5,9,9
+	.half	.L240-.L239
+	.byte	1,5,50,7,9
+	.half	.L65-.L240
+	.byte	3,1,1,5,43,9
+	.half	.L112-.L65
+	.byte	1,5,66,9
+	.half	.L241-.L112
+	.byte	1,5,60,9
+	.half	.L242-.L241
+	.byte	1,5,30,9
+	.half	.L243-.L242
+	.byte	1,5,32,9
+	.half	.L244-.L243
+	.byte	1,5,39,9
+	.half	.L113-.L244
+	.byte	3,1,1,5,30,9
+	.half	.L245-.L113
+	.byte	1,5,19,9
+	.half	.L114-.L245
+	.byte	1,5,17,9
+	.half	.L246-.L114
+	.byte	3,2,1,5,25,9
+	.half	.L247-.L246
+	.byte	1,5,23,9
+	.half	.L248-.L247
+	.byte	1,5,13,9
+	.half	.L249-.L248
+	.byte	1,5,18,7,9
+	.half	.L250-.L249
+	.byte	3,1,1,5,26,9
+	.half	.L251-.L250
+	.byte	1,5,23,9
+	.half	.L252-.L251
+	.byte	1,5,29,9
+	.half	.L253-.L252
+	.byte	1,5,24,9
+	.half	.L8-.L253
+	.byte	3,1,1,5,32,9
+	.half	.L254-.L8
+	.byte	1,5,30,9
+	.half	.L255-.L254
+	.byte	1,5,20,9
+	.half	.L256-.L255
+	.byte	1,5,18,7,9
+	.half	.L257-.L256
+	.byte	3,1,1,5,26,9
+	.half	.L258-.L257
+	.byte	1,5,23,9
+	.half	.L259-.L258
+	.byte	1,5,15,9
+	.half	.L9-.L259
+	.byte	3,127,1,5,21,9
+	.half	.L7-.L9
+	.byte	3,4,1,5,19,9
+	.half	.L260-.L7
+	.byte	1,5,1,9
+	.half	.L11-.L260
+	.byte	3,2,1,7,9
+	.half	.L40-.L11
+	.byte	0,1,1
+.L187:
+	.sdecl	'.debug_ranges',debug,cluster('getJointAngles')
+	.sect	'.debug_ranges'
+.L39:
+	.word	-1,.L24,0,.L40-.L24,0,0
+	.sdecl	'.debug_loc',debug,cluster('getJointAngles')
+	.sect	'.debug_loc'
+.L56:
+	.word	-1,.L24,.L74-.L24,.L75-.L24
+	.half	1
+	.byte	90
+	.word	.L85-.L24,.L86-.L24
+	.half	1
+	.byte	84
+	.word	0,0
+.L62:
+	.word	-1,.L24,.L75-.L24,.L50-.L24
+	.half	1
+	.byte	90
+	.word	.L105-.L24,.L106-.L24
+	.half	1
+	.byte	84
+	.word	0,0
+.L57:
+	.word	-1,.L24,.L78-.L24,.L79-.L24
+	.half	1
+	.byte	91
+	.word	.L87-.L24,.L88-.L24
+	.half	1
+	.byte	84
+	.word	0,0
+.L63:
+	.word	-1,.L24,.L79-.L24,.L50-.L24
+	.half	1
+	.byte	91
+	.word	.L107-.L24,.L108-.L24
+	.half	1
+	.byte	84
+	.word	0,0
+.L58:
+	.word	-1,.L24,.L84-.L24,.L50-.L24
+	.half	1
+	.byte	92
+	.word	.L89-.L24,.L90-.L24
+	.half	1
+	.byte	84
+	.word	0,0
+.L64:
+	.word	-1,.L24,.L104-.L24,.L50-.L24
+	.half	1
+	.byte	88
+	.word	.L109-.L24,.L110-.L24
+	.half	1
+	.byte	84
+	.word	0,0
+.L23:
+	.word	-1,.L24,0,.L50-.L24
+	.half	2
+	.byte	138,0
+	.word	0,0
+.L54:
+	.word	-1,.L24,0,.L67-.L24
+	.half	1
+	.byte	100
+	.word	.L70-.L24,.L50-.L24
+	.half	1
+	.byte	111
+	.word	0,0
+.L61:
+	.word	-1,.L24,.L93-.L24,.L94-.L24
+	.half	1
+	.byte	95
+	.word	0,0
+.L55:
+	.word	-1,.L24,0,.L67-.L24
+	.half	1
+	.byte	101
+	.word	.L71-.L24,.L50-.L24
+	.half	1
+	.byte	108
+	.word	0,0
+.L66:
+	.word	-1,.L24,.L113-.L24,.L114-.L24
+	.half	1
+	.byte	95
+	.word	0,0
+.L59:
+	.word	-1,.L24,.L91-.L24,.L92-.L24
+	.half	1
+	.byte	84
+	.word	.L2-.L24,.L6-.L24
+	.half	1
+	.byte	84
+	.word	.L111-.L24,.L112-.L24
+	.half	1
+	.byte	84
+	.word	.L7-.L24,.L11-.L24
+	.half	1
+	.byte	84
+	.word	0,0
+.L51:
+	.word	-1,.L24,0,.L68-.L24
+	.half	1
+	.byte	84
+	.word	.L72-.L24,.L73-.L24
+	.half	1
+	.byte	88
+	.word	.L80-.L24,.L68-.L24
+	.half	1
+	.byte	88
+	.word	.L95-.L24,.L96-.L24
+	.half	1
+	.byte	88
+	.word	.L99-.L24,.L100-.L24
+	.half	1
+	.byte	88
+	.word	0,0
+.L52:
+	.word	-1,.L24,0,.L69-.L24
+	.half	1
+	.byte	85
+	.word	.L76-.L24,.L77-.L24
+	.half	1
+	.byte	89
+	.word	.L81-.L24,.L82-.L24
+	.half	1
+	.byte	89
+	.word	.L82-.L24,.L83-.L24
+	.half	1
+	.byte	84
+	.word	.L97-.L24,.L98-.L24
+	.half	1
+	.byte	89
+	.word	.L101-.L24,.L102-.L24
+	.half	1
+	.byte	89
+	.word	.L102-.L24,.L103-.L24
+	.half	1
+	.byte	84
+	.word	0,0
+	.sdecl	'.debug_loc',debug,cluster('servo_control')
+	.sect	'.debug_loc'
+.L46:
+	.word	-1,.L26,0,.L116-.L26
+	.half	1
+	.byte	100
+	.word	.L119-.L26,.L41-.L26
+	.half	1
+	.byte	111
+	.word	0,0
+.L47:
+	.word	-1,.L26,0,.L117-.L26
+	.half	1
+	.byte	101
+	.word	.L120-.L26,.L41-.L26
+	.half	1
+	.byte	108
+	.word	0,0
+.L48:
+	.word	-1,.L26,0,.L41-.L26
+	.half	2
+	.byte	145,120
+	.word	0,0
+.L49:
+	.word	-1,.L26,0,.L41-.L26
+	.half	2
+	.byte	145,124
+	.word	0,0
+.L25:
+	.word	-1,.L26,0,.L115-.L26
+	.half	2
+	.byte	138,0
+	.word	.L115-.L26,.L41-.L26
+	.half	2
+	.byte	138,8
+	.word	.L41-.L26,.L41-.L26
+	.half	2
+	.byte	138,0
+	.word	0,0
+.L43:
+	.word	-1,.L26,0,.L118-.L26
+	.half	1
+	.byte	84
+	.word	0,0
+.L44:
+	.word	-1,.L26,0,.L118-.L26
+	.half	1
+	.byte	85
+	.word	0,0
+	.sdecl	'.debug_frame',debug
+	.sect	'.debug_frame'
+.L261:
+	.word	48
+	.word	-1
+	.byte	3,0,2,1,27,12,26,0,8,26,8,27,8,30,8,29,8,28,8,16,8,17,8,24,8,25,8,31,8,32,8,33,8,34,8,35,8,36,8,37,8,38
+	.byte	8,39
+	.sdecl	'.debug_frame',debug,cluster('getJointAngles')
+	.sect	'.debug_frame'
+	.word	12
+	.word	.L261,.L24,.L50-.L24
+	.sdecl	'.debug_frame',debug,cluster('servo_control')
+	.sect	'.debug_frame'
+	.word	36
+	.word	.L261,.L26,.L41-.L26
+	.byte	4
+	.word	(.L115-.L26)/2
+	.byte	19,8,22,26,3,19,138,8,4
+	.word	(.L41-.L115)/2
+	.byte	19,0,8,26,0,0
+	; Module end
