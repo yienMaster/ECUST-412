@@ -1,0 +1,1218 @@
+###############################################################################
+#
+# IAR ELF Linker V8.32.3.193/W32 for ARM                  11/Mar/2023  17:51:14
+# Copyright 2007-2019 IAR Systems AB.
+#
+#    Output file  =  
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Exe\RT106X.out
+#    Map file     =  
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\List\RT106X.map
+#    Command line =  
+#        -f C:\Users\BenyXie\AppData\Local\Temp\EW91DE.tmp
+#        (E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\board.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\clock_config.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\diskio.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\evkmimxrt1064_flexspi_nor_config.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\evkmimxrt1064_sdram_ini_dcd.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\ff.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\ffsystem.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\ffunicode.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_adapter_lpuart.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_adc.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_adc_etc.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_aipstz.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_aoi.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_assert.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_bee.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_cache.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_clock.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_cmp.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_common.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_common_arm.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_component_generic_list.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_csi.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_dcdc.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_dcp.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_debug_console.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_dmamux.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_edma.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_elcdif.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_enc.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_enet.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_ewm.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_flexcan.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_flexcan_edma.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_flexio.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_flexio_camera.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_flexio_camera_edma.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_flexio_i2c_master.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_flexio_i2s.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_flexio_i2s_edma.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_flexio_mculcd.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_flexio_mculcd_edma.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_flexio_spi.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_flexio_spi_edma.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_flexio_uart.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_flexio_uart_edma.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_flexram.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_flexram_allocate.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_flexspi.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_flexspi_edma.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_flexspi_nor_boot.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_gpc.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_gpio.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_gpt.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_kpp.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_lpi2c.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_lpi2c_edma.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_lpspi.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_lpspi_edma.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_lpuart.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_lpuart_edma.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_ocotp.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_os_abstraction_bm.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_pit.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_pmu.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_pwm.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_pxp.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_qtmr.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_romapi.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_rtwdog.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_sai.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_sai_edma.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_sd.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_sd_disk.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_sdmmc_common.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_sdmmc_host.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_sdmmc_osa.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_semc.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_snvs_hp.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_snvs_lp.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_spdif.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_spdif_edma.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_src.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_tempmon.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_trng.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_tsc.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_usdhc.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_wdog.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_xbara.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\fsl_xbarb.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\isr.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\main.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\sdmmc_config.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\startup_MIMXRT1064.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\system_MIMXRT1064.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\usb_device_cdc_acm.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\usb_device_ch9.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\usb_device_class.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\usb_device_dci.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\usb_device_descriptor.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\usb_device_ehci.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\usb_phy.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_common_clock.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_common_debug.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_common_fifo.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_common_font.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_common_function.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_common_interrupt.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_common_vector.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_absolute_encoder.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_bluetooth_ch9141.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_camera.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_dl1a.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_gps_tau1201.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_icm20602.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_imu660ra.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_imu963ra.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_ips114.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_ips200.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_key.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_mpu6050.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_mt9v03x.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_mt9v03x_flexio.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_oled.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_ov7725.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_scc8660.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_scc8660_flexio.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_tft180.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_tsl1401.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_type.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_virtual_oscilloscope.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_wifi_uart.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_device_wireless_uart.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_driver_adc.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_driver_csi.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_driver_delay.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_driver_encoder.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_driver_exti.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_driver_flash.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_driver_flexio_csi.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_driver_gpio.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_driver_iic.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_driver_pit.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_driver_pwm.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_driver_romapi.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_driver_sdio.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_driver_soft_iic.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_driver_soft_spi.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_driver_spi.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_driver_timer.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_driver_uart.o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj\zf_driver_usb_cdc.o
+#        --no_out_extension -o
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Exe\RT106X.out
+#        --map
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\List\RT106X.map
+#        --config
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\..\..\IAR\icf\MIMXRT1064xxxxx_flexspi_nor.icf
+#        --semihosting
+#        E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\..\..\..\libraries\zf_device\zf_device_config.a
+#        --entry __iar_program_start --vfe --text_out locale)
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__Heap_Handler  = DLMalloc
+__SystemLibrary = DLib
+__dlib_version  = 6
+
+
+*******************************************************************************
+*** HEAP SELECTION
+***
+
+The advanced heap was selected because the application calls memory
+allocation functions outside of system library functions, and there
+are calls to deallocation functions in the application.
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A0":  place at 0x7000'2000 { ro section .intvec };
+"A2":  place at 0x7000'0000 { section .boot_hdr.conf };
+"A3":  place at 0x7000'1000 { section .boot_hdr.ivt };
+"A4":  place at 0x7000'1020 { ro section .boot_hdr.boot_data };
+"A5":  place at 0x7000'1030 { ro section .boot_hdr.dcd_data };
+"P1":  place in [from 0x7000'2000 to 0x7000'23ff] |
+                [from 0x7000'2400 to 0x703f'ffff] { ro };
+define block RW { first rw, section m_usb_dma_init_data };
+"P2":  place in [from 0x8000'0000 to 0x8000'03ff] |
+                [from 0x8000'0400 to 0x81df'ffff] { block RW };
+define block SDRAM_VAR
+   with alignment = 8 { section SDRAM_CACHE, section SDRAM_CACHE.init };
+"P11": place in [from 0x8000'0000 to 0x8000'03ff] |
+                [from 0x8000'0400 to 0x81df'ffff] { block SDRAM_VAR };
+define block ZI
+   with alignment = 32 { first zi, section m_usb_dma_noninit_data };
+"P3":  place in [from 0x2000'0000 to 0x2006'efff] { block ZI };
+"P4":  place in [from 0x2000'0000 to 0x2006'efff] { section .data };
+"P5":  place in [from 0x2000'0000 to 0x2006'efff] { section .textrw };
+define block DTCM_VAR
+   with alignment = 8 { section NonCacheable, section NonCacheable.init };
+"P9":  place in [from 0x2000'0000 to 0x2006'efff] { block DTCM_VAR };
+define block CSTACK with size = 4K, alignment = 8 { };
+"P7":  place in [from 0x2006'f000 to 0x2006'ffff] { block CSTACK };
+initialize by copy { rw, section .textrw };
+initialize by copy { ro }
+   except {
+      ro section .intvec, ro object system_MIMXRT1064.o,
+      ro object startup_MIMXRT1064.o, section .boot_hdr.conf,
+      section .boot_hdr.ivt, section .boot_hdr.boot_data,
+      section .boot_hdr.dcd_data };
+keep {
+   section .boot_hdr.conf, section .boot_hdr.ivt, section .boot_hdr.boot_data,
+   section .boot_hdr.dcd_data };
+
+No sections matched the following patterns:
+
+  section .intvec_RAM              in "A1"
+  section .textrw                  in "P3-P5|P9"
+  section ITCM_NonCacheable        in block ITCM_VAR
+  section ITCM_NonCacheable.init   in block ITCM_VAR
+  section NonCacheable             in block DTCM_VAR
+  section NonCacheable.init        in block DTCM_VAR
+  section OCRAM_CACHE              in block OCRAM_VAR
+  section OCRAM_CACHE.init         in block OCRAM_VAR
+  section SDRAM_CACHE              in block SDRAM_VAR
+  section SDRAM_CACHE.init         in block SDRAM_VAR
+  section SDRAM_NonCacheable       in block SDRAM_NCACHE_VAR
+  section SDRAM_NonCacheable.init  in block SDRAM_NCACHE_VAR
+  section m_usb_dma_init_data      in block RW
+  section m_usb_dma_noninit_data   in block ZI
+
+
+  Section              Kind         Address    Size  Object
+  -------              ----         -------    ----  ------
+"P3-P5|P9", part 1 of 2:                       0x81
+  P3-P5|P9 s0                   0x2000'0000    0x81  <Init block>
+    .data              inited   0x2000'0000    0x2c  zf_driver_gpio.o [1]
+    .data              inited   0x2000'002c    0x24  zf_driver_uart.o [1]
+    .data              inited   0x2000'0050    0x14  zf_driver_pwm.o [1]
+    .data              inited   0x2000'0064     0x4  system_MIMXRT1064.o [1]
+    .data              inited   0x2000'0068     0x4  zf_common_clock.o [1]
+    .data              inited   0x2000'006c     0x4  zf_device_type.o [1]
+    .data              inited   0x2000'0070     0x4  zf_device_type.o [1]
+    .data              inited   0x2000'0074     0x4  zf_device_type.o [1]
+    .data              inited   0x2000'0078     0x4  zf_device_type.o [1]
+    .data              inited   0x2000'007c     0x4  zf_device_type.o [1]
+    .data              inited   0x2000'0080     0x1  zf_common_debug.o [1]
+                              - 0x2000'0081    0x81
+
+"P3-P5|P9", part 2 of 2:                      0x308
+  ZI                            0x2000'00a0   0x308  <Block>
+    .bss               zero     0x2000'00a0     0x4  fsl_clock.o [1]
+    .bss               zero     0x2000'00a4     0x4  fsl_clock.o [1]
+    .bss               zero     0x2000'00a8     0x4  fsl_csi.o [1]
+    .bss               zero     0x2000'00ac     0x4  fsl_csi.o [1]
+    .bss               zero     0x2000'00b0    0x14  fsl_debug_console.o [1]
+    .bss               zero     0x2000'00c4    0x80  fsl_edma.o [1]
+    .bss               zero     0x2000'0144     0x8  fsl_enet.o [1]
+    .bss               zero     0x2000'014c     0x8  fsl_enet.o [1]
+    .bss               zero     0x2000'0154     0x8  fsl_enet.o [1]
+    .bss               zero     0x2000'015c     0x8  fsl_enet.o [1]
+    .bss               zero     0x2000'0164     0x8  fsl_enet.o [1]
+    .bss               zero     0x2000'016c     0x8  fsl_enet.o [1]
+    .bss               zero     0x2000'0174    0x10  fsl_flexcan.o [1]
+    .bss               zero     0x2000'0184     0x4  fsl_flexcan.o [1]
+    .bss               zero     0x2000'0188     0x8  fsl_flexio.o [1]
+    .bss               zero     0x2000'0190     0x8  fsl_flexio.o [1]
+    .bss               zero     0x2000'0198     0x8  fsl_flexio.o [1]
+    .bss               zero     0x2000'01a0     0x4  fsl_lpi2c.o [1]
+    .bss               zero     0x2000'01a4    0x14  fsl_lpi2c.o [1]
+    .bss               zero     0x2000'01b8     0x4  fsl_lpi2c.o [1]
+    .bss               zero     0x2000'01bc    0x14  fsl_lpi2c.o [1]
+    .bss               zero     0x2000'01d0    0x14  fsl_lpspi.o [1]
+    .bss               zero     0x2000'01e4     0x4  fsl_lpspi.o [1]
+    .bss               zero     0x2000'01e8     0x4  fsl_lpspi.o [1]
+    .bss               zero     0x2000'01ec    0x24  fsl_lpuart.o [1]
+    .bss               zero     0x2000'0210     0x4  fsl_lpuart.o [1]
+    .bss               zero     0x2000'0214    0x20  fsl_sai.o [1]
+    .bss               zero     0x2000'0234     0x4  fsl_sai.o [1]
+    .bss               zero     0x2000'0238     0x4  fsl_sai.o [1]
+    .bss               zero     0x2000'023c     0x8  fsl_spdif.o [1]
+    .bss               zero     0x2000'0244     0x4  fsl_spdif.o [1]
+    .bss               zero     0x2000'0248     0x4  fsl_spdif.o [1]
+    .bss               zero     0x2000'024c     0xc  fsl_usdhc.o [1]
+    .bss               zero     0x2000'0258     0x4  fsl_usdhc.o [1]
+    .bss               zero     0x2000'025c    0x14  zf_common_debug.o [1]
+    .bss               zero     0x2000'0270     0x1  zf_common_debug.o [1]
+    .bss               zero     0x2000'0271     0x1  zf_common_debug.o [1]
+    .bss               zero     0x2000'0274     0x4  zf_common_interrupt.o [1]
+    .bss               zero     0x2000'0278     0x1  zf_device_gps_tau1201.o [1]
+    .bss               zero     0x2000'0279     0x1  zf_device_gps_tau1201.o [1]
+    .bss               zero     0x2000'027c    0x18  zf_device_gps_tau1201.o [1]
+    .bss               zero     0x2000'0294     0x1  zf_device_gps_tau1201.o [1]
+    .bss               zero     0x2000'0295     0x1  zf_device_gps_tau1201.o [1]
+    .bss               zero     0x2000'0298    0x80  zf_device_gps_tau1201.o [1]
+    .bss               zero     0x2000'0318    0x80  zf_device_gps_tau1201.o [1]
+    .bss               zero     0x2000'0398    0x10  zf_driver_usb_cdc.o [1]
+                              - 0x2000'03a8   0x308
+
+"P7":                                        0x1000
+  CSTACK                        0x2006'f000  0x1000  <Block>
+    CSTACK             uninit   0x2006'f000  0x1000  <Block tail>
+                              - 0x2007'0000  0x1000
+
+"A2":                                         0x200
+  .boot_hdr.conf       const    0x7000'0000   0x200  evkmimxrt1064_flexspi_nor_config.o [1]
+                              - 0x7000'0200   0x200
+
+"A3":                                          0x20
+  .boot_hdr.ivt        const    0x7000'1000    0x20  fsl_flexspi_nor_boot.o [1]
+                              - 0x7000'1020    0x20
+
+"A4":                                          0x10
+  .boot_hdr.boot_data  const    0x7000'1020    0x10  fsl_flexspi_nor_boot.o [1]
+                              - 0x7000'1030    0x10
+
+"A5":                                         0x410
+  .boot_hdr.dcd_data   const    0x7000'1030   0x410  evkmimxrt1064_sdram_ini_dcd.o [1]
+                              - 0x7000'1440   0x410
+
+"A0":                                         0x440
+  .intvec              const    0x7000'2000   0x400  zf_common_vector.o [1]
+  .intvec              ro code  0x7000'2400    0x40  vector_table_M.o [4]
+                              - 0x7000'2440   0x440
+
+"P1":                                        0x4ad9
+  .text                ro code  0x7000'2440   0x1f6  lz77_init.o [4]
+  .text                ro code  0x7000'2636     0x6  abort.o [2]
+  .text                ro code  0x7000'263c    0x14  exit.o [5]
+  .text                ro code  0x7000'2650   0x11a  system_MIMXRT1064.o [1]
+  .text                ro code  0x7000'276a    0x3a  zero_init3.o [4]
+  .text                ro code  0x7000'27a4    0x6c  startup_MIMXRT1064.o [1]
+  .text                ro code  0x7000'2810    0x28  data_init.o [4]
+  .text                ro code  0x7000'2838    0x22  fpinit_M.o [3]
+  .iar.init_table      const    0x7000'285c    0x48  - Linker created -
+  Veneer               ro code  0x7000'28a4     0x8  - Linker created -
+  Veneer               ro code  0x7000'28ac     0x8  - Linker created -
+  .text                ro code  0x7000'28b4    0x1e  cmain.o [4]
+  .text                ro code  0x7000'28d2     0x4  low_level_init.o [2]
+  .text                ro code  0x7000'28d6     0xc  cstartup_M.o [4]
+  .rodata              const    0x7000'28e2     0x0  zero_init3.o [4]
+  .rodata              const    0x7000'28e2     0x0  lz77_init.o [4]
+  Initializer bytes    const    0x7000'28e2  0x45d8  <for RW-1>
+  Initializer bytes    const    0x7000'6eba    0x5f  <for P3-P5|P9 s0>
+                              - 0x7000'6f19  0x4ad9
+
+"P2|P11":                                    0x69b2
+  RW                            0x8000'0400  0x69b2  <Block>
+    RW-1                        0x8000'0400  0x69b2  <Init block>
+      .rodata          inited   0x8000'0400   0x420  pow64.o [3]
+      .rodata          inited   0x8000'0820    0x18  clock_config.o [1]
+      .rodata          inited   0x8000'0838    0x90  clock_config.o [1]
+      .rodata          inited   0x8000'08c8    0x10  clock_config.o [1]
+      .rodata          inited   0x8000'08d8     0x8  clock_config.o [1]
+      .rodata          inited   0x8000'08e0    0x2c  fsl_assert.o [1]
+      .rodata          inited   0x8000'090c    0x10  fsl_clock.o [1]
+      .rodata          inited   0x8000'091c    0x90  fsl_clock.o [1]
+      .rodata          inited   0x8000'09ac    0x10  fsl_clock.o [1]
+      .rodata          inited   0x8000'09bc    0x90  fsl_edma.o [1]
+      .rodata          inited   0x8000'0a4c    0x1c  fsl_edma.o [1]
+      .rodata          inited   0x8000'0a68     0xc  fsl_edma.o [1]
+      .rodata          inited   0x8000'0a74    0x3c  fsl_enet.o [1]
+      .rodata          inited   0x8000'0ab0    0x90  fsl_enet.o [1]
+      .rodata          inited   0x8000'0b40     0x8  fsl_enet.o [1]
+      .rodata          inited   0x8000'0b48    0x94  fsl_flexcan.o [1]
+      .rodata          inited   0x8000'0bdc    0x18  fsl_flexcan.o [1]
+      .rodata          inited   0x8000'0bf4    0x18  fsl_flexcan.o [1]
+      .rodata          inited   0x8000'0c0c    0x18  fsl_flexcan.o [1]
+      .rodata          inited   0x8000'0c24    0x90  fsl_lpspi.o [1]
+      .rodata          inited   0x8000'0cb4    0x18  fsl_lpspi.o [1]
+      .rodata          inited   0x8000'0ccc    0x18  fsl_lpspi.o [1]
+      .rodata          inited   0x8000'0ce4    0x18  fsl_lpspi.o [1]
+      .rodata          inited   0x8000'0cfc    0x18  fsl_lpspi.o [1]
+      .rodata          inited   0x8000'0d14    0x10  fsl_lpuart.o [1]
+      .rodata          inited   0x8000'0d24    0x90  fsl_lpuart.o [1]
+      .rodata          inited   0x8000'0db4    0x40  fsl_lpuart.o [1]
+      .rodata          inited   0x8000'0df4    0x94  fsl_lpuart.o [1]
+      .rodata          inited   0x8000'0e88     0xc  fsl_lpuart.o [1]
+      .rodata          inited   0x8000'0e94    0x1c  fsl_lpuart.o [1]
+      .rodata          inited   0x8000'0eb0    0x28  fsl_lpuart.o [1]
+      .rodata          inited   0x8000'0ed8    0x28  fsl_lpuart.o [1]
+      .rodata          inited   0x8000'0f00    0x24  fsl_lpuart.o [1]
+      .rodata          inited   0x8000'0f24    0x14  fsl_lpuart.o [1]
+      .rodata          inited   0x8000'0f38    0x90  fsl_pwm.o [1]
+      .rodata          inited   0x8000'0fc8    0x1c  fsl_pwm.o [1]
+      .rodata          inited   0x8000'0fe4    0x90  fsl_sai.o [1]
+      .rodata          inited   0x8000'1074    0x18  fsl_sai.o [1]
+      .rodata          inited   0x8000'108c    0x18  fsl_sai.o [1]
+      .rodata          inited   0x8000'10a4     0xc  fsl_usdhc.o [1]
+      .rodata          inited   0x8000'10b0     0xc  zf_common_debug.o [1]
+      .rodata          inited   0x8000'10bc    0x10  zf_common_debug.o [1]
+      .rodata          inited   0x8000'10cc     0xc  zf_common_debug.o [1]
+      .rodata          inited   0x8000'10d8    0x1c  zf_common_debug.o [1]
+      .rodata          inited   0x8000'10f4    0x18  zf_common_debug.o [1]
+      .rodata          inited   0x8000'110c    0x10  zf_common_debug.o [1]
+      .rodata          inited   0x8000'111c    0x94  zf_common_fifo.o [1]
+      .rodata          inited   0x8000'11b0    0x94  zf_driver_pwm.o [1]
+      .rodata          inited   0x8000'1244    0x94  zf_driver_uart.o [1]
+      .text            inited   0x8000'12d8   0x2ac  board.o [1]
+      .text            inited   0x8000'1584   0x71c  clock_config.o [1]
+      .text            inited   0x8000'1ca0    0x1c  fsl_assert.o [1]
+      .text            inited   0x8000'1cbc   0x438  fsl_clock.o [1]
+      .text            inited   0x8000'20f4    0x20  fsl_csi.o [1]
+      .text            inited   0x8000'2114   0xb0a  fsl_debug_console.o [1]
+      .text            inited   0x8000'2c20   0x4d4  fsl_edma.o [1]
+      .text            inited   0x8000'30f4   0x150  fsl_enet.o [1]
+      .text            inited   0x8000'3244    0xa4  fsl_flexcan.o [1]
+      .text            inited   0x8000'32e8    0x68  fsl_flexio.o [1]
+      .text            inited   0x8000'3350    0x94  fsl_lpi2c.o [1]
+      .text            inited   0x8000'33e4    0xf4  fsl_lpspi.o [1]
+      .text            inited   0x8000'34d8   0x498  fsl_lpuart.o [1]
+      .text            inited   0x8000'3970   0x2b4  fsl_pwm.o [1]
+      .text            inited   0x8000'3c24   0x148  fsl_sai.o [1]
+      .text            inited   0x8000'3d6c    0x48  fsl_spdif.o [1]
+      .text            inited   0x8000'3db4    0x38  fsl_usdhc.o [1]
+      .text            inited   0x8000'3dec   0x238  isr.o [1]
+      .text            inited   0x8000'4024    0x14  main.o [1]
+      .text            inited   0x8000'4038   0x176  usb_device_dci.o [1]
+      .text            inited   0x8000'41b0   0x5e4  usb_device_ehci.o [1]
+      .text            inited   0x8000'4794    0x1c  zf_common_clock.o [1]
+      .text            inited   0x8000'47b0   0x4d0  zf_common_debug.o [1]
+      .text            inited   0x8000'4c80   0x4a0  zf_common_fifo.o [1]
+      .text            inited   0x8000'5120    0x4e  zf_common_interrupt.o [1]
+      .text            inited   0x8000'5170    0xd4  zf_device_gps_tau1201.o [1]
+      .text            inited   0x8000'5244     0x2  zf_device_type.o [1]
+      .text            inited   0x8000'5248    0x70  zf_driver_gpio.o [1]
+      .text            inited   0x8000'52b8   0x100  zf_driver_pwm.o [1]
+      .text            inited   0x8000'53b8   0x570  zf_driver_uart.o [1]
+      .text            inited   0x8000'5928    0x20  zf_driver_usb_cdc.o [1]
+      .text            inited   0x8000'5948    0xa6  ABImemcpy.o [4]
+      .text            inited   0x8000'59f0    0x66  ABImemset.o [4]
+      .text            inited   0x8000'5a58   0x274  I64DivMod.o [4]
+      .text            inited   0x8000'5ccc    0x20  DblCmpEq.o [3]
+      .text            inited   0x8000'5cec    0x2e  DblCmpLe.o [3]
+      .text            inited   0x8000'5d1c    0x2e  DblCmpGe.o [3]
+      .text            inited   0x8000'5d4c    0x5c  DblToS64.o [3]
+      .text            inited   0x8000'5da8    0x52  S64ToDbl.o [3]
+      .text            inited   0x8000'5dfc    0xa2  modf.o [3]
+      .text            inited   0x8000'5ea0    0x16  math_wrappers64.o [3]
+      .text            inited   0x8000'5eb8    0x36  strlen.o [4]
+      .text            inited   0x8000'5ef0    0x40  sprintf.o [2]
+      .text            inited   0x8000'5f30     0x2  I64DivZer.o [4]
+      .text            inited   0x8000'5f34   0x368  iar_Exp64.o [3]
+      .text            inited   0x8000'629c   0x570  pow64.o [3]
+      .text            inited   0x8000'680c    0xf0  ldexp.o [3]
+      .text            inited   0x8000'68fc    0x7c  frexp.o [3]
+      Veneer           inited   0x8000'6978     0x8  - Linker created -
+      .text            inited   0x8000'6980     0xa  cexit.o [4]
+      .text            inited   0x8000'698a    0x12  zf_common_vector.o [1]
+      .text            inited   0x8000'699c     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'69a4     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'69ac     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'69b4     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'69bc     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'69c4     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'69cc     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'69d4     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'69dc     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'69e4     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'69ec     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'69f4     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'69fc     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6a04     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6a0c     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6a14     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6a1c     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6a24     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6a26     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6a28     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6a2a     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6a32     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6a3a     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6a42     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6a4a     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6a52     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6a5a     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6a62     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6a6a     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6a72     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6a7a     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6a82     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6a84     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6a86     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6a88     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6a8a     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6a8c     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6a8e     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6a90     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6a92     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6a94     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6a96     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6a98     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6a9a     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6a9c     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6a9e     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6aa0     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6aa2     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6aa4     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6aac     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6ab4     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6abc     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6ac4     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6acc     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6ace     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6ad0     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6ad2     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6ad4     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6ad6     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6ad8     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6ada     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6adc     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6ade     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6ae0     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6ae2     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6ae4     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6ae6     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6ae8     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6aea     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6aec     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6aee     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6af0     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6af2     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6af4     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6af6     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6af8     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6afa     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6afc     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6b04     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6b0c     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b0e     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b10     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b12     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b14     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b16     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b18     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b1a     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b1c     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b1e     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b20     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b22     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b24     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b26     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b28     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b2a     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6b32     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6b3a     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b3c     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6b44     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6b4c     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6b54     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6b5c     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b5e     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b60     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b62     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b64     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b66     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b68     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b6a     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b6c     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b6e     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b70     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b72     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b74     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b76     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b78     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b7a     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b7c     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b7e     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b80     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b82     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b84     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b86     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b88     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b8a     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b8c     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b8e     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b90     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b92     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b94     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b96     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b98     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b9a     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b9c     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6b9e     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6ba0     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6ba2     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6baa     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6bb2     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6bba     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6bbc     0x8  zf_common_vector.o [1]
+      .text            inited   0x8000'6bc4     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6bc6     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6bc8     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6bca     0x2  zf_common_vector.o [1]
+      .text            inited   0x8000'6bcc     0xe  DblToS32.o [3]
+      .text            inited   0x8000'6bda    0x12  DblAdd.o [3]
+      .text            inited   0x8000'6bec    0x12  DblDiv.o [3]
+      .text            inited   0x8000'6bfe    0x12  DblMul.o [3]
+      .text            inited   0x8000'6c10    0x12  DblSub.o [3]
+      .text            inited   0x8000'6c22     0xe  S32ToDbl.o [3]
+      .text            inited   0x8000'6c30     0xe  U32ToDbl.o [3]
+      .text            inited   0x8000'6c3e    0x28  strncmp.o [2]
+      .text            inited   0x8000'6c66     0xa  xsprout.o [2]
+      .text            inited   0x8000'6c70     0x4  exit.o [2]
+      .text            inited   0x8000'6c74   0x13e  xprintftiny.o [2]
+                              - 0x8000'6db2  0x69b2
+
+Unused ranges:
+
+         From           To        Size
+         ----           --        ----
+  0x2000'0081  0x2000'009f        0x1f
+  0x2000'03a8  0x2006'efff    0x6'ec58
+  0x7000'6f19  0x703f'ffff   0x3f'90e7
+  0x8000'0000  0x8000'03ff       0x400
+  0x8000'6db2  0x81df'ffff  0x1df'924e
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address      Size
+          -------      ----
+Zero (__iar_zero_init3)
+    1 destination range, total size 0x308:
+          0x2000'00a0   0x308
+
+Copy/lz77 (__iar_lz77_init3)
+    1 source range, total size 0x45d8 (66% of destination):
+          0x7000'28e2  0x45d8
+    1 destination range, total size 0x69b2:
+          0x8000'0400  0x69b2
+
+Copy/lz77 (__iar_lz77_init3)
+    1 source range, total size 0x5f (73% of destination):
+          0x7000'6eba    0x5f
+    1 destination range, total size 0x81:
+          0x2000'0000    0x81
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module                              ro code  rw code  ro data  rw data
+    ------                              -------  -------  -------  -------
+command line/config:
+    ----------------------------------------------------------------------
+    Total:
+
+E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj: [1]
+    board.o                                          684      452
+    clock_config.o                                 1 820    1 329      192
+    evkmimxrt1064_flexspi_nor_config.o                        512
+    evkmimxrt1064_sdram_ini_dcd.o                           1 040
+    fsl_assert.o                                      28       48       44
+    fsl_clock.o                                    1 080      830      184
+    fsl_csi.o                                         32       22        8
+    fsl_debug_console.o                            2 826    1 867       20
+    fsl_edma.o                                     1 236      939      312
+    fsl_enet.o                                       336      362      260
+    fsl_flexcan.o                                    164      254      240
+    fsl_flexio.o                                     104       69       24
+    fsl_flexspi_nor_boot.o                                     48
+    fsl_lpi2c.o                                      148       98       48
+    fsl_lpspi.o                                      244      319      268
+    fsl_lpuart.o                                   1 176    1 139      588
+    fsl_pwm.o                                        692      572      172
+    fsl_sai.o                                        328      343      232
+    fsl_spdif.o                                       72       48       16
+    fsl_usdhc.o                                       56       45       28
+    isr.o                                            568      375
+    main.o                                            20       13
+    startup_MIMXRT1064.o                    108
+    system_MIMXRT1064.o                     282                 3        4
+    usb_device_dci.o                                 374      248
+    usb_device_ehci.o                              1 508      997
+    zf_common_clock.o                                 28       22        4
+    zf_common_debug.o                              1 232      886      131
+    zf_common_fifo.o                               1 184      880      148
+    zf_common_interrupt.o                             78       52        4
+    zf_common_vector.o                               578    1 406
+    zf_device_gps_tau1201.o                          212      141      284
+    zf_device_type.o                                   2       17       20
+    zf_driver_gpio.o                                 112      107       44
+    zf_driver_pwm.o                                  256      282      168
+    zf_driver_uart.o                               1 392    1 044      184
+    zf_driver_usb_cdc.o                               32       21       16
+    ----------------------------------------------------------------------
+    Total:                                  390   18 602   16 830    3 643
+
+dl7M_tlf.a: [2]
+    abort.o                                   6
+    exit.o                                             4        2
+    low_level_init.o                          4
+    sprintf.o                                         64       43
+    strncmp.o                                         40       26
+    xprintftiny.o                                    318      211
+    xsprout.o                                         10        7
+    ----------------------------------------------------------------------
+    Total:                                   10      436      289
+
+m7M_tlv.a: [3]
+    DblAdd.o                                          18       11
+    DblCmpEq.o                                        32       21
+    DblCmpGe.o                                        46       32
+    DblCmpLe.o                                        46       30
+    DblDiv.o                                          18       12
+    DblMul.o                                          18       12
+    DblSub.o                                          18       12
+    DblToS32.o                                        14       10
+    DblToS64.o                                        92       62
+    S32ToDbl.o                                        14        9
+    S64ToDbl.o                                        82       54
+    U32ToDbl.o                                        14       10
+    fpinit_M.o                               34
+    frexp.o                                          124       82
+    iar_Exp64.o                                      872      577
+    ldexp.o                                          240      159
+    math_wrappers64.o                                 22       16
+    modf.o                                           162      109
+    pow64.o                                        1 392    1 617    1 056
+    ----------------------------------------------------------------------
+    Total:                                   34    3 224    2 835    1 056
+
+rt7M_tl.a: [4]
+    ABImemcpy.o                                      166      110
+    ABImemset.o                                      102       69
+    I64DivMod.o                                      628      416
+    I64DivZer.o                                        2        2
+    cexit.o                                           10        6
+    cmain.o                                  30
+    cstartup_M.o                             12
+    data_init.o                              40
+    lz77_init.o                             502
+    strlen.o                                          54       37
+    vector_table_M.o                         64
+    zero_init3.o                             58
+    ----------------------------------------------------------------------
+    Total:                                  706      962      640
+
+shb_l.a: [5]
+    exit.o                                   20
+    ----------------------------------------------------------------------
+    Total:                                   20
+
+    Gaps                                              26        2        6
+    Linker created                           16        8       77    4 096
+--------------------------------------------------------------------------
+    Grand Total:                          1 176   23 258   20 673    8 801
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                       Address   Size  Type      Object
+-----                       -------   ----  ----      ------
+.iar.init_table$$Base   0x7000'285c          --   Gb  - Linker created -
+.iar.init_table$$Limit  0x7000'28a4          --   Gb  - Linker created -
+?main                   0x7000'28b5         Code  Gb  cmain.o [4]
+ARM_MPU_Disable         0x8000'12f5   0x1a  Code  Lc  board.o [1]
+ARM_MPU_Enable          0x8000'12d9   0x1c  Code  Lc  board.o [1]
+BOARD_BootClockRUN      0x8000'172d  0x448  Code  Gb  clock_config.o [1]
+BOARD_ConfigMPU         0x8000'13af  0x154  Code  Gb  board.o [1]
+BOARD_DebugConsoleSrcFreq
+                        0x8000'1375   0x3a  Code  Gb  board.o [1]
+BOARD_InitBootClocks    0x8000'1725    0x8  Code  Gb  clock_config.o [1]
+BusFault_Handler        0x8000'6991    0x2  Code  Gb  zf_common_vector.o [1]
+CAN1_DriverIRQHandler   0x8000'3245   0x2a  Code  Gb  fsl_flexcan.o [1]
+CAN2_DriverIRQHandler   0x8000'326f   0x2a  Code  Gb  fsl_flexcan.o [1]
+CAN3_DriverIRQHandler   0x8000'3299   0x2a  Code  Gb  fsl_flexcan.o [1]
+CLOCK_ControlGate       0x8000'1689   0x50  Code  Lc  clock_config.o [1]
+CLOCK_ControlGate       0x8000'34f1   0x50  Code  Lc  fsl_lpuart.o [1]
+CLOCK_DeinitAudioPll    0x8000'1ddb    0xc  Code  Gb  fsl_clock.o [1]
+CLOCK_DeinitEnetPll     0x8000'1df3    0xc  Code  Gb  fsl_clock.o [1]
+CLOCK_DeinitUsb2Pll     0x8000'1dd1    0xa  Code  Gb  fsl_clock.o [1]
+CLOCK_DeinitVideoPll    0x8000'1de7    0xc  Code  Gb  fsl_clock.o [1]
+CLOCK_DisableClock      0x8000'16d9   0x10  Code  Lc  clock_config.o [1]
+CLOCK_DisableClock      0x8000'3551   0x10  Code  Lc  fsl_lpuart.o [1]
+CLOCK_EnableClock       0x8000'3541   0x10  Code  Lc  fsl_lpuart.o [1]
+CLOCK_GetDiv            0x8000'1339   0x2a  Code  Lc  board.o [1]
+CLOCK_GetMux            0x8000'130f   0x2a  Code  Lc  board.o [1]
+CLOCK_GetOscFreq        0x8000'1363   0x12  Code  Lc  board.o [1]
+CLOCK_GetOscFreq        0x8000'1cbd   0x18  Code  Lc  fsl_clock.o [1]
+CLOCK_GetPllBypassRefClk
+                        0x8000'1cfb   0x22  Code  Lc  fsl_clock.o [1]
+CLOCK_GetPllFreq        0x8000'1e09  0x27e  Code  Gb  fsl_clock.o [1]
+CLOCK_GetPllFreq::enetRefClkFreq
+                        0x8000'09ac   0x10  Data  Lc  fsl_clock.o [1]
+CLOCK_InitArmPll        0x8000'1d91   0x40  Code  Gb  fsl_clock.o [1]
+CLOCK_InitExternalClk   0x8000'1d1d   0x4a  Code  Gb  fsl_clock.o [1]
+CLOCK_InitRcOsc24M      0x8000'1d83    0xe  Code  Gb  fsl_clock.o [1]
+CLOCK_IsPllBypassed     0x8000'1cd5   0x10  Code  Lc  fsl_clock.o [1]
+CLOCK_IsPllEnabled      0x8000'1ce5   0x16  Code  Lc  fsl_clock.o [1]
+CLOCK_SetDiv            0x8000'1613   0x76  Code  Lc  clock_config.o [1]
+CLOCK_SetMux            0x8000'159d   0x76  Code  Lc  clock_config.o [1]
+CLOCK_SetPllBypass      0x8000'16f9   0x2c  Code  Lc  clock_config.o [1]
+CLOCK_SetRtcXtalFreq    0x8000'16f1    0x8  Code  Lc  clock_config.o [1]
+CLOCK_SetXtalFreq       0x8000'16e9    0x8  Code  Lc  clock_config.o [1]
+CLOCK_SwitchOsc         0x8000'1d67   0x1c  Code  Gb  fsl_clock.o [1]
+CSI_DriverIRQHandler    0x8000'20f5   0x14  Code  Gb  fsl_csi.o [1]
+CSI_IRQHandler          0x8000'3e2f    0xc  Code  Gb  isr.o [1]
+CSTACK$$Base            0x2006'f000          --   Gb  - Linker created -
+CSTACK$$Limit           0x2007'0000          --   Gb  - Linker created -
+DMA0_DMA16_DriverIRQHandler
+                        0x8000'2db9   0x34  Code  Gb  fsl_edma.o [1]
+DMA10_DMA26_DriverIRQHandler
+                        0x8000'2fb1   0x32  Code  Gb  fsl_edma.o [1]
+DMA11_DMA27_DriverIRQHandler
+                        0x8000'2fe3   0x32  Code  Gb  fsl_edma.o [1]
+DMA12_DMA28_DriverIRQHandler
+                        0x8000'3015   0x32  Code  Gb  fsl_edma.o [1]
+DMA13_DMA29_DriverIRQHandler
+                        0x8000'3047   0x32  Code  Gb  fsl_edma.o [1]
+DMA14_DMA30_DriverIRQHandler
+                        0x8000'3079   0x32  Code  Gb  fsl_edma.o [1]
+DMA15_DMA31_DriverIRQHandler
+                        0x8000'30b1   0x32  Code  Gb  fsl_edma.o [1]
+DMA1_DMA17_DriverIRQHandler
+                        0x8000'2ded   0x32  Code  Gb  fsl_edma.o [1]
+DMA2_DMA18_DriverIRQHandler
+                        0x8000'2e1f   0x32  Code  Gb  fsl_edma.o [1]
+DMA3_DMA19_DriverIRQHandler
+                        0x8000'2e51   0x32  Code  Gb  fsl_edma.o [1]
+DMA4_DMA20_DriverIRQHandler
+                        0x8000'2e83   0x32  Code  Gb  fsl_edma.o [1]
+DMA5_DMA21_DriverIRQHandler
+                        0x8000'2eb7   0x32  Code  Gb  fsl_edma.o [1]
+DMA6_DMA22_DriverIRQHandler
+                        0x8000'2ee9   0x32  Code  Gb  fsl_edma.o [1]
+DMA7_DMA23_DriverIRQHandler
+                        0x8000'2f1b   0x32  Code  Gb  fsl_edma.o [1]
+DMA8_DMA24_DriverIRQHandler
+                        0x8000'2f4d   0x32  Code  Gb  fsl_edma.o [1]
+DMA9_DMA25_DriverIRQHandler
+                        0x8000'2f7f   0x32  Code  Gb  fsl_edma.o [1]
+DbgConsole_ConvertFloatRadixNumToString
+                        0x8000'231b  0x1d6  Code  Lc  fsl_debug_console.o [1]
+DbgConsole_ConvertRadixNumToString
+                        0x8000'21a1  0x17a  Code  Lc  fsl_debug_console.o [1]
+DbgConsole_Printf       0x8000'2115   0x18  Code  Gb  fsl_debug_console.o [1]
+DbgConsole_PrintfFormattedData
+                        0x8000'2509  0x716  Code  Lc  fsl_debug_console.o [1]
+DbgConsole_PrintfPaddingCharacter
+                        0x8000'2175   0x2c  Code  Lc  fsl_debug_console.o [1]
+DbgConsole_Putchar      0x8000'2155   0x20  Code  Gb  fsl_debug_console.o [1]
+DbgConsole_Vprintf      0x8000'212d   0x28  Code  Gb  fsl_debug_console.o [1]
+DebugMon_Handler        0x8000'6997    0x2  Code  Gb  zf_common_vector.o [1]
+DefaultISR              0x7000'280d         Code  Wk  startup_MIMXRT1064.o [1]
+DisableGlobalIRQ        0x8000'513f    0x8  Code  Lc  zf_common_interrupt.o [1]
+EDMA_GetChannelStatusFlags
+                        0x8000'2c21   0x46  Code  Gb  fsl_edma.o [1]
+EDMA_HandleIRQ          0x8000'2c71  0x148  Code  Gb  fsl_edma.o [1]
+ENET2_1588_Timer_DriverIRQHandler
+                        0x8000'3211    0xe  Code  Gb  fsl_enet.o [1]
+ENET2_DriverIRQHandler  0x8000'3203    0xe  Code  Gb  fsl_enet.o [1]
+ENET_1588_Timer_DriverIRQHandler
+                        0x8000'31f5    0xe  Code  Gb  fsl_enet.o [1]
+ENET_CommonFrame0IRQHandler
+                        0x8000'3135   0x8c  Code  Gb  fsl_enet.o [1]
+ENET_DriverIRQHandler   0x8000'31e7    0xe  Code  Gb  fsl_enet.o [1]
+ENET_GetInstance        0x8000'30f5   0x34  Code  Gb  fsl_enet.o [1]
+ENET_Ptp1588IRQHandler  0x8000'31c1   0x26  Code  Gb  fsl_enet.o [1]
+FLEXIO1_DriverIRQHandler
+                        0x8000'3339    0x8  Code  Gb  fsl_flexio.o [1]
+FLEXIO2_DriverIRQHandler
+                        0x8000'3341    0x8  Code  Gb  fsl_flexio.o [1]
+FLEXIO3_DriverIRQHandler
+                        0x8000'3349    0x8  Code  Gb  fsl_flexio.o [1]
+FLEXIO_CommonIRQHandler
+                        0x8000'32e9   0x42  Code  Lc  fsl_flexio.o [1]
+GPIO1_Combined_0_15_IRQHandler
+                        0x8000'3f59   0x18  Code  Gb  isr.o [1]
+GPIO1_Combined_16_31_IRQHandler
+                        0x8000'3f71   0x24  Code  Gb  isr.o [1]
+GPIO2_Combined_0_15_IRQHandler
+                        0x8000'3f95   0x1e  Code  Gb  isr.o [1]
+GPIO2_Combined_16_31_IRQHandler
+                        0x8000'3fb3   0x1e  Code  Gb  isr.o [1]
+GPIO3_Combined_0_15_IRQHandler
+                        0x8000'3fd1   0x1c  Code  Gb  isr.o [1]
+GPIO_ClearPinsInterruptFlags
+                        0x8000'3e01   0x10  Code  Lc  isr.o [1]
+GPIO_GetPinsInterruptFlags
+                        0x8000'3df1    0xc  Code  Lc  isr.o [1]
+GPIO_PortClearInterruptFlags
+                        0x8000'3dfd    0x4  Code  Lc  isr.o [1]
+GPIO_PortGetInterruptFlags
+                        0x8000'3ded    0x4  Code  Lc  isr.o [1]
+HardFault_Handler       0x8000'698d    0x2  Code  Gb  zf_common_vector.o [1]
+IOMUXC_SetPinConfig     0x8000'5265   0x10  Code  Lc  zf_driver_gpio.o [1]
+IOMUXC_SetPinMux        0x8000'5249   0x1c  Code  Lc  zf_driver_gpio.o [1]
+InStream_Read           0x7000'2455   0x28  Code  Lc  lz77_init.o [4]
+InStream_StepRegion     0x7000'2441   0x14  Code  Lc  lz77_init.o [4]
+LPI2C1_DriverIRQHandler
+                        0x8000'3393    0xc  Code  Gb  fsl_lpi2c.o [1]
+LPI2C2_DriverIRQHandler
+                        0x8000'339f    0xc  Code  Gb  fsl_lpi2c.o [1]
+LPI2C3_DriverIRQHandler
+                        0x8000'33b1    0xc  Code  Gb  fsl_lpi2c.o [1]
+LPI2C4_DriverIRQHandler
+                        0x8000'33c1    0xc  Code  Gb  fsl_lpi2c.o [1]
+LPI2C_CommonIRQHandler  0x8000'3351   0x42  Code  Lc  fsl_lpi2c.o [1]
+LPSPI1_DriverIRQHandler
+                        0x8000'3419   0x24  Code  Gb  fsl_lpspi.o [1]
+LPSPI2_DriverIRQHandler
+                        0x8000'343d   0x24  Code  Gb  fsl_lpspi.o [1]
+LPSPI3_DriverIRQHandler
+                        0x8000'3461   0x24  Code  Gb  fsl_lpspi.o [1]
+LPSPI4_DriverIRQHandler
+                        0x8000'3485   0x24  Code  Gb  fsl_lpspi.o [1]
+LPSPI_CommonIRQHandler  0x8000'33ed   0x2c  Code  Lc  fsl_lpspi.o [1]
+LPSPI_IsMaster          0x8000'33e5    0x8  Code  Lc  fsl_lpspi.o [1]
+LPUART1_IRQHandler      0x8000'3e9d   0x16  Code  Gb  isr.o [1]
+LPUART2_IRQHandler      0x8000'3eb3   0x16  Code  Gb  isr.o [1]
+LPUART3_IRQHandler      0x8000'3ec9   0x16  Code  Gb  isr.o [1]
+LPUART4_IRQHandler      0x8000'3edf   0x24  Code  Gb  isr.o [1]
+LPUART5_IRQHandler      0x8000'3f03   0x20  Code  Gb  isr.o [1]
+LPUART6_IRQHandler      0x8000'3f23   0x16  Code  Gb  isr.o [1]
+LPUART7_DriverIRQHandler
+                        0x8000'3945   0x14  Code  Gb  fsl_lpuart.o [1]
+LPUART8_IRQHandler      0x8000'3f39   0x20  Code  Gb  isr.o [1]
+LPUART_ClearStatusFlags
+                        0x8000'38cf   0x42  Code  Gb  fsl_lpuart.o [1]
+LPUART_Deinit           0x8000'380f   0x3e  Code  Gb  fsl_lpuart.o [1]
+LPUART_GetDefaultConfig
+                        0x8000'384d   0x6c  Code  Gb  fsl_lpuart.o [1]
+LPUART_GetInstance      0x8000'3573   0x34  Code  Gb  fsl_lpuart.o [1]
+LPUART_GetStatusFlags   0x8000'38b9   0x16  Code  Gb  fsl_lpuart.o [1]
+LPUART_Init             0x8000'35a7  0x268  Code  Gb  fsl_lpuart.o [1]
+LPUART_ReadByte         0x8000'53c1   0x2e  Code  Lc  zf_driver_uart.o [1]
+LPUART_SoftwareReset    0x8000'3561   0x12  Code  Lc  fsl_lpuart.o [1]
+LPUART_WriteByte        0x8000'53b9    0x8  Code  Lc  zf_driver_uart.o [1]
+MemManage_Handler       0x8000'698f    0x2  Code  Gb  zf_common_vector.o [1]
+NMI_Handler             0x8000'698b    0x2  Code  Gb  zf_common_vector.o [1]
+OutStream_Write         0x7000'247d   0x42  Code  Lc  lz77_init.o [4]
+PIT_ClearStatusFlags    0x8000'3e21    0xe  Code  Lc  isr.o [1]
+PIT_GetStatusFlags      0x8000'3e11   0x10  Code  Lc  isr.o [1]
+PIT_IRQHandler          0x8000'3e3b   0x62  Code  Gb  isr.o [1]
+PORTPTR                 0x2000'0000   0x2c  Data  Gb  zf_driver_gpio.o [1]
+PWMPTR                  0x2000'0050   0x14  Data  Lc  zf_driver_pwm.o [1]
+PWM_GetComplementU16    0x8000'3971    0xa  Code  Lc  fsl_pwm.o [1]
+PWM_SetPwmLdok          0x8000'52b9   0x36  Code  Lc  zf_driver_pwm.o [1]
+PWM_UpdatePwmDutycycleHighAccuracy
+                        0x8000'397b  0x29e  Code  Gb  fsl_pwm.o [1]
+PendSV_Handler          0x8000'6999    0x2  Code  Gb  zf_common_vector.o [1]
+RW$$Base                0x8000'0400          --   Gb  - Linker created -
+RW$$Limit               0x8000'6db2          --   Gb  - Linker created -
+Region$$Table$$Base     0x7000'285c          --   Gb  - Linker created -
+Region$$Table$$Limit    0x7000'28a4          --   Gb  - Linker created -
+Reset_Handler           0x7000'27a5         Code  Gb  startup_MIMXRT1064.o [1]
+SAI1_DriverIRQHandler   0x8000'3c4f   0x52  Code  Gb  fsl_sai.o [1]
+SAI2_DriverIRQHandler   0x8000'3ca1   0x52  Code  Gb  fsl_sai.o [1]
+SAI3_RX_DriverIRQHandler
+                        0x8000'3d1d   0x2a  Code  Gb  fsl_sai.o [1]
+SAI3_TX_DriverIRQHandler
+                        0x8000'3cf3   0x2a  Code  Gb  fsl_sai.o [1]
+SAI_RxGetEnabledInterruptStatus
+                        0x8000'3c25   0x16  Code  Lc  fsl_sai.o [1]
+SAI_TxGetEnabledInterruptStatus
+                        0x8000'3c3b   0x14  Code  Lc  fsl_sai.o [1]
+SPDIF_DriverIRQHandler  0x8000'3d6d   0x36  Code  Gb  fsl_spdif.o [1]
+SVC_Handler             0x8000'6995    0x2  Code  Gb  zf_common_vector.o [1]
+SysTick_Handler         0x8000'699b    0x2  Code  Wk  zf_common_vector.o [1]
+SystemCoreClock         0x2000'0064    0x4  Data  Gb  system_MIMXRT1064.o [1]
+SystemInit              0x7000'2651   0xda  Code  Gb  system_MIMXRT1064.o [1]
+USB_DeviceControl       0x8000'4039   0x2e  Code  Lc  usb_device_dci.o [1]
+USB_DeviceEhciCancelControlPipe
+                        0x8000'423d  0x10a  Code  Lc  usb_device_ehci.o [1]
+USB_DeviceEhciFillSetupBuffer
+                        0x8000'41b1   0x8c  Code  Lc  usb_device_ehci.o [1]
+USB_DeviceEhciInterruptPortChange
+                        0x8000'4691   0x52  Code  Lc  usb_device_ehci.o [1]
+USB_DeviceEhciInterruptReset
+                        0x8000'46e3   0x66  Code  Lc  usb_device_ehci.o [1]
+USB_DeviceEhciInterruptSof
+                        0x8000'4749    0x2  Code  Lc  usb_device_ehci.o [1]
+USB_DeviceEhciInterruptTokenDone
+                        0x8000'4347  0x34a  Code  Lc  usb_device_ehci.o [1]
+USB_DeviceEhciIsrFunction
+                        0x8000'474b   0x4a  Code  Gb  usb_device_ehci.o [1]
+USB_DeviceNotification  0x8000'40c7   0xbe  Code  Lc  usb_device_dci.o [1]
+USB_DeviceNotificationTrigger
+                        0x8000'4185   0x2a  Code  Gb  usb_device_dci.o [1]
+USB_DeviceResetNotification
+                        0x8000'4067   0x60  Code  Lc  usb_device_dci.o [1]
+USB_OTG1_IRQHandler     0x8000'5929    0xe  Code  Gb  zf_driver_usb_cdc.o [1]
+USB_OTG2_IRQHandler     0x8000'5937    0xe  Code  Gb  zf_driver_usb_cdc.o [1]
+USDHC1_DriverIRQHandler
+                        0x8000'3db5   0x16  Code  Gb  fsl_usdhc.o [1]
+USDHC2_DriverIRQHandler
+                        0x8000'3dcb   0x16  Code  Gb  fsl_usdhc.o [1]
+UsageFault_Handler      0x8000'6993    0x2  Code  Gb  zf_common_vector.o [1]
+ZI$$Base                0x2000'00a0          --   Gb  - Linker created -
+ZI$$Limit               0x2000'03a8          --   Gb  - Linker created -
+_PrintfTiny             0x8000'6c8d  0x126  Code  Gb  xprintftiny.o [2]
+_SDK_AtomicLocalClearAndSet4Byte
+                        0x8000'1585   0x18  Code  Lc  clock_config.o [1]
+_SDK_AtomicLocalClearAndSet4Byte
+                        0x8000'34d9   0x18  Code  Lc  fsl_lpuart.o [1]
+_SProut                 0x8000'6c67    0xa  Code  Gb  xsprout.o [2]
+__CSTACK_ADDRESS {Abs}  0x2007'0000         Data  Gb  <internal module>
+__NVIC_SetPriorityGrouping
+                        0x8000'5121   0x1e  Code  Lc  zf_common_interrupt.o [1]
+__RAM_VECTOR_TABLE_SIZE {Abs}
+                              0x400         Data  Gb  <internal module>
+__VECTOR_RAM {Abs}      0x8000'0000         Data  Gb  <internal module>
+__VECTOR_TABLE {Abs}    0x7000'2000         Data  Gb  <internal module>
+__aeabi_assert          0x8000'1ca1   0x1c  Code  Gb  fsl_assert.o [1]
+__aeabi_cdcmpeq         0x8000'5ccd         Code  Gb  DblCmpEq.o [3]
+__aeabi_cdcmple         0x8000'5ced         Code  Gb  DblCmpLe.o [3]
+__aeabi_cdrcmple        0x8000'5d1d         Code  Gb  DblCmpGe.o [3]
+__aeabi_d2iz            0x8000'6bcd    0xe  Code  Gb  DblToS32.o [3]
+__aeabi_d2lz            0x8000'5d4d         Code  Gb  DblToS64.o [3]
+__aeabi_dadd            0x8000'6bdb   0x12  Code  Gb  DblAdd.o [3]
+__aeabi_ddiv            0x8000'6bed   0x12  Code  Gb  DblDiv.o [3]
+__aeabi_dmul            0x8000'6bff   0x12  Code  Gb  DblMul.o [3]
+__aeabi_dsub            0x8000'6c11   0x12  Code  Gb  DblSub.o [3]
+__aeabi_i2d             0x8000'6c23    0xe  Code  Gb  S32ToDbl.o [3]
+__aeabi_l2d             0x8000'5da9         Code  Gb  S64ToDbl.o [3]
+__aeabi_ldiv0           0x8000'5f31         Code  Gb  I64DivZer.o [4]
+__aeabi_ldivmod         0x8000'5a59         Code  Gb  I64DivMod.o [4]
+__aeabi_memcpy          0x8000'5949         Code  Gb  ABImemcpy.o [4]
+__aeabi_memcpy4         0x8000'5969         Code  Gb  ABImemcpy.o [4]
+__aeabi_memcpy8         0x8000'5969         Code  Gb  ABImemcpy.o [4]
+__aeabi_memset          0x8000'59f1         Code  Gb  ABImemset.o [4]
+__aeabi_ui2d            0x8000'6c31    0xe  Code  Gb  U32ToDbl.o [3]
+__aeabi_uldivmod        0x8000'5a9d         Code  Gb  I64DivMod.o [4]
+__cmain                 0x7000'28b5         Code  Gb  cmain.o [4]
+__exit                  0x7000'263d   0x14  Code  Gb  exit.o [5]
+__iar_Exp64             0x8000'5f35  0x368  Code  Gb  iar_Exp64.o [3]
+__iar_Memset            0x8000'59f1         Code  Gb  ABImemset.o [4]
+__iar_Memset_word       0x8000'59f9         Code  Gb  ABImemset.o [4]
+__iar_Pow64             0x8000'629d  0x4e4  Code  Lc  pow64.o [3]
+__iar_data_init3        0x7000'2811   0x28  Code  Gb  data_init.o [4]
+__iar_frexp             0x8000'6915         Code  Gb  frexp.o [3]
+__iar_frexp64           0x8000'68fd         Code  Gb  frexp.o [3]
+__iar_frexpl            0x8000'6915         Code  Gb  frexp.o [3]
+__iar_init_vfp          0x7000'2839         Code  Gb  fpinit_M.o [3]
+__iar_ldexp64           0x8000'680d         Code  Gb  ldexp.o [3]
+__iar_lz77_init3        0x7000'24bf  0x178  Code  Gb  lz77_init.o [4]
+__iar_modf              0x8000'5e11         Code  Gb  modf.o [3]
+__iar_modfl             0x8000'5e11         Code  Gb  modf.o [3]
+__iar_pow64             0x8000'6809    0x4  Code  Gb  pow64.o [3]
+__iar_pow_medium        0x8000'6809    0x4  Code  Gb  pow64.o [3]
+__iar_pow_medium64      0x8000'6809    0x4  Code  Gb  pow64.o [3]
+__iar_pow_mediuml       0x8000'6809    0x4  Code  Gb  pow64.o [3]
+__iar_program_start     0x7000'28d7         Code  Gb  cstartup_M.o [4]
+__iar_scalbln64         0x8000'680d         Code  Gb  ldexp.o [3]
+__iar_scalbn64          0x8000'680d         Code  Gb  ldexp.o [3]
+__iar_softfp___iar_modf64
+                        0x8000'5dfd         Code  Gb  modf.o [3]
+__iar_softfp_modf       0x8000'5dfd         Code  Gb  modf.o [3]
+__iar_softfp_modfl      0x8000'5dfd         Code  Gb  modf.o [3]
+__iar_softfp_pow        0x8000'5ea7   0x10  Code  Gb  math_wrappers64.o [3]
+__iar_zero_init3        0x7000'276b   0x3a  Code  Gb  zero_init3.o [4]
+__low_level_init        0x7000'28d3    0x4  Code  Gb  low_level_init.o [2]
+__vector_table          0x7000'2400         Data  Gb  vector_table_M.o [4]
+__zf_vector_table       0x7000'2000  0x400  Data  Gb  zf_common_vector.o [1]
+_call_main              0x7000'28c1         Code  Gb  cmain.o [4]
+_exit                   0x8000'6981         Code  Gb  cexit.o [4]
+_main                   0x7000'28cf         Code  Gb  cmain.o [4]
+abort                   0x7000'2637    0x6  Code  Gb  abort.o [2]
+afio_init               0x8000'5275   0x44  Code  Gb  zf_driver_gpio.o [1]
+armPllConfig_BOARD_BootClockRUN
+                        0x8000'08d8    0x8  Data  Gb  clock_config.o [1]
+camera_uart_handler     0x2000'006c    0x4  Data  Gb  zf_device_type.o [1]
+clock_init              0x8000'4795   0x1c  Code  Gb  zf_common_clock.o [1]
+dcd_data                0x7000'1030  0x410  Data  Gb  evkmimxrt1064_sdram_ini_dcd.o [1]
+debug_assert_handler    0x8000'4b9d   0x46  Code  Gb  zf_common_debug.o [1]
+debug_assert_handler{1}{2}::assert_nest_index
+                        0x2000'0271    0x1  Data  Lc  zf_common_debug.o [1]
+debug_delay             0x8000'47b1   0x38  Code  Lc  zf_common_debug.o [1]
+debug_init              0x8000'4c2d   0x26  Code  Gb  zf_common_debug.o [1]
+debug_output            0x8000'489b  0x302  Code  Lc  zf_common_debug.o [1]
+debug_output_info       0x2000'025c   0x14  Data  Lc  zf_common_debug.o [1]
+debug_output_init       0x8000'4c03   0x2a  Code  Gb  zf_common_debug.o [1]
+debug_output_struct_init
+                        0x8000'4be3   0x20  Code  Gb  zf_common_debug.o [1]
+debug_protective_handler
+                        0x8000'47e9   0xa4  Code  Lc  zf_common_debug.o [1]
+debug_uart_str_output   0x8000'488d    0xe  Code  Lc  zf_common_debug.o [1]
+exit                    0x8000'6c71    0x4  Code  Gb  exit.o [2]
+fifo_clear              0x8000'4cb5   0x9c  Code  Gb  zf_common_fifo.o [1]
+fifo_end_offset         0x8000'4c9b   0x1a  Code  Lc  zf_common_fifo.o [1]
+fifo_head_offset        0x8000'4c81   0x1a  Code  Lc  zf_common_fifo.o [1]
+fifo_read_buffer        0x8000'4f47  0x1d4  Code  Gb  zf_common_fifo.o [1]
+fifo_used               0x8000'4d51   0x22  Code  Gb  zf_common_fifo.o [1]
+fifo_write_buffer       0x8000'4d73  0x1d4  Code  Gb  zf_common_fifo.o [1]
+flexio_camera_uart_handler
+                        0x2000'0074    0x4  Data  Gb  zf_device_type.o [1]
+flexio_camera_vsync_handler
+                        0x2000'0070    0x4  Data  Gb  zf_device_type.o [1]
+frexp                   0x8000'68fd         Code  Gb  frexp.o [3]
+frexpl                  0x8000'68fd         Code  Gb  frexp.o [3]
+g_boot_data             0x7000'1020   0x10  Data  Gb  fsl_flexspi_nor_boot.o [1]
+g_rtcXtalFreq           0x2000'00a4    0x4  Data  Gb  fsl_clock.o [1]
+g_xtalFreq              0x2000'00a0    0x4  Data  Gb  fsl_clock.o [1]
+gps_gga_buffer          0x2000'0298   0x80  Data  Lc  zf_device_gps_tau1201.o [1]
+gps_gga_state           0x2000'0294    0x1  Data  Gb  zf_device_gps_tau1201.o [1]
+gps_rmc_buffer          0x2000'0318   0x80  Data  Lc  zf_device_gps_tau1201.o [1]
+gps_rmc_state           0x2000'0295    0x1  Data  Gb  zf_device_gps_tau1201.o [1]
+gps_tau1201_flag        0x2000'0278    0x1  Data  Gb  zf_device_gps_tau1201.o [1]
+gps_tau1201_receiver_fifo
+                        0x2000'027c   0x18  Data  Lc  zf_device_gps_tau1201.o [1]
+gps_tau1201_state       0x2000'0279    0x1  Data  Lc  zf_device_gps_tau1201.o [1]
+gps_uart_callback       0x8000'5171   0xb0  Code  Gb  zf_device_gps_tau1201.o [1]
+image_vector_table      0x7000'1000   0x20  Data  Gb  fsl_flexspi_nor_boot.o [1]
+interrupt_global_disable
+                        0x8000'5147   0x10  Code  Gb  zf_common_interrupt.o [1]
+interrupt_init          0x8000'5165    0xa  Code  Gb  zf_common_interrupt.o [1]
+interrupt_nest_count    0x2000'0274    0x4  Data  Lc  zf_common_interrupt.o [1]
+ldexp                   0x8000'680d         Code  Gb  ldexp.o [3]
+ldexpl                  0x8000'680d         Code  Gb  ldexp.o [3]
+lnbias                  0x8000'0400  0x420  Data  Lc  pow64.o [3]
+m_boot_hdr_conf_start {Abs}
+                        0x7000'0000         Data  Gb  <internal module>
+main                    0x8000'4025   0x14  Code  Gb  main.o [1]
+out                     0x8000'6c75   0x18  Code  Lc  xprintftiny.o [2]
+pow                     0x8000'6809    0x4  Code  Gb  pow64.o [3]
+powl                    0x8000'6809    0x4  Code  Gb  pow64.o [3]
+pwm_set_duty            0x8000'52ef   0xc2  Code  Gb  zf_driver_pwm.o [1]
+qspiflash_config        0x7000'0000  0x200  Data  Gb  evkmimxrt1064_flexspi_nor_config.o [1]
+s_EDMAHandle            0x2000'00c4   0x80  Data  Lc  fsl_edma.o [1]
+s_ENETHandle            0x2000'0144    0x8  Data  Lc  fsl_enet.o [1]
+s_cdcVcom               0x2000'0398   0x10  Data  Gb  zf_driver_usb_cdc.o [1]
+s_csiHandle             0x2000'00a8    0x4  Data  Lc  fsl_csi.o [1]
+s_csiIsr                0x2000'00ac    0x4  Data  Lc  fsl_csi.o [1]
+s_debugConsole          0x2000'00b0   0x14  Data  Lc  fsl_debug_console.o [1]
+s_enet1588TimerIsr      0x2000'016c    0x8  Data  Lc  fsl_enet.o [1]
+s_enetBases             0x8000'0b40    0x8  Data  Lc  fsl_enet.o [1]
+s_enetErrIsr            0x2000'015c    0x8  Data  Lc  fsl_enet.o [1]
+s_enetRxIsr             0x2000'0154    0x8  Data  Lc  fsl_enet.o [1]
+s_enetTsIsr             0x2000'0164    0x8  Data  Lc  fsl_enet.o [1]
+s_enetTxIsr             0x2000'014c    0x8  Data  Lc  fsl_enet.o [1]
+s_flexcanHandle         0x2000'0174   0x10  Data  Lc  fsl_flexcan.o [1]
+s_flexcanIsr            0x2000'0184    0x4  Data  Lc  fsl_flexcan.o [1]
+s_flexioHandle          0x2000'0188    0x8  Data  Lc  fsl_flexio.o [1]
+s_flexioIsr             0x2000'0198    0x8  Data  Lc  fsl_flexio.o [1]
+s_flexioType            0x2000'0190    0x8  Data  Lc  fsl_flexio.o [1]
+s_lpi2cMasterHandle     0x2000'01a4   0x14  Data  Gb  fsl_lpi2c.o [1]
+s_lpi2cMasterIsr        0x2000'01a0    0x4  Data  Gb  fsl_lpi2c.o [1]
+s_lpi2cSlaveHandle      0x2000'01bc   0x14  Data  Lc  fsl_lpi2c.o [1]
+s_lpi2cSlaveIsr         0x2000'01b8    0x4  Data  Lc  fsl_lpi2c.o [1]
+s_lpspiHandle           0x2000'01d0   0x14  Data  Lc  fsl_lpspi.o [1]
+s_lpspiMasterIsr        0x2000'01e4    0x4  Data  Lc  fsl_lpspi.o [1]
+s_lpspiSlaveIsr         0x2000'01e8    0x4  Data  Lc  fsl_lpspi.o [1]
+s_lpuartBases           0x8000'0f00   0x24  Data  Lc  fsl_lpuart.o [1]
+s_lpuartClock           0x8000'0f24   0x14  Data  Lc  fsl_lpuart.o [1]
+s_lpuartHandle          0x2000'01ec   0x24  Data  Gb  fsl_lpuart.o [1]
+s_lpuartIsr             0x2000'0210    0x4  Data  Gb  fsl_lpuart.o [1]
+s_saiHandle             0x2000'0214   0x20  Data  Lc  fsl_sai.o [1]
+s_saiRxIsr              0x2000'0238    0x4  Data  Lc  fsl_sai.o [1]
+s_saiTxIsr              0x2000'0234    0x4  Data  Lc  fsl_sai.o [1]
+s_spdifHandle           0x2000'023c    0x8  Data  Lc  fsl_spdif.o [1]
+s_spdifRxIsr            0x2000'0248    0x4  Data  Lc  fsl_spdif.o [1]
+s_spdifTxIsr            0x2000'0244    0x4  Data  Lc  fsl_spdif.o [1]
+s_usdhcBase             0x8000'10a4    0xc  Data  Lc  fsl_usdhc.o [1]
+s_usdhcHandle           0x2000'024c    0xc  Data  Lc  fsl_usdhc.o [1]
+s_usdhcIsr              0x2000'0258    0x4  Data  Lc  fsl_usdhc.o [1]
+scalbln                 0x8000'680d         Code  Gb  ldexp.o [3]
+scalblnl                0x8000'680d         Code  Gb  ldexp.o [3]
+scalbn                  0x8000'680d         Code  Gb  ldexp.o [3]
+scalbnl                 0x8000'680d         Code  Gb  ldexp.o [3]
+sprintf                 0x8000'5ef1   0x40  Code  Gb  sprintf.o [2]
+strlen                  0x8000'5eb9         Code  Gb  strlen.o [4]
+strncmp                 0x8000'6c3f   0x28  Code  Gb  strncmp.o [2]
+system_clock            0x2000'0068    0x4  Data  Gb  zf_common_clock.o [1]
+type_default_callback   0x8000'5245    0x2  Code  Gb  zf_device_type.o [1]
+uart_index              0x2000'002c   0x24  Data  Lc  zf_driver_uart.o [1]
+uart_init               0x8000'57b9   0x96  Code  Gb  zf_driver_uart.o [1]
+uart_iomuxc             0x8000'53ef  0x34c  Code  Gb  zf_driver_uart.o [1]
+uart_query_byte         0x8000'5785   0x34  Code  Gb  zf_driver_uart.o [1]
+uart_write_byte         0x8000'573b   0x28  Code  Gb  zf_driver_uart.o [1]
+uart_write_string       0x8000'5763   0x22  Code  Gb  zf_driver_uart.o [1]
+wireless_module_spi_handler
+                        0x2000'007c    0x4  Data  Gb  zf_device_type.o [1]
+wireless_module_uart_handler
+                        0x2000'0078    0x4  Data  Gb  zf_device_type.o [1]
+zf_debug_assert_enable  0x2000'0080    0x1  Data  Lc  zf_common_debug.o [1]
+zf_debug_init_flag      0x2000'0270    0x1  Data  Lc  zf_common_debug.o [1]
+
+
+[1] = E:\智能车大创\RT1064核心板资料\【代码】RT1064开源库+例程\SeekFree_RT1064_Opensource_Library\project\iar\program\nor_sdram_zf_dtcm\Obj
+[2] = dl7M_tlf.a
+[3] = m7M_tlv.a
+[4] = rt7M_tl.a
+[5] = shb_l.a
+[6] = zf_device_config.a
+
+   1 176 bytes of readonly  code memory
+  23 258 bytes of readwrite code memory
+  20 673 bytes of readonly  data memory
+   8 801 bytes of readwrite data memory
+
+Errors: none
+Warnings: none
