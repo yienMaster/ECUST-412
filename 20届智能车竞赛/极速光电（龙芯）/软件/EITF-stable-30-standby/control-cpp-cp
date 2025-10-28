@@ -1,0 +1,842 @@
+
+int cross_gap(const vector<Point> left_border, const vector<Point> right_border,
+              const vector<Point> left_lost, const vector<Point> right_lost,
+              const int current_gap, Mat &mid)
+{
+
+    //--------------注意！！！ 传入的左右边界是有效边界！！！---------------
+
+    if (left_lost.size() < 10 || right_lost.size() < 10 || left_border.size() < 6 || right_border.size() < 6)
+    { // 理论上不可能,但是防御性编程
+        return current_gap;
+    }
+    Vec4f left_line, right_line; // 左边界和右边界的直线参数
+
+    vector<Point> left_assess_points = {}, right_assess_points = {}; // 左右参考点
+    int gap = 0;                                                     // 中线误差
+
+    double left_k = 0, left_b = 0, right_k = 0, right_b = 0;
+    static Point left_bot = Point(0, 0), right_bot = Point(0, 0); // 左边界最下部和右边界最下部
+    cout << "ccc" << endl;
+    if (left_lost[0].y < UP_DETECT - 3 && right_lost[0].y < UP_DETECT - 3) // 左侧和右侧的丢线都还在前瞻点上方(还未进入十字)
+    {
+        cout << "ddd" << endl;
+        return current_gap; // 误差不变
+    }
+    else // 已经进入十字
+    {
+        int min_lost_y = IMG_HEIGHT, max_lost_y = 0;
+        for (int i = 0; i < left_lost.size(); i++)
+            if (left_lost[i].y < min_lost_y)
+                min_lost_y = left_lost[i].y;
+        for (int i = 0; i < right_lost.size(); i++)
+            if (right_lost[i].y < min_lost_y)
+                min_lost_y = right_lost[i].y;
+        for (int i = 0; i < left_lost.size(); i++)
+            if (left_lost[i].y > max_lost_y)
+                max_lost_y = left_lost[i].y;
+        for (int i = 0; i < right_lost.size(); i++)
+            if (right_lost[i].y > max_lost_y)
+                max_lost_y = right_lost[i].y; // 取两个丢线点的y值的最小值
+                                              // 丢线点最底部
+        cout << "eee" << endl;
+        //---------------------------------------左半边------------------------------
+        for (int i = left_border.size() - 1; i >= 0; i -= 2)
+        {
+            if (left_border[i].y < min_lost_y - 5 && left_border[i].y > min_lost_y - 15)
+                left_assess_points.push_back(left_border[i]);
+            if (left_assess_points.size() == 4)
+                break;
+        }
+        for (int i = right_border.size() - 1; i >= 0; i -= 2)
+        {
+            if (right_border[i].y < min_lost_y - 5 && right_border[i].y > min_lost_y - 15)
+                right_assess_points.push_back(right_border[i]);
+            if (right_assess_points.size() == 4)
+                break;
+        }
+
+        cout << "left:" << left_assess_points << endl
+             << "right:" << right_assess_points << endl;
+        system("pause");
+
+        fitLine(left_assess_points, left_line, DIST_L2, 0, 0, 0);   // 拟合评估线
+        fitLine(right_assess_points, right_line, DIST_L2, 0, 0, 0); // 拟合评估线
+
+        // fastLineFit(left_assess_points, left_k, left_b); // 拟合直线
+        // fastLineFit(right_assess_points, right_k, right_b);
+
+        //---------------------bug-severe----------------
+
+        if (left_line[0] == 0) // 左边斜率不存在
+        {
+            left_k = __INT_MAX__;
+            left_b = left_line[2];
+        }
+        else
+        {
+            left_k = left_line[1] / left_line[0];          // 斜率
+            left_b = left_line[3] - left_k * left_line[2]; // 截距
+                                                           // 获取边线上 前瞻点y 及前瞻点y上方15个像素的丢线误差
+        }
+
+        if (right_line[0] == 0) // 左边斜率不存在
+        {
+            right_k = __INT_MAX__;
+            right_b = right_line[2];
+        }
+        else
+        {
+            right_k = right_line[1] / right_line[0];           // 斜率
+            right_b = right_line[3] - right_k * right_line[2]; // 截距
+                                                               // 获取边线上 前瞻点y 及前瞻点y上方15个像素的丢线误差
+        }
+
+        cout << "lk:" << left_k << "  lb:" << left_b << "  rk:" << right_k << "  rb:" << right_b << endl;
+        //-----------------可视化
+        vector<Point> left_sim = {}, right_sim = {};
+        for (int x = IMG_WIDTH / 2 - 10; x >= 10; x--)
+        {
+            int y = left_b + left_k * x;
+            if (y >= 0 && y < IMG_HEIGHT)
+                left_sim.push_back(Point(x, y));
+        }
+        for (int x = IMG_WIDTH / 2 + 10; x <= IMG_WIDTH - 10; x++)
+        {
+            int y = right_b + right_k * x;
+            if (y >= 0 && y < IMG_HEIGHT)
+                right_sim.push_back(Point(x, y));
+        }
+        draw_by_points(left_sim, mid, 128, 0, 128);
+        draw_by_points(right_sim, mid, 128, 0, 128);
+        //---------------------
+
+        for (int y = UP_DETECT; y <= DOWN_DETECT; y++) // 计算新的gap
+        {
+            double left_x = 0, right_x = IMG_WIDTH;
+            if (left_k >= __INT_MAX__ - 4)  // k不存在
+                left_x = left_b;            // 左边点坐标就是截距
+            if (right_k >= __INT_MAX__ - 4) // k不存在
+                right_x = right_b;          // 右边点坐标就是截距
+
+            if (left_k < __INT_MAX__ - 4) // k存在
+                left_x = (y - left_b) / left_k;
+
+            if (right_k < __INT_MAX__ - 4) // k存在
+                right_x = (y - right_b) / right_k;
+            int mid_x = (left_x + right_x) / 2.0;
+            gap += CAR_X - mid_x;
+        }
+        return gap;
+    }
+}
+
+void fastLineFit(const std::vector<Point> &points, double &k, double &b)
+{
+    const double epsilon = 1e-9;
+    const size_t n = points.size();
+
+    if (n < 2) // 难绷
+    {
+        cerr << "fitline points<2" << endl;
+        raise(SIGABRT);
+    }
+
+    // 快速垂直线检测
+    bool all_x_equal = true;
+    const double first_x = points[0].x;
+    double sum_x = 0, sum_y = 0, sum_xy = 0, sum_x2 = 0;
+
+    for (const auto &p : points)
+    {
+        // 统计量累加
+        sum_x += p.x;
+        sum_y += p.y;
+        sum_xy += p.x * p.y;
+        sum_x2 += p.x * p.x;
+
+        // 垂直线快速检测（提前终止优化）
+        if (all_x_equal && std::abs(p.x - first_x) > epsilon)
+        {
+            all_x_equal = false;
+        }
+    }
+
+    // 处理垂直线情况
+    if (all_x_equal)
+    {
+        k = __INT_MAX__; // 斜率无穷大
+        b = sum_x / n;   // 截距为x的平均值
+        return;
+    }
+
+    // 核心计算
+    const double denominator = n * sum_x2 - sum_x * sum_x;
+    if (std::abs(denominator) < epsilon)
+    {
+        k = __INT_MAX__; // 斜率无穷大
+        b = sum_x / n;   // 截距为x的平均值
+        return;
+    }
+
+    k = (n * sum_xy - sum_x * sum_y) / denominator;
+    b = (sum_y - k * sum_x) / n;
+
+    return;
+}
+
+void detect_corners_fit(const vector<Point> left_border, const vector<Point> right_border,
+                        vector<Point> &left_corners, vector<Point> &right_corners, const int edge_th, const double k_threshold)
+{
+    if (left_border.size() < 5 || right_border.size() < 5) // 边界点太少
+    {
+        cerr << "left/right_border.size()<5" << endl;
+        return;
+    }
+
+    double last_k = 0, now_k = 0; // 上一次斜率和这一次斜率
+    std::deque<Point> dq;         // 受试点队列   头尾操作比vector更高效
+
+    //-----------------------------左边界-------------------------
+    for (int i = 0; i < 4; i++)
+        dq.push_back(left_border[i]); // 推入初始4个点
+
+    vector<Point> vec(dq.begin(), dq.end()); // 复制到vec 便于fitline
+    Vec4f line;
+    cv::fitLine(vec, line, DIST_L2, 0, 0.01, 0.01); // 拟合直线
+    double vx = line[0];
+    double vy = line[1];      // x,y方向向量
+    if (fabs(vx) < 1e-8)      // 垂直线
+        last_k = __INT_MAX__; // 斜率无穷大
+    else
+        last_k = vy / vx; // 初始斜率
+
+    for (int i = 4; i < left_border.size(); i++)
+    {
+        dq.pop_front();               // 弹出队头
+        dq.push_back(left_border[i]); // 推入队尾  从i=4开始
+
+        vec.clear();                                    // 清空
+        vec = vector<Point>(dq.begin(), dq.end());      // 复制到vec 便于fitline
+        cv::fitLine(vec, line, DIST_L2, 0, 0.01, 0.01); // 拟合直线
+        vx = line[0];
+        vy = line[1];            // x,y方向向量
+        if (fabs(vx) < 1e-8)     // 垂直线
+            now_k = __INT_MAX__; // 斜率无穷大
+        else
+            now_k = vy / vx; // 初始斜率
+
+        if (fabs(now_k - last_k) > k_threshold && dq.front().x > edge_th) // 斜率变化过大并且不是边界点
+            left_corners.push_back(dq.front());                           // 角点
+        last_k = now_k;                                                   // 更新
+    }
+
+    //-----------------------------右边界-------------------------
+    dq.clear(); // 清空
+    for (int i = 0; i < 4; i++)
+        dq.push_back(right_border[i]); // 推入初始4个点
+
+    vec.clear();                                    // 清空
+    vec = vector<Point>(dq.begin(), dq.end());      // 复制到vec 便于fitline
+    cv::fitLine(vec, line, DIST_L2, 0, 0.01, 0.01); // 拟合直线
+    vx = line[0];
+    vy = line[1];             // x,y方向向量
+    if (fabs(vx) < 1e-8)      // 垂直线
+        last_k = __INT_MAX__; // 斜率无穷大
+    else
+        last_k = vy / vx; // 初始斜率
+
+    for (int i = 4; i < right_border.size(); i++)
+    {
+        dq.pop_front();                // 弹出队头
+        dq.push_back(right_border[i]); // 推入队尾  从i=4开始
+
+        vec.clear();                               // 清空
+        vec = vector<Point>(dq.begin(), dq.end()); // 复制到vec 便于fitline
+
+        cv::fitLine(vec, line, DIST_L2, 0, 0.01, 0.01); // 拟合直线
+
+        vx = line[0];
+        vy = line[1];            // x,y方向向量
+        if (fabs(vx) < 1e-8)     // 垂直线
+            now_k = __INT_MAX__; // 斜率无穷大
+        else
+            now_k = vy / vx; // 初始斜率
+
+        if (fabs(now_k - last_k) > k_threshold && dq.front().x < IMG_WIDTH - edge_th) // 斜率变化过大并且不是边界点
+            right_corners.push_back(dq.front());                                      // 角点
+        last_k = now_k;                                                               // 更新
+    }
+
+    return;
+}
+
+void detect_corners(const vector<Point> left_border, const vector<Point> right_border,
+                    vector<Point> &left_corners, vector<Point> &right_corners, const int edge_th, const float k_threshold, const float dist_th)
+{
+    if (left_border.size() < 3 || right_border.size() < 3) // 边界点太少
+    {
+        cerr << "left/right_border.size()<3" << endl;
+        return;
+    }
+
+    float last_k = 0, now_k = 0; // 上一次斜率和这一次斜率
+    cv::Point p1, p2;            // 两个点
+    int i = 1;
+    float dist1 = 0, dist2 = 0; // 前后两点距离测定点
+
+    /*
+    这段代码的逻辑是这样的,利用两两边界点之间的斜率差判断是否是角点.但由于边界呈锯齿装,
+    有时会出现不是丢线点却斜率无穷大,这时就需要迭代寻找x坐标不同的点做斜率,但是这样一来,
+    上方的角点 由于下半部分是丢线点,斜率变化会较小,无法被检测出来.
+    所以,这里的做法是如果斜率不存在,但是是丢线点(x=0/IMG_WIDTH)则斜率赋值为无穷大,
+    如果不是丢线点则迭代找到斜率存在的2点做斜率,
+    同时限制 角点的x坐标不能过于靠近边缘.
+    过十字的时候由于左右两边大量丢线,可能会有边界上一些离散的点被认定为角点,
+    因此这里还需要判定角点与周围的距离至少有一个不能太大(角点附近有连续的合法边界)
+    */
+
+    //------------------左边界----------------------
+    p1.x = -1, p1.y = -1;
+    p2.x = -1, p2.y = -1; // 初始化点
+    i = 1;
+
+    p1 = left_border[0];
+    for (; i < left_border.size(); i++)
+    {
+        if (left_border[i].x != p1.x) // 不是垂直
+        {
+            p2 = left_border[i++]; // 第2个点
+            break;
+        }
+        else
+        {
+            if (left_border[i].x == 0) // 如果2个都是丢线点
+            {
+                p2 = left_border[i++]; // 第2个点
+                break;
+            }
+        }
+    }
+    if (p2.x == -1)
+    {
+        cerr << "left_corner 1 not found" << endl;
+        return;
+    }
+    dist1 = sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y)); // 两点距离
+    if (p2.x != p1.x)
+        last_k = (p2.y - p1.y) / (p2.x - p1.x); // 初始斜率
+    else
+        last_k = 65535; // k无穷大
+
+    for (; i < left_border.size() - 1; i++)
+    {
+        if (left_border[i].x != p2.x)
+        {
+            p1 = p2;
+            p2 = left_border[i];                                                         // 第2个点
+            dist2 = sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y)); // 两点距离
+            now_k = (p2.y - p1.y) / (p2.x - p1.x);                                       // 初始斜率
+            double k_err = fabs(now_k - last_k);
+            if (k_err > k_threshold && (dist1 <= dist_th || dist2 <= dist_th) && (p1.x > edge_th && p1.x < IMG_WIDTH - edge_th)) // 斜率变化过大并且不是边界点
+            {
+                left_corners.push_back(p1); // 角点
+            }
+            last_k = now_k; // 更新
+            dist1 = dist2;
+        }
+        else
+        {
+            if (left_border[i].x == 0) // 如果2个都是丢线点   说明在向上爬
+            {
+                p1 = p2;
+                p2 = left_border[i];                                                         // 第2个点
+                dist2 = sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y)); // 两点距离
+                now_k = 65535;                                                               // 斜率无穷大
+                double k_err = fabs(now_k - last_k);
+                if (k_err > k_threshold && (dist1 <= dist_th || dist2 <= dist_th) && (p1.x > edge_th && p1.x < IMG_WIDTH - edge_th)) // 斜率变化过大并且不是边界点
+                {
+                    left_corners.push_back(p1); // 角点
+                }
+                last_k = now_k; // 更新
+                dist1 = dist2;
+            }
+        }
+    }
+
+    //------------------右边界----------------------
+    p1.x = -1, p1.y = -1;
+    p2.x = -1, p2.y = -1; // 初始化点
+    i = 1;
+
+    p1 = right_border[0];
+    for (; i < right_border.size(); i++)
+    {
+        if (right_border[i].x != p1.x) // 不是垂直
+        {
+            p2 = right_border[i++]; // 第2个点
+            break;
+        }
+        else
+        {
+            if (right_border[i].x >= IMG_WIDTH - 1) // 如果2个都是丢线点
+            {
+                p2 = right_border[i++]; // 第2个点
+                break;
+            }
+        }
+    }
+
+    if (p2.x == -1)
+    {
+        cerr << "right_corner 1 not found" << endl;
+        return;
+    }
+    dist1 = sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y)); // 两点距离
+    if (p2.x != p1.x)
+        last_k = (p2.y - p1.y) / (p2.x - p1.x); // 初始斜率
+    else
+        last_k = 65535;
+    for (; i < right_border.size() - 1; i++)
+    {
+        if (right_border[i].x != p2.x)
+        {
+            p1 = p2;
+            p2 = right_border[i];                                                        // 第2个点
+            dist2 = sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y)); // 两点距离
+            now_k = (p2.y - p1.y) / (p2.x - p1.x);                                       // 初始斜率
+            double k_err = fabs(now_k - last_k);
+            if (k_err > k_threshold && (dist1 <= dist_th || dist2 <= dist_th) && (p1.x > edge_th && p1.x < IMG_WIDTH - edge_th)) // 斜率变化过大并且不是边界点
+            {
+                right_corners.push_back(p1); // 角点
+            }
+            last_k = now_k; // 更新
+            dist1 = dist2;
+        }
+        else
+        {
+            if (right_border[i].x >= IMG_WIDTH - 1) // 如果2个都是丢线点   说明在向上爬
+            {
+                p1 = p2;
+                p2 = right_border[i];                                                        // 第2个点
+                dist2 = sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y)); // 两点距离
+                now_k = 65535;                                                               // 斜率大
+                double k_err = fabs(now_k - last_k);
+                if (k_err > k_threshold && (dist1 <= dist_th || dist2 <= dist_th) && (p1.x > edge_th && p1.x < IMG_WIDTH - edge_th)) // 斜率变化过大并且不是边界点
+                {
+                    right_corners.push_back(p1); // 角点
+                }
+                last_k = now_k; // 更新
+                dist1 = dist2;
+            }
+        }
+    }
+
+    return;
+}
+
+double calcAngle_v(const Point v1, const Point v2)
+{
+    double dotProd = v1.x * v2.x + v1.y * v2.y;      // 向量内积
+    double normV1 = sqrt(v1.x * v1.x + v1.y * v1.y); // 向量1的模
+    double normV2 = sqrt(v2.x * v2.x + v2.y * v2.y); // 模
+
+    if (normV1 == 0 || normV2 == 0)
+    {
+        cerr << "Norm=0!!!" << endl;
+        return 3.756; // 避免除零错误
+    }
+    if (normV1 <= 5 && normV2 <= 5) // 避免曲线误判角点
+        return 0;
+
+    double cosTheta = dotProd / (normV1 * normV2);
+    return acos(cosTheta) * 180.0 / CV_PI; // 转换为角度
+}
+
+void detect_corners_v(const vector<Point> left_border, const vector<Point> right_border,
+                      vector<Point> &left_corners, vector<Point> &right_corners, const int edge_th, const float angle_threshold, const int step)
+{
+    if (left_border.size() < 2 * step + 1 || right_border.size() < 2 * step + 1) // 边界点太少
+    {
+        cerr << "left/right_border.size()<2*step+1" << endl;
+        return;
+    }
+
+    for (int i = step; i < left_border.size() - step; i++)
+    {
+        const Point v1 = left_border[i] - left_border[i - step];
+        const Point v2 = left_border[i + step] - left_border[i]; // 以i为检测角点
+        double angle = calcAngle_v(v1, v2);
+        if (angle > angle_threshold && left_border[i].x > edge_th)
+        {
+            cout << left_border[i - step] << "," << left_border[i] << "," << left_border[i + step] << endl;
+            left_corners.push_back(left_border[i]); // 角点
+        }
+    }
+
+    for (int i = step; i < right_border.size() - step; i++)
+    {
+        const Point v1 = right_border[i] - right_border[i - step];
+        const Point v2 = right_border[i + step] - right_border[i]; // 以i为检测角点
+        double angle = calcAngle_v(v1, v2);
+        if (angle > angle_threshold && right_border[i].x < IMG_WIDTH - edge_th)
+        {
+            cout << right_border[i - step] << "," << right_border[i] << "," << right_border[i + step] << endl;
+            right_corners.push_back(right_border[i]); // 角点
+        }
+    }
+
+    return;
+}
+
+
+
+// 计算两点间向量角度差
+double calcAngle(const Point &p1, const Point &p2, const Point &p3)
+{
+    Point v1 = p1 - p2; // 前向向量
+    Point v2 = p3 - p2; // 后向向量
+
+    double dotProd = v1.x * v2.x + v1.y * v2.y;      //
+    double normV1 = sqrt(v1.x * v1.x + v1.y * v1.y); // 向量1的模
+    double normV2 = sqrt(v2.x * v2.x + v2.y * v2.y); // 模
+
+    if (normV1 == 0 || normV2 == 0)
+    {
+        cerr << "Norm=0!!!" << endl;
+        return 3.756; // 避免除零错误
+    }
+
+    double cosTheta = dotProd / (normV1 * normV2);
+    return acos(cosTheta) * 180.0 / CV_PI; // 转换为角度
+}
+
+void detectAngles(const std::vector<Point> &boundary,
+                  std::vector<Point> &rightAngles,
+                  Mat &mid,
+                  int step // 点间距步长   =3.0
+                  )        // =40.0
+{
+    for (int i = 0; i < boundary.size() - step; i += step)
+    {
+        int j = 0, k = 0;
+        Point p1 = boundary[i];
+        Point p2 = Point(-1, -1), p3 = Point(-1, -1);
+        for (j = i + 1; j < boundary.size() - step; j++)
+        {
+            Point p = boundary[j];
+            Point v1 = p1 - p; // 前向向量
+            double normV1 = sqrt(v1.x * v1.x + v1.y * v1.y);
+            if (normV1 <= 10 || normV1 >= 30)
+                continue; // 模长太短或太长
+            p2 = p;
+            break;
+        }
+
+        for (k = j + 1; k < boundary.size() - step; j++)
+        {
+            Point p = boundary[j];
+            Point v2 = p - p2; // 前向向量
+            double normV1 = sqrt(v2.x * v2.x + v2.y * v2.y);
+            if (normV1 <= 10 || normV1 >= 30)
+                continue; // 模长太短或太长
+            p3 = p;
+            break;
+        }
+
+        if (p2.x == -1 || p3.x == -1 || p2.x >= IMG_WIDTH - 5 || p2.x <= 4)
+            continue; // 没选到合适的p2 p3 点 或者检测出来的角点在边界上
+
+        // if(p1.y>=IMG_HEIGHT/2||p2.y>=IMG_HEIGHT/2||p3.y>=IMG_HEIGHT/2)    continue;     //太高的点不需要找角
+
+        double angle = calcAngle(p1, p2, p3);
+
+        if (angle >= 20 && angle <= 90)
+        { // 直角判定
+            cout << p2.x << "," << p2.y << "  " << angle << endl;
+            rightAngles.push_back(p2);
+            // circle(mid, p1, 2, Scalar(255, 0, 255), -1); // 红色标记直角
+            // circle(mid, p3, 2, Scalar(255, 0, 255), -1); // 红色标记直角
+        }
+    }
+}
+
+
+
+
+
+
+int get_border_and_get_gap_neighbour8(const Mat edge, vector<Point> &left_border, vector<Point> &right_border, vector<Point> &mid_border)
+{
+    int gap = 0; // 中线误差
+
+    Mat Lvisited(edge.size(), CV_8U, Scalar(0));
+    std::queue<Point> Lq; // 工作队列   左
+
+    Mat Rvisited(edge.size(), CV_8U, Scalar(0));
+    std::queue<Point> Rq; // 工作队列   右
+
+    Point left_start(-1, -1), right_start(-1, -1); // 起始点
+
+    //--------------------寻找左边界开始----------------
+    // 从中间向左开始寻找左边界起始点
+    for (int x = edge.cols / 2; x >= 0; x--)
+    {
+        if (edge.at<uchar>(DOWN_BORDER, x) == 255)
+        {
+            left_start = Point(x, DOWN_BORDER);
+            break;
+        }
+    }
+
+    // 如果没找到起始点，从图像最左边缘开始
+    if (left_start.x == -1)
+    {
+        left_start = Point(0, DOWN_BORDER);
+    }
+
+    Lq.push(left_start); // 将初始点推入队列
+    Lvisited.at<uchar>(left_start.y, left_start.x) = 255;
+
+    while (!Lq.empty())
+    {
+        Point p = Lq.front();
+        Lq.pop();
+        left_border.push_back(p);
+
+        bool found = false; // 标记是否找到相邻边界
+
+        // 检查八邻域
+        for (int i = 0; i < 8; i++)
+        {
+            Point neighbor = p + neighbors8[i];
+            // 检查邻域点是否在图像范围内
+            if (neighbor.x >= 0 && neighbor.x < edge.cols &&
+                neighbor.y >= UP_BORDER && neighbor.y <= DOWN_BORDER)
+            {
+                // 如果邻域点是边缘点且未被访问过
+                if (edge.at<uchar>(neighbor.y, neighbor.x) == 255 &&
+                    Lvisited.at<uchar>(neighbor.y, neighbor.x) == 0)
+                {
+                    Lvisited.at<uchar>(neighbor.y, neighbor.x) = 255;
+                    Lq.push(neighbor);
+                    found = true; // 找到相邻边界
+                }
+            }
+            // 如果邻域点超出图像范围，直接将其作为边界点
+            else
+            {
+                left_border.push_back(neighbor);
+                found = true;
+            }
+        }
+
+        // 如果没有找到相邻边界且当前点不是图像边缘点，则将当前点作为边界点
+        if (!found && p.y != UP_BORDER && p.y != DOWN_BORDER && p.x != 0 && p.x != edge.cols - 1)
+        {
+            left_border.push_back(p);
+        }
+    }
+    //--------------------寻找左边界结束----------------
+
+    cout << "1" << endl;
+
+    //--------------------寻找右边界开始----------------
+    // 从中间向右开始寻找右边界起始点
+    for (int x = edge.cols / 2; x < edge.cols; x++)
+    {
+        if (edge.at<uchar>(DOWN_BORDER, x) == 255)
+        {
+            right_start = Point(x, DOWN_BORDER);
+            break;
+        }
+    }
+
+    // 如果没找到起始点，从图像最右边缘开始
+    if (right_start.x == -1)
+    {
+        right_start = Point(edge.cols - 1, DOWN_BORDER);
+    }
+
+    cout << "2" << endl;
+
+    Rq.push(right_start); // 将初始点推入队列
+    Rvisited.at<uchar>(right_start.y, right_start.x) = 255;
+
+    cout << "3" << endl;
+
+    while (!Rq.empty())
+    {
+        Point p = Rq.front();
+        Rq.pop();
+        right_border.push_back(p);
+
+        bool found = false; // 标记是否找到相邻边界
+
+        // 检查八邻域
+        for (int i = 0; i < 8; i++)
+        {
+            Point neighbor = p + neighbors8[i];
+            // 检查邻域点是否在图像范围内
+            if (neighbor.x >= 0 && neighbor.x < edge.cols &&
+                neighbor.y >= UP_BORDER && neighbor.y <= DOWN_BORDER)
+            {
+                // 如果邻域点是边缘点且未被访问过
+                if (edge.at<uchar>(neighbor.y, neighbor.x) == 255 &&
+                    Rvisited.at<uchar>(neighbor.y, neighbor.x) == 0)
+                {
+                    Rvisited.at<uchar>(neighbor.y, neighbor.x) = 255;
+                    Rq.push(neighbor);
+                    found = true; // 找到相邻边界
+                }
+            }
+            // 如果邻域点超出图像范围，直接将其作为边界点
+            else
+            {
+                right_border.push_back(neighbor);
+                found = true;
+            }
+        }
+
+        // 如果没有找到相邻边界且当前点不是图像边缘点，则将当前点作为边界点
+        if (!found && p.y != UP_BORDER && p.y != DOWN_BORDER && p.x != 0 && p.x != edge.cols - 1)
+        {
+            right_border.push_back(p);
+        }
+    }
+    //--------------------寻找右边界结束----------------
+
+    cout << "4" << endl;
+
+    return gap;
+}
+
+/*
+int get_border_and_get_gap_neighbour8(const Mat edge,vector<Point>& left_border,vector<Point>& right_border,vector<Point>& mid_border)
+{
+    int gap=0;      //中线误差
+
+
+    Mat Lvisited(edge.size(), CV_8U, Scalar(0));
+    std::queue<Point> Lq;        //工作队列   左
+
+    Mat Rvisited(edge.size(), CV_8U, Scalar(0));
+    std::queue<Point> Rq;        //工作队列   右
+
+    Point left_start(-1,-1), right_start(-1,-1);            //起始点
+
+    //--------------------寻找左边界开始----------------
+    for (int x = edge.cols/2; x >=0; x--)       //从中间向左开始寻找左边界起始点
+    {
+        if (edge.at<uchar>(DOWN_BORDER, x) == 255) {
+            left_start = Point(x, DOWN_BORDER);
+            break;
+        }
+    }
+
+    if(left_start.x==-1)     //没找到  (照片角度比较窄没拍到边界)
+    {       //从图像最边缘开爬
+        left_start = Point(0, DOWN_BORDER);
+    }
+
+    Lq.push(left_start);      //将初始点推入
+    Lvisited.at<uchar>(left_start) = 255;
+
+    while (!Lq.empty())
+    {
+        bool found=false;       //还没找到相邻边界
+        Point p = Lq.front();
+        Lq.pop();
+        left_border.push_back(p);
+
+
+        // 检查八邻域
+        for (int i =0; i<8; i++)
+        {
+            Point neighbor = p + neighbors8[i];
+            if (neighbor.x >=0 && neighbor.x < edge.cols &&
+                neighbor.y >=UP_BORDER && neighbor.y <= DOWN_BORDER)
+            {
+                if (edge.at<uchar>(neighbor) == 255 &&
+                    Lvisited.at<uchar>(neighbor) == 0)
+                {
+                    Lvisited.at<uchar>(neighbor) = 255;
+                    Lq.push(neighbor);
+                    found=true;         //找到相邻边界
+                }
+            }
+        }
+
+    }
+    //--------------------寻找左边界结束----------------
+
+
+
+    cout<<"1"<<endl;
+    //--------------------寻找右边界开始----------------
+    for (int x = edge.cols/2; x <edge.cols; x++)       //从中间向右开始寻找右边界起始点
+    {
+        if (edge.at<uchar>(DOWN_BORDER, x) == 255) {
+            right_start = Point(x, DOWN_BORDER);
+            break;
+        }
+    }
+
+    if(right_start.x==-1)     //没找到  (照片角度比较窄没拍到边界)
+    {       //从图像最边缘开爬
+        right_start = Point(edge.cols-1, DOWN_BORDER);
+    }
+
+    cout<<"2"<<endl;
+    Rq.push(right_start);      //将初始点推入
+    Rvisited.at<uchar>(right_start) = 255;
+
+
+    cout<<"3"<<endl;
+
+    while (!Rq.empty())
+    {
+        bool found=false;       //还没找到相邻边界
+        Point p = Rq.front();
+        //cout<<"Point:"<<p.x<<","<<p.y<<endl;
+        Rq.pop();
+        right_border.push_back(p);
+
+        // 检查八邻域
+        for (int i =0; i<8; i++)
+        {
+            Point neighbor = p + neighbors8[i];
+            if (neighbor.x >=0 && neighbor.x < edge.cols &&
+                neighbor.y >=UP_BORDER && neighbor.y <= DOWN_BORDER)
+            {
+                if (edge.at<uchar>(neighbor) == 255 &&
+                    Rvisited.at<uchar>(neighbor) == 0)
+                {
+                    Rvisited.at<uchar>(neighbor) = 255;
+                    Rq.push(neighbor);
+                    found=true;     //找到相邻点
+                }
+            }
+        }
+
+
+    }
+    //--------------------寻找右边界结束----------------
+
+    cout<<"4"<<endl;
+
+    // 处理边界点和计算中线误差的逻辑
+    // ...
+
+    return gap;
+
+
+
+
+
+}
+*/
+
+
+
+

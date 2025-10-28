@@ -1,0 +1,37 @@
+# ===== CMake生成的文件/目录 =====
+# 忽略CMake缓存、配置及临时文件
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+
+# 忽略CMake构建目录及内部所有内容
+CMakeFiles/
+build/          # 常见构建目录名
+*/build/        # 递归忽略所有子目录下的build文件夹
+
+# 忽略自动生成的Makefile
+Makefile
+*.make
+
+# ===== 编译产物 =====
+# 可执行文件、静态库、动态库
+*.exe
+*.a
+*.so
+*.dll
+*.dylib
+
+# 对象文件及中间编译文件
+*.o
+*.obj
+*.pdb
+
+# ===== 其他常见忽略项 =====
+# 开发环境配置（如IDE生成文件）
+.idea/
+.vscode/
+*.sln
+*.vcxproj*
+
+# 系统文件（如macOS的.DS_Store）
+.DS_Store

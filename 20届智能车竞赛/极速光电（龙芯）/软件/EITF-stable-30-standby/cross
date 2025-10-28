@@ -1,0 +1,236 @@
+// 可以结合上下两侧的未丢线边界点  计算出gap
+        const int min_lost_y = min(left_lost[left_lost.size() - 1].y, right_lost[right_lost.size() - 1].y); // 取两个丢线点的y值的最小值
+        const int max_lost_y = max(left_lost[0].y, right_lost[0].y);                                        // 丢线点最底部
+        cout<<"eee"<<endl;
+                                                                     //---------------------------------------左半边------------------------------
+        for (int i = 0; left_border[i].y > max_lost_y && i < left_border.size(); i++) // 从左边界的最下部开始
+        {
+            if (left_border[i].y - max_lost_y >= 6&&left_border[i].x>5) // 作为参考点
+            {
+                left_assess_points.push_back(left_border[i]);
+                left_bot.x = left_border[i].x; // 记录左下方最底部边界点
+                left_bot.y = left_border[i].y;
+                if (left_assess_points.size() == 2)
+                    break; // 下面的点取够了
+            }
+        }
+        if (left_assess_points.size() < 2)     left_assess_points.push_back(left_bot);         //取上一帧图像的左边界最下部
+
+        for (int i = left_border.size() - 1; left_border[i].y < min_lost_y && i >= 0; i--) // 从左边界的最上部开始
+        {
+            if (min_lost_y - left_border[i].y <= 4&&left_border[i].x>5) // 作为参考点
+            {
+                left_assess_points.push_back(left_border[i]);
+
+                if (left_assess_points.size() == 4)
+                    break; // 上面的点取够了
+            }
+        }
+        if (left_assess_points.size() < 3) // 如果不够
+        {
+            left_assess_points.push_back(left_border[left_border.size() - 2]);
+            left_assess_points.push_back(left_border[left_border.size() - 1]); // 左边界最上部
+        } // 这再怎么说也有2个合规点
+
+        //---------------------------------------右半边------------------------------
+        for (int i = 0; right_border[i].y > max_lost_y && i < right_border.size(); i++) // 从右边界的最下部开始
+        {
+            if (right_border[i].y - max_lost_y >= 6&&right_border[i].x<IMG_WIDTH-5) // 作为参考点
+            {
+                right_assess_points.push_back(right_border[i]);
+                right_bot.x = right_border[i].x; // 记录左下方最底部边界点
+                right_bot.y = right_border[i].y;
+                if (right_assess_points.size() == 2)
+                    break; // 下面的点取够了
+            }
+        }
+
+        if (right_assess_points.size() < 2)     right_assess_points.push_back(right_bot);         //取上一帧图像的左边界最下部
+        for (int i = right_border.size() - 1; right_border[i].y < min_lost_y && i >= 0; i--) // 从右边界的最上部开始
+        {
+            if (min_lost_y - right_border[i].y <= 4&&right_border[i].x<IMG_WIDTH-5) // 作为参考点
+            {
+                right_assess_points.push_back(right_border[i]);
+
+                if (right_assess_points.size() == 4)
+                    break; // 上面的点取够了
+            }
+        }
+
+        if (right_assess_points.size() < 3) // 如果不够
+        {
+            right_assess_points.push_back(right_border[right_border.size() - 2]); // 取左边界的最上部
+            right_assess_points.push_back(right_border[right_border.size() - 1]);  // 左边界最上部
+        }
+
+        cout<<"fit"<<endl;
+
+        fitLine(left_assess_points, left_line, DIST_L2, 0, 0, 0); // 拟合评估线
+        fitLine(right_assess_points, right_line, DIST_L2, 0, 0, 0); // 拟合评估线
+
+        //fastLineFit(left_assess_points, left_k, left_b); // 拟合直线
+        //fastLineFit(right_assess_points, right_k, right_b);
+
+        cout<<"lk:"<<left_k<<"  lb:"<<left_b<<"  rk:"<<right_k<<"  rb:"<<right_b<<endl;
+        //---------------------bug-severe----------------
+        drawline(mid, left_line, 128, 0, 128); // 紫色
+        drawline(mid, right_line, 128, 0, 128);
+
+        if(left_line[0]==0)     //左边斜率不存在
+        {
+            left_k=__INT_MAX__;
+            left_b=left_line[2];
+        }
+        else
+        {
+        left_k = left_line[1] / left_line[0];     // 斜率
+        left_b = left_line[3] - left_k * left_line[2]; // 截距
+                                         // 获取边线上 前瞻点y 及前瞻点y上方15个像素的丢线误差
+        }
+
+        if(right_line[0]==0)     //左边斜率不存在
+        {
+            right_k=__INT_MAX__;
+            right_b=right_line[2];
+        }
+        else
+        {
+        right_k = right_line[1] / right_line[0];     // 斜率
+        right_b = right_line[3] - right_k * right_line[2]; // 截距
+                                         // 获取边线上 前瞻点y 及前瞻点y上方15个像素的丢线误差
+        }
+
+        for(int y=UP_DETECT;y<=DOWN_DETECT;y++)        //计算新的gap
+        {
+            double left_x=0,right_x=IMG_WIDTH;
+            if(left_k>=__INT_MAX__-4)       //k不存在
+            left_x=left_b;      //左边点坐标就是截距
+            if(right_k>=__INT_MAX__-4)       //k不存在
+            right_x=right_b;      //右边点坐标就是截距
+
+            if(left_k<__INT_MAX__-4)       //k存在
+            left_x=(y-left_b)/left_k;      
+
+            if(right_k<__INT_MAX__-4)       //k存在
+            right_x=(y-right_b)/right_k;  
+            int mid_x=(left_x+right_x)/2.0;
+            gap+=CAR_X-mid_x;
+        }   
+        return gap;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+void detect_corners(const vector<Point> left_border,const vector<Point> right_border,
+    vector<Point>& left_corners,vector<Point>& right_corners,const int edge_th,const float k_threshold,const float dist_th)
+{
+    if(left_border.size()<3||right_border.size()<3)  //边界点太少
+    {
+        cerr<<"left/right_border.size()<3"<<endl;  return;
+    }
+
+    float last_k=0,now_k=0;            //上一次斜率和这一次斜率
+    cv::Point p1,p2;            //两个点
+    int i=1;
+    float dist1=0,dist2=0;     //前后两点距离测定点
+
+
+    //------------------左边界----------------------
+    p1.x=-1,p1.y=-1;
+    p2.x=-1,p2.y=-1;        //初始化点
+    i=1;
+
+    p1=left_border[0];
+    for(;i<left_border.size();i++)
+    {
+        if(left_border[i].x!=p1.x)        //不是垂直
+        {
+            p2=left_border[i++];      //第2个点
+            break;
+        }
+    }
+    if(p2.x==-1)
+    {
+        cerr<<"left_corner 1 not found"<<endl; return;
+    }
+    dist1=sqrt((p2.x-p1.x)*(p2.x-p1.x)+(p2.y-p1.y)*(p2.y-p1.y));      //两点距离
+    last_k=(p2.y-p1.y)/(p2.x-p1.x);      //初始斜率
+    
+    for(;i<left_border.size()-1;i++)
+    {
+        if(left_border[i].x!=p2.x)
+        {
+            p1=p2;
+            p2=left_border[i];      //第2个点
+            dist2=sqrt((p2.x-p1.x)*(p2.x-p1.x)+(p2.y-p1.y)*(p2.y-p1.y));      //两点距离
+            now_k=(p2.y-p1.y)/(p2.x-p1.x);      //初始斜率
+            double k_err=fabs(fabs(now_k)-fabs(last_k));
+            if(k_err>k_threshold&&(dist1<=dist_th||dist2<=dist_th)&&(p1.x>edge_th&&p1.x<IMG_WIDTH-edge_th))        //斜率变化过大并且不是边界点
+            {
+                left_corners.push_back(p1);       //角点
+            }
+            last_k=now_k;      //更新
+            dist1=dist2;
+        }
+    }
+
+
+    //------------------右边界----------------------
+    p1.x=-1,p1.y=-1;
+    p2.x=-1,p2.y=-1;        //初始化点
+    i=1;
+
+    p1=right_border[0];
+    for(;i<right_border.size();i++)
+    {
+        if(right_border[i].x!=p1.x)        //不是垂直
+        {
+            p2=right_border[i++];      //第2个点
+            break;
+        }
+    }
+
+    if(p2.x==-1)
+    {
+        cerr<<"right_corner 1 not found"<<endl; return;
+   
+    }
+    dist1=sqrt((p2.x-p1.x)*(p2.x-p1.x)+(p2.y-p1.y)*(p2.y-p1.y));      //两点距离
+    last_k=(p2.y-p1.y)/(p2.x-p1.x);      //初始斜率
+    for(;i<right_border.size()-1;i++)
+    {
+        if(right_border[i].x!=p2.x) 
+        {
+            p1=p2;
+            p2=right_border[i];      //第2个点
+            dist2=sqrt((p2.x-p1.x)*(p2.x-p1.x)+(p2.y-p1.y)*(p2.y-p1.y));      //两点距离 
+            now_k=(p2.y-p1.y)/(p2.x-p1.x);      //初始斜率
+            double k_err=fabs(fabs(now_k)-fabs(last_k));
+            if(k_err>k_threshold&&(dist1<=dist_th||dist2<=dist_th)&&(p1.x>edge_th&&p1.x<IMG_WIDTH-edge_th))        //斜率变化过大并且不是边界点
+            {
+                right_corners.push_back(p1);       //角点 
+            }
+            last_k=now_k;      //更新
+            dist1=dist2;
+        }
+    }
+
+    return;
+}
+
+

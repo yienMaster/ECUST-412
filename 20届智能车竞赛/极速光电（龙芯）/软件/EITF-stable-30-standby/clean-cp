@@ -1,0 +1,28 @@
+void cleanup()
+{
+    pthread_cancel(motor_thread); // 终止线程
+
+    pwm_set_duty_cycle(pwm1, 0.45);
+
+    usleep(25000);
+
+    pwm_destroy(pwm1);
+
+    writer.release();
+
+    motor_destroy(motor);
+    motor_destroy(motorL);
+    // 销毁互斥锁
+    pthread_mutex_destroy(&encoder_mutex);
+    printf("程序终止！\n");
+    cout << "clean succeeded." << endl;
+    exit(0); // exit
+}
+
+void terminateHandler()
+{
+    cout << "Program terminated unexpectedly. Cleaning up..." << endl;
+    // 执行清理操作
+    abort();
+    return;
+}

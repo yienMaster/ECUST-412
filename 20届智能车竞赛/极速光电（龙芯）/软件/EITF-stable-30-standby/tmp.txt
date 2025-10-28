@@ -1,0 +1,54 @@
+/*
+@brief 单侧角点检测
+@param const vector<Point> left_border  左边界点集
+@param const vector<Point> right_border  右边界点集
+@param const struct cross_lost lost_point  丢线结构体
+@param Point& up_corner  上角点
+@param Point& down_corner  下角点
+@param const bool is_right  是否为右侧
+@return void
+*/
+void single_corner_detect(const vector<Point> left_border, const vector<Point> right_border,
+    const vector<Point> left_lost,const vector<Point>right_lost,
+    Point &up_corner, Point &down_corner, const bool is_right);
+
+
+
+
+void single_corner_detect(const vector<Point> left_border, const vector<Point> right_border,
+                          const vector<Point> left_lost,const vector<Point>right_lost,
+                          Point &up_corner, Point &down_corner, const bool is_right)
+{
+    bool is_down=true;      //是否是下方角点
+    const float th=2;       //角点判断阈值(距离差)
+    vector<Point> corners={};
+    corners.reserve(5);     //预分配空间
+    if(is_right)            //右侧
+    {
+        //从下往上找
+        for(int i_right=1;i_right<right_border.size()-1;i_right++)
+        {
+            const float dist1 = sqrt((right_border[i_right].x - right_border[i_right - 1].x) * (right_border[i_right].x - right_border[i_right - 1].x) + (right_border[i_right].y - right_border[i_right - 1].y) * (right_border[i_right].y - right_border[i_right - 1].y));
+            const float dist2 = sqrt((right_border[i_right].x - right_border[i_right + 1].x) * (right_border[i_right].x - right_border[i_right + 1].x) + (right_border[i_right].y - right_border[i_right + 1].y) * (right_border[i_right].y - right_border[i_right + 1].y));
+            if(fabs(dist1-dist2)>th)
+            {
+                if(right_border[i_right].x<IMG_WIDTH-2&&right_border[i_right].y>UP_BORDER) 
+                {
+                    if(is_down)
+                    {
+                    down_corner = right_border[i_right];    //角点
+                    is_down=false;
+                    }
+                    else
+                    {
+                        corners.push_back(right_border[i_right]);
+                    }
+                }
+            }
+        }
+    }
+
+    up_corner=corners.back();
+
+    return;
+}

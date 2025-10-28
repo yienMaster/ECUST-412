@@ -1,0 +1,133 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+#include <unistd.h>
+#include <string>
+#include <chrono>
+#include <thread>
+#include <signal.h>
+#include <stdio.h>
+
+
+//自定义头文件
+#include "gpio.h"
+#include "pwm.h"
+#include "servo.h"
+#include "tools.h"
+#include "control.h"
+
+ 
+using namespace cv;
+using namespace std;
+
+
+PWM* pwm1=pwm_init(1,0);           //全局Servo
+VideoWriter writer;
+
+VideoCapture cam(0);  
+
+
+void handle_sigint(int sig) 
+{
+         
+
+    pwm_destroy(pwm1);
+
+    writer.release();
+
+    cout<<"ctrl + c handled successfully."<<endl;
+    exit(0);        //exit
+}
+
+
+
+
+
+
+int main(void)
+{
+    signal(SIGINT, handle_sigint);          //注册Ctrl+C信号的处理函数
+    set_cam(cam);           //设置摄像头参数
+    
+
+
+    pwm_set_frequency(pwm1,300);
+    pwm_set_duty_cycle(pwm1,0.45);
+    pwm_enable(pwm1);
+
+    sleep(3);
+
+    //pwm_set_duty_cycle(pwm1,0.49);
+   // sleep(3);
+    
+
+
+
+    
+
+
+    Mat img;
+    
+    //while(1)
+    {
+    cam>>img;           //获取一帧图像
+    
+    Mat gray,bin,edge;
+    auto start = std::chrono::high_resolution_clock::now();         //开始计时
+
+
+    flip(img,img,0);            //垂直翻转图像
+    
+
+    cvtColor(img, gray, COLOR_BGR2GRAY);        //灰度化
+    GaussianBlur(gray, gray, Size(5, 5), 1.4);            //高斯模糊
+    threshold(gray, bin, 0, 255,THRESH_BINARY | THRESH_OTSU);       //大津法 二值化
+    Canny(bin,edge,50,150)  ;       //边缘检测
+
+    Mat kernel = getStructuringElement(MORPH_RECT, Size(5, 5));     //形态学操作
+    morphologyEx(edge, edge, MORPH_CLOSE, kernel); // 闭运算
+    morphologyEx(edge, edge, MORPH_OPEN, kernel);  // 开运算
+
+    Mat mid=img.clone();
+
+    int gap=calculateAndDrawCenterLine(edge,mid);
+    float motor_pwm=control_servo(gap);
+    pwm_set_duty_cycle(pwm1,motor_pwm);
+
+    
+    
+
+    auto end = std::chrono::high_resolution_clock::now();
+    //处理完1帧图像
+    std::chrono::duration<double, std::milli> elapsed = end - start;
+
+    cout<<elapsed.count()<<"ms"<<"\toutput:"<<motor_pwm<<"\tgap:"<<gap<<endl;      //处理1帧图像耗时
+    
+    
+    save_pic(img,"./pic/1_img.jpg");
+    save_pic(bin,"./pic/1_bin.jpg");
+    save_pic(edge,"./pic/1_edge.jpg");
+   
+    save_pic(mid,"./pic/1_mid.jpg");
+    
+
+    //putText(mid,"gap:"+to_string(gap), Point(80,100), FONT_HERSHEY_PLAIN, 1, (0,0,255), 1, LINE_AA);
+    //writer.write(edge); // 写入视频文件
+
+    }
+
+
+    //sleep(5);
+    //servo_set_angle(test,150);
+    //std::this_thread::sleep_for(std::chrono::milliseconds(25));     //暂停50ms
+    //servo_destroy(test);
+
+    
+
+    //sleep(50);
+    //pwm_destroy(pwm1);
+    //pwm_destroy(pwm2);
+
+
+
+    raise(SIGINT);      //触发ctrl+c 调用相应处理函数 完成资源释放
+}

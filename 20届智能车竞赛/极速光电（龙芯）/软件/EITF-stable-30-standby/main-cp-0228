@@ -1,0 +1,116 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+#include <unistd.h>
+#include <string>
+#include <chrono>
+#include <thread>
+#include <signal.h>
+#include <stdio.h>
+
+
+//自定义头文件
+#include "gpio.h"
+#include "pwm.h"
+#include "servo.h"
+#include "tools.h"
+#include "control.h"
+
+ 
+using namespace cv;
+using namespace std;
+
+
+PWM* pwm1=pwm_init(1,0);           //全局Servo
+VideoWriter writer;
+
+VideoCapture cam(0);  
+
+
+void handle_sigint(int sig) 
+{
+         
+
+    pwm_destroy(pwm1);
+
+    writer.release();
+
+    cout<<"ctrl + c handled successfully."<<endl;
+    exit(0);        //exit
+}
+
+
+
+
+
+
+int main(void)
+{
+    signal(SIGINT, handle_sigint);          //注册Ctrl+C信号的处理函数
+    set_cam(cam);           //设置摄像头参数
+    
+
+
+    pwm_set_frequency(pwm1,300);
+    pwm_set_duty_cycle(pwm1,0.45);
+    pwm_enable(pwm1);
+
+
+    
+   
+
+
+
+    
+
+
+    Mat img;
+    
+    while(1)
+    {
+    cam>>img;           //获取一帧图像
+    
+    Mat gray,bin,edge;
+    auto start = std::chrono::high_resolution_clock::now();         //开始计时
+
+
+    flip(img,img,0);            //垂直翻转图像
+    cvtColor(img, gray, COLOR_BGR2GRAY);        //灰度化
+    GaussianBlur(gray, gray, Size(5, 5), 0);            //高斯模糊
+    threshold(gray, bin, 0, 255,THRESH_BINARY | THRESH_OTSU);       //大津法 二值化
+    Canny(bin,edge,50,150)  ;       //边缘检测
+
+    Mat mid=img.clone();
+
+    int gap=calculateAndDrawCenterLine(edge,mid);
+
+
+
+    
+
+    auto end = std::chrono::high_resolution_clock::now();
+    //处理完1帧图像
+    std::chrono::duration<double, std::milli> elapsed = end - start;
+
+    cout<<elapsed.count()<<"ms"<<endl;      //处理1帧图像耗时
+
+    putText(mid,"gap:"+to_string(gap), Point(450,350), FONT_HERSHEY_PLAIN, 2, (0,0,255), 3, LINE_AA);
+    writer.write(mid); // 写入视频文件
+
+    }
+
+
+    //sleep(5);
+    //servo_set_angle(test,150);
+    //std::this_thread::sleep_for(std::chrono::milliseconds(25));     //暂停50ms
+    //servo_destroy(test);
+
+    
+
+    //sleep(50);
+    //pwm_destroy(pwm1);
+    //pwm_destroy(pwm2);
+
+
+
+    return 0;
+}

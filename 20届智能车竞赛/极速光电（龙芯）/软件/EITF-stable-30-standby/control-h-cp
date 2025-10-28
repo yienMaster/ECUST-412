@@ -1,0 +1,88 @@
+/*
+@brief 利用八邻域寻找左右边界点  并存储进二维向量[y][0]  左边界 [y][1] 右边界
+@param const Mat edge  边缘检测图像
+@param vector<Point>& left_border  左边界点集
+@param vector<Point>& right_border  右边界点集
+@param vector<Point>& mid_border  中线点集
+@return int gap
+*/
+int get_border_and_get_gap_neighbour8(const Mat edge,vector<Point>& left_border,vector<Point>& right_border,vector<Point>& mid_border);
+
+
+
+/*
+@brief 向量法角点检测
+@param const vector<Point> 边界点集
+@param vector<Point>& rightAngles  右直角点集
+@param vector<Point>& acuteAngles  锐角点集
+@param Mat& mid  中线图像
+@param int step  点间距步长
+@param double angleThreshold  角度阈值
+@return void
+*/
+void detectAngles(const std::vector<Point> &boundary,std::vector<Point> &rightAngles,Mat &mid,
+    int step // 点间距步长  =3
+  );        // =40.0
+
+
+
+/*
+@brief 交叉路口
+@param const vector<Point> left_border  左边界点集(有效边界)
+@param const vector<Point> right_border  右边界点集(有效边界)
+@param const vector<Point> left_lost  左丢线点集
+@param const vector<Point> right_lost  右丢线点集
+@param const int current_gap  当前gap
+@param Mat& mid  中线图像
+@return int 路口状态下的gap
+*/
+int cross_gap(const vector<Point> left_border,const vector<Point> right_border,
+    const vector<Point> left_lost,const vector<Point> right_lost,
+    const int current_gap,Mat& mid);
+
+
+/*
+@brief 手写(并非)的快速求直线,小规模数据应该比fitLine快(ai说的)
+@param const vector<Point> points  拟合直线的点集
+@param double &k  斜率
+@param double &b  截距
+@return void
+*/
+void fastLineFit(const std::vector<Point>& points, double &k, double &b) ;
+
+
+/*
+@brief 根据斜率变化检测左右边界的角点(排除临近边界的角点),利用直线拟合计算斜率
+@param const vector<Point> left_border  左边界点集
+@param const vector<Point> right_border  右边界点集
+@param vector<Point>& left_corners  左角点集
+@param vector<Point>& right_corners  右角点集
+@param const int edge_th   边界的距离阈值(距离边界小于该阈值的点将被排除)
+@param const double k_threshold  斜率变化阈值
+*/
+void detect_corners_fit(const vector<Point> left_border,const vector<Point> right_border,
+    vector<Point>& left_corners,vector<Point>& right_corners,const int edge_th,const double k_threshold);
+
+
+/*
+@brief 根据斜率变化检测左右边界的角点(排除临近边界的角点),利用2点计算斜率
+@param const vector<Point> left_border  左边界点集
+@param const vector<Point> right_border  右边界点集
+@param vector<Point>& left_corners  左角点集
+@param vector<Point>& right_corners  右角点集
+@param const int edge_th   边界的距离阈值(距离边界小于该阈值的点将被排除)
+@param const float k_threshold  斜率变化阈值
+@param const float dist_th  点和相邻点距离阈值
+ */
+void detect_corners(const vector<Point> left_border,const vector<Point> right_border,
+    vector<Point>& left_corners,vector<Point>& right_corners,const int edge_th,const float k_threshold,const float dist_th);
+
+
+void detect_corners_v(const vector<Point> left_border,const vector<Point> right_border,
+    vector<Point>& left_corners,vector<Point>& right_corners,const int edge_th,const float angle_threshold,
+const int step);
+
+
+    double calcAngle_v(const Point v1,const Point v2);
+
+
