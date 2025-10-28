@@ -1,0 +1,27 @@
+use_for_all: 低速不加速的稳定版本，有斑马线停车，无屏幕
+use_for_all_2: 低速加速的稳定版本，有斑马线停车，无屏幕
+use_for_all_2_2: 低速加速的稳定版本，无斑马线停车，无屏幕
+
+
+left_sci_with_bar: 左侧大环岛，有避障的稳定版本，无斑马线停车与屏幕
+right_sci_with_bar: 右侧大环岛，有避障的稳定版本，无斑马线停车与屏幕
+
+左侧障碍需要躲避，右侧不需要。
+sta2：左环岛
+sta3：右环岛
+sta4：障碍
+sta5：屏幕
+
+以下，都没有屏幕，开启了避障
+
+right_sci_with_bar_170_speed: 限速170，右侧大环岛。不佳
+right_sci_with_bar_180_speed: 限速180，右侧大环岛。较为优秀
+right_sci_with_bar_highest: 目标速度提升20，尚可
+
+left_sci_with_bar_180_speed:限速180，左侧大环岛，较为优秀
+left_sci_with_bar_highest:目标速度提升20，尚可
+
+wheel_1_left: 壹号轮胎左环岛
+wheel_2_right:壹号轮胎右环岛
+
+despreado
